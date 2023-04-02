@@ -21,11 +21,19 @@ class TopicsSeeder extends Seeder
         $tagValues = ['Physics', 'Chemistry', 'Biology', ''];
 
         for ($i = 0; $i < 10; $i++) { 
+            $tag = $faker->randomElement($tagValues);
+            if ($tag != '') {
+                $moduleId = 3;
+            } else {
+                $moduleId = $faker->numberBetween(1, $numberOfModules);
+                if ($moduleId == 3)
+                    $moduleId = $faker->randomElement([1, 2, 4]);
+            }
             DB::table('topics')->insert([ 
                 'name' => $faker->sentence(), 
-                'tag' => $faker->randomElement($tagValues), 
+                'tag' => $tag, 
                 'order' => $i + 1,
-                'moduleId' => $faker->numberBetween(1, $numberOfModules),
+                'moduleId' => $moduleId,
             ]); 
         }
     }
