@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('leaderboards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('userId')->constrained('users', 'id');
-            $table->unsignedTinyInteger('rank')->check('rank >= 1 AND rank <= 10');
+            $table->unsignedTinyInteger('rank')->check('rank >= 1 AND rank <= 10')->unique();
             $table->timestamps();
         });
     }

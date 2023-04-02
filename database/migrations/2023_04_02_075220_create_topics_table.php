@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('tag')->enum('Physics', 'Chemistry', 'Biology');
+            $table->string('tag')->enum('Physics', 'Chemistry', 'Biology', '');
             $table->integer('order');
             $table->foreignId('moduleId')->constrained('modules', 'id');
             $table->timestamps();
