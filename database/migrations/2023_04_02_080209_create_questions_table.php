@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('question');
-            $table->string('options');
+            $table->string('option1');
+            $table->string('option2');
+            $table->string('option3');
+            $table->string('option4');
             $table->unsignedTinyInteger('answer')->check('answer >= 1 AND answer <= 4');
             $table->foreignId('quizId')->constrained('quizzes', 'id');
             $table->timestamps();

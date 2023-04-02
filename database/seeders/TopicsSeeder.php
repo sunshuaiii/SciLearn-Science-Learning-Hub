@@ -24,7 +24,7 @@ class TopicsSeeder extends Seeder
             DB::table('topics')->insert([ 
                 'name' => $faker->sentence(), 
                 'tag' => $faker->randomElement($tagValues), 
-                'order' => $i,
+                'order' => $i + 1,
                 'moduleId' => $faker->numberBetween(1, $numberOfModules),
             ]); 
         }

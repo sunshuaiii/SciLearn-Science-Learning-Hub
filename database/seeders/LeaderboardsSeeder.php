@@ -22,7 +22,7 @@ class LeaderboardsSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) { 
             DB::table('leaderboards')->insert([ 
                 'userId' => $faker->numberBetween(1, $numberOfUsers),
-                'rank' => $i,
+                'rank' => $i + 1,
             ]); 
         }
     }

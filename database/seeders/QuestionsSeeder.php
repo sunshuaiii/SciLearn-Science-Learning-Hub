@@ -21,9 +21,12 @@ class QuestionsSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) { 
             DB::table('questions')->insert([ 
-                'name' => $faker->name, 
-                'email' => $faker->unique()->safeEmail, 
-                'password' => bcrypt('password'), 
+                'question' => $faker->sentence().'?', 
+                'option1' => $faker->sentence(),
+                'option2' => $faker->sentence(),
+                'option3' => $faker->sentence(),
+                'option4' => $faker->sentence(),
+                'answer' => $faker->numberBetween(1, 4),
                 'quizId' => $faker->numberBetween(1, $numberOfQuizzes),
             ]); 
         }
