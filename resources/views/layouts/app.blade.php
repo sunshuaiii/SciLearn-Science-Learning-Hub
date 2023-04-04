@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 
 <head>
+	<meta property="og:title" content="SciLearn - Science Learning Hub" />
+	<meta name="author" content="Ling Sun Shuai, Lim Choon Kiat, Olivia Ong Yee Ming, Tan Jia Qi, Yang Chu Yan">
+	<!-- <link rel="icon" href="~/images/logo" type="image/x-icon" /> -->
+	<meta property="og:description" content="This website allows kids age between 6 to 8 to learn Science." />
+	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title')</title>
+    <title>SciLearn - @yield('title')</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap">
@@ -19,6 +24,9 @@
 
     <!-- public/css/styles.css -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+	<!-- public/js/app.js -->
+	<script src="{{asset('js/app.js')}}" type="module"></script>
 </head>
 
 <body>
@@ -44,12 +52,21 @@
                         <a class="dropdown-item" href="/badges">Badges</a>
                         <a class="dropdown-item" href="/profile">Profile</a>
                         <hr>
-                        <a class="dropdown-item" href="/signIn">Sign In</a>
+						@if (Auth::guard(session('role'))->user())
+							<a class="dropdown-item" href="/logout">Logout</a>
+							<!-- 
+								admin view
+
+							-->
+						@else
+							<a class="dropdown-item" href="/login/student">Login</a>
+							<a class="dropdown-item" href="/register/student">Sign Up</a>
+						@endif
                         <!--signIn/signOut if else-->
                     </div>
                     <img src="images/AvatarIcon.png" alt="Avatar" id="avatar">
                 </div>
-
+				
                 <!-- Modules -->
                 <div class="nav-item mx-2">
                     <a href="/modules" style="font-size:28px">Modules</a>
@@ -65,14 +82,15 @@
     </header>
 
 
-    <div class=" container">
-        @yield('content')
-    </div>
+    <h1>@yield('title')</h1>
+	<div class="container">
+		@yield('content')
+	</div>
 
     <footer>
         <p style="font-size:1em; text-align:center">@SciLearn and the SciLearn logo are trademarks and/or registered
             trademarks of UTAR.
-            2023 UTAR, all rights
+            {{date("Y")}} UTAR, all rights
             reserved.</p>
     </footer>
 

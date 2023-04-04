@@ -12,3 +12,7 @@ A science learning web application created using Laravel framework.
 2. Migrate all migration files      `php artisan migrate`
 3. Seed all seeder files            `php artisan db:seed`
 4. Rollback, migrate, and seed      `php artisan migrate:refresh --seed`    
+
+## admin authentication
+one time register
+url: localhost/register/admin
