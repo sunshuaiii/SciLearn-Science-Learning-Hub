@@ -9,4 +9,10 @@ class Avatar extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    // avatar->user = 1..*
+    public function getUsers()
+    {
+        return $this->hasMany(User::class);
+    }
 }

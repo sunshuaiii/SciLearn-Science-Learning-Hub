@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Leaderboard extends Model
 {
     use HasFactory;
+
+    // leaderboard->user = 1..*
+    public function getUsers()
+    {
+        return $this->hasMany(User::class);
+    }
 }

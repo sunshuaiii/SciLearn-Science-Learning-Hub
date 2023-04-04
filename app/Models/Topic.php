@@ -9,4 +9,28 @@ class Topic extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    // topic->colletion = *..*
+    public function getCollections()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    // topic->quiz = 1..*
+    public function getQuizzes()
+    {
+        return $this->hasMany(Quiz::class);
+    }
+
+    // topic->module = *..1
+    public function getModule()
+    {
+        return $this->belongsTo(Module::class);
+    }
+
+    // topic->article = 1..*
+    public function getArticles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

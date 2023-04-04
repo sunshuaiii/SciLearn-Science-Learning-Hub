@@ -20,7 +20,7 @@ class UserBadgesSeeder extends Seeder
         $numberOfUsers = DB::table('users')->count();
         $numberOfBadges = DB::table('badges')->count();  
 
-        for ($i = 0; $i < 10; $i++) { 
+        for ($i = 0; $i < 20; $i++) { 
             DB::table('userbadges')->insert([ 
                 'user_id' => $faker->numberBetween(1, $numberOfUsers),
                 'badge_id' => $faker->numberBetween(1, $numberOfBadges),

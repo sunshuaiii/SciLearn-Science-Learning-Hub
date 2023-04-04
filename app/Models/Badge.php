@@ -10,6 +10,7 @@ class Badge extends Model
     use HasFactory;
     public $timestamps = false;
 
+    // badge->user = *..*
     public function getUsers()
     {
         return $this->belongsToMany(User::class, 'userbadges');

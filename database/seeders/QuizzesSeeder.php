@@ -19,9 +19,9 @@ class QuizzesSeeder extends Seeder
         $faker = Faker::create();
         $numberOfTopics = DB::table('topics')->count();
 
-        for ($i = 0; $i < 10; $i++) { 
+        for ($i = 0; $i < 200; $i++) { 
             DB::table('quizzes')->insert([ 
-                'name' => "Quiz ".$i + 1, 
+                'name' => "Quiz ".$faker->words(2, true), 
                 'topic_id' => $faker->numberBetween(1, $numberOfTopics),
             ]); 
         }

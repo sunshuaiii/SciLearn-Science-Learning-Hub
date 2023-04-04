@@ -43,8 +43,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // user->badge = *..*
     public function getBadges()
     {
         return $this->belongsToMany(Badge::class, 'userbadges');
+    }
+
+    // user->quiz = *..*
+    public function getQuizzes()
+    {
+        return $this->belongsToMany(Quiz::class, 'userquizzes');
+    }
+
+    // user->leaderboard = *..1
+    public function getLeaderboard()
+    {
+        return $this->belongsTo(Leaderboard::class);
+    }
+
+    // user->avatar = *..1
+    public function getAvatar()
+    {
+        return $this->belongsTo(Avatar::class);
+    }
+
+    // user->collection = 1..*
+    public function getCollections()
+    {
+        return $this->hasMany(Collection::class);
     }
 }

@@ -19,9 +19,9 @@ class QuestionsSeeder extends Seeder
         $faker = Faker::create();
         $numberOfQuizzes = DB::table('quizzes')->count(); 
 
-        for ($i = 0; $i < 10; $i++) { 
+        for ($i = 0; $i < 2000; $i++) { 
             DB::table('questions')->insert([ 
-                'question' => $faker->sentence().'?', 
+                'question' => ucfirst($faker->words(10, true).'?'), 
                 'option1' => $faker->sentence(),
                 'option2' => $faker->sentence(),
                 'option3' => $faker->sentence(),

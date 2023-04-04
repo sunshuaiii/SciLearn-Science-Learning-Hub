@@ -20,7 +20,7 @@ class TopicsSeeder extends Seeder
         $numberOfModules = DB::table('modules')->count();
         $tagValues = ['Physics', 'Chemistry', 'Biology', ''];
 
-        for ($i = 0; $i < 10; $i++) { 
+        for ($i = 0; $i < 40; $i++) { 
             $tag = $faker->randomElement($tagValues);
             if ($tag != '') {
                 $moduleId = 3;
@@ -32,6 +32,7 @@ class TopicsSeeder extends Seeder
             DB::table('topics')->insert([ 
                 'name' => $faker->sentence(), 
                 'tag' => $tag, 
+                'image' => $faker->imageUrl($width = 640, $height = 480, 'science'),
                 'order' => $i + 1,
                 'module_id' => $moduleId,
             ]); 

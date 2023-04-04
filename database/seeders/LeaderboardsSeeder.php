@@ -17,13 +17,14 @@ class LeaderboardsSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $numberOfUsers = DB::table('users')->count(); 
+        $numberOfUsers = DB::table('users')->count();
 
-        for ($i = 0; $i < 10; $i++) { 
-            DB::table('leaderboards')->insert([ 
-                'user_id' => $faker->numberBetween(1, $numberOfUsers),
-                'rank' => $i + 1,
-            ]); 
+        for ($i = 0; $i < 10; $i++) {
+            DB::table('leaderboards')->insert([
+                'user_id' => $i + 1,
+                'duration' => $faker->randomFloat(2, 1, 99999),
+                'created_at' => $faker->dateTimeBetween('2022-01-01', '2022-12-31')->format('Y:m:d H:i:s'),
+            ]);
         }
     }
 }
