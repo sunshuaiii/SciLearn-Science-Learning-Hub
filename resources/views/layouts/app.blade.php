@@ -3,6 +3,8 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('title')</title>
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap">
 
@@ -15,6 +17,8 @@
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
+    <!-- public/css/styles.css -->
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 
 <body>
@@ -23,20 +27,17 @@
             <div class="container">
                 <!-- Search Box -->
                 <div class="nav-item mx-2">
-                    <input type="text" id="search" placeholder="Type to search for a topic"
-                        style="height:50px; width:230px; text-align:center">
+                    <input type="text" id="search" placeholder="Type to search for a topic" style="height:50px; width:230px; text-align:center">
                 </div>
 
                 <!-- Leaderboard -->
                 <div class="nav-item mx-2">
-                    <a href="/leaderboard"
-                        style="text-decoration:none; font-family: 'Fredoka One', sans-serif; font-size:28px; color:#330066;">Leaderboard</a>
+                    <a href="/leaderboard" style="font-size:28px">Leaderboard</a>
                 </div>
 
                 <!-- My Collections, Badges, Profile and Sign In/Log Out -->
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" style="display:none">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby=" userDropdown">
                         <a class="dropdown-item" href="/collections">My Collections</a>
@@ -51,14 +52,12 @@
 
                 <!-- Modules -->
                 <div class="nav-item mx-2">
-                    <a href="/modules"
-                        style="text-decoration:none; font-family: 'Fredoka One', sans-serif; font-size:28px; color:#330066;">Modules</a>
+                    <a href="/modules" style="font-size:28px">Modules</a>
                 </div>
 
                 <!-- Logo -->
                 <div class="nav-item mx-2">
-                    <img src="images/SciLearn.png" alt="SciLearn" class="my-image img-fluid"
-                        style="width: 180px; height: 90px">
+                    <img src="images/SciLearn.png" alt="SciLearn" class="my-image img-fluid" style="width: 180px; height: 90px">
                 </div>
             </div>
         </nav>
@@ -78,25 +77,28 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- search function -->
     <script>
-    $('#search').keypress(function(e) {
-        if (e.which == 13) {
-            var query = $(this).val().trim();
-            window.location.href = '/search?q=' + encodeURIComponent(query);
-            return false;
-        }
-    });
+        $('#search').keypress(function(e) {
+            if (e.which == 13) {
+                var query = $(this).val().trim();
+                window.location.href = '/search?q=' + encodeURIComponent(query);
+                return false;
+            }
+        });
     </script>
 
     <!-- dropdown -->
     <script>
-    $(document).ready(function() {
-        $('#avatar').on('click', function() {
-            $('#dropdown').dropdown('toggle');
+        $(document).ready(function() {
+            $('#avatar').on('click', function() {
+                $('#dropdown').dropdown('toggle');
+            });
         });
-    });
     </script>
 
 </body>

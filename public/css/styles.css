@@ -1,0 +1,25 @@
+body {
+    font-family: 'Fredoka One', sans-serif;
+    background-color: #f5fcff;
+}
+
+a {
+    color: #393c56;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #545875;
+}
+
+#carouselExampleDark {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.carousel-item img {
+    max-width: 50%;
+    height: auto;
+    margin: 0 auto;
+}
