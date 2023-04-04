@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('image');
-            $table->foreignId('topicId')->constrained('topics', 'id');
+            $table->foreignId('topic_id')->constrained('topics', 'id');
             $table->timestamps();
         });
     }

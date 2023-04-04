@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('is_admin')->default(0);
-            $table->foreignId('avatarId')->constrained('avatars', 'id');
+            $table->foreignId('avatar_id')->constrained('avatars', 'id');
             $table->rememberToken();
             $table->timestamps();
         });

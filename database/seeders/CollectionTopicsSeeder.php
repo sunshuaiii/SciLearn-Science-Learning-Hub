@@ -22,8 +22,8 @@ class CollectionTopicsSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) { 
             DB::table('collectiontopics')->insert([ 
-                'collectionId' => $faker->numberBetween(1, $numberOfCollections),
-                'topicId' => $faker->numberBetween(1, $numberOfTopics),
+                'collection_id' => $faker->numberBetween(1, $numberOfCollections),
+                'topic_id' => $faker->numberBetween(1, $numberOfTopics),
             ]); 
         }
     }

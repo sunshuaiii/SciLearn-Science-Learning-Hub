@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('collectiontopics', function (Blueprint $table) {
-            $table->foreignId('collectionId')->constrained('collections', 'id');
-            $table->foreignId('topicId')->constrained('topics', 'id');
+            $table->foreignId('collection_id')->constrained('collections', 'id');
+            $table->foreignId('topic_id')->constrained('topics', 'id');
             $table->timestamps();
         });
     }

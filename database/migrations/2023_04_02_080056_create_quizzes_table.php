@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('topicId')->constrained('topics', 'id');
+            $table->foreignId('topic_id')->constrained('topics', 'id');
             $table->timestamps();
         });
     }

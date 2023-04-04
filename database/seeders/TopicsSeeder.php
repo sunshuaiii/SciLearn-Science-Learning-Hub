@@ -33,7 +33,7 @@ class TopicsSeeder extends Seeder
                 'name' => $faker->sentence(), 
                 'tag' => $tag, 
                 'order' => $i + 1,
-                'moduleId' => $moduleId,
+                'module_id' => $moduleId,
             ]); 
         }
     }

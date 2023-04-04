@@ -22,8 +22,8 @@ class UserQuizzesSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) { 
             DB::table('userquizzes')->insert([ 
-                'userId' => $faker->numberBetween(1, $numberOfUsers),
-                'quizId' => $faker->numberBetween(1, $numberOfQuizzes),
+                'user_id' => $faker->numberBetween(1, $numberOfUsers),
+                'quiz_id' => $faker->numberBetween(1, $numberOfQuizzes),
             ]); 
         }
     }

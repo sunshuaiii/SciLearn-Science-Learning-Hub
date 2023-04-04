@@ -22,7 +22,7 @@ class QuizzesSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) { 
             DB::table('quizzes')->insert([ 
                 'name' => "Quiz ".$i + 1, 
-                'topicId' => $faker->numberBetween(1, $numberOfTopics),
+                'topic_id' => $faker->numberBetween(1, $numberOfTopics),
             ]); 
         }
     }

@@ -22,7 +22,7 @@ class CollectionsSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) { 
             DB::table('collections')->insert([ 
                 'name' => $faker->sentence(6, true), 
-                'userId' => $faker->numberBetween(1, $numberOfUsers), 
+                'user_id' => $faker->numberBetween(1, $numberOfUsers), 
             ]); 
         }
     }

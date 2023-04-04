@@ -27,7 +27,7 @@ class QuestionsSeeder extends Seeder
                 'option3' => $faker->sentence(),
                 'option4' => $faker->sentence(),
                 'answer' => $faker->numberBetween(1, 4),
-                'quizId' => $faker->numberBetween(1, $numberOfQuizzes),
+                'quiz_id' => $faker->numberBetween(1, $numberOfQuizzes),
             ]); 
         }
     }

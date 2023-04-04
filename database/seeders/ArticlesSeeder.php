@@ -29,7 +29,7 @@ class ArticlesSeeder extends Seeder
                 'title' => $faker->sentence(), 
                 'content' => $faker->paragraph(), 
                 'image' => $imagePath,
-                'topicId' => $faker->numberBetween(1, $numberOfTopics), 
+                'topic_id' => $faker->numberBetween(1, $numberOfTopics), 
             ]); 
         }
     }

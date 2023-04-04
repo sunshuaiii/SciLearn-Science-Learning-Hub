@@ -25,7 +25,7 @@ class UsersSeeder extends Seeder
                 'email' => $faker->unique()->safeEmail(), 
                 'password' => bcrypt('password'), 
                 // is_admin attribute will be set to false by default
-                'avatarId' => $faker->numberBetween(1, $numberOfAvatars),
+                'avatar_id' => $faker->numberBetween(1, $numberOfAvatars),
             ]); 
         }
     }

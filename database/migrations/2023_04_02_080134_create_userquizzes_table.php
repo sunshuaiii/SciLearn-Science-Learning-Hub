@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('userquizzes', function (Blueprint $table) {
-            $table->foreignId('userId')->constrained('users', 'id');
-            $table->foreignId('quizId')->constrained('quizzes', 'id');
+            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->foreignId('quiz_id')->constrained('quizzes', 'id');
             $table->timestamps();
         });
     }

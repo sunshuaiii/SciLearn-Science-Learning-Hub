@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('userbadges', function (Blueprint $table) {
-            $table->foreignId('userId')->constrained('users', 'id');
-            $table->foreignId('badgeId')->constrained('badge', 'id');
+            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->foreignId('badge_id')->constrained('badge', 'id');
             $table->timestamps();
         });
     }

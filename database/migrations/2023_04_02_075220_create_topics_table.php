@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('tag')->enum('Physics', 'Chemistry', 'Biology', '');
             $table->integer('order');
-            $table->foreignId('moduleId')->constrained('modules', 'id');
+            $table->foreignId('module_id')->constrained('modules', 'id');
             $table->timestamps();
         });
     }

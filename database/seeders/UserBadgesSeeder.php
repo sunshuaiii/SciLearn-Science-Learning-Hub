@@ -22,8 +22,8 @@ class UserBadgesSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) { 
             DB::table('userbadges')->insert([ 
-                'userId' => $faker->numberBetween(1, $numberOfUsers),
-                'badgeId' => $faker->numberBetween(1, $numberOfBadges),
+                'user_id' => $faker->numberBetween(1, $numberOfUsers),
+                'badge_id' => $faker->numberBetween(1, $numberOfBadges),
             ]); 
         }
     }
