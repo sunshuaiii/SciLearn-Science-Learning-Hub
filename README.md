@@ -16,3 +16,6 @@ A science learning web application created using Laravel framework.
 ## admin authentication
 one time register
 url: localhost/register/admin
+
+cannot retrieve what guard is used for authentication
+so create a session to remember the role of the user

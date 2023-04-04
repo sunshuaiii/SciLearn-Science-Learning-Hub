@@ -2,11 +2,6 @@
  
 @section('title', $role == 'admin' ? 'Admin Login' : 'Login')
  
-@section('sidebar')
-    @parent
-    <p>This is appended to the master sidebar.</p>
-@endsection
- 
 @section('content')
 	<div class="container mt-3">
 		<h2>Login</h2>

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('leaderboards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->foreignId('user_id')->constrained();
             $table->float('duration', 7, 2);
             $table->timestamps();
         });

@@ -49,7 +49,7 @@ class RegisterController extends Controller
 
 	private function adminExist() {
 		if(Admin::get()->count() > 0)
-		abort(404);
+			abort(404);
 	}
 
 	public function showAdminRegisterForm() {

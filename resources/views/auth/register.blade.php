@@ -4,11 +4,6 @@
  
 @section('title', $role == 'admin' ? 'Admin Register' : 'Register')
  
-@section('sidebar')
-    @parent
-    <p>This is appended to the master sidebar.</p>
-@endsection
- 
 @section('content')
 	<form method="POST" action="{{'/register/'.$role}}" id="form_id" class="form-horizontal">
 		@csrf

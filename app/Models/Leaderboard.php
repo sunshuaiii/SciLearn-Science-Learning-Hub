@@ -10,8 +10,8 @@ class Leaderboard extends Model
     use HasFactory;
 
     // leaderboard->user = 1..*
-    public function getUsers()
+    public function getUser()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

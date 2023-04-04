@@ -16,9 +16,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@4.4.1/dist/css/bootstrap-icons.min.css">
-
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
@@ -48,11 +45,11 @@
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby=" userDropdown">
-                        <a class="dropdown-item" href="/collections">My Collections</a>
-                        <a class="dropdown-item" href="/badges">Badges</a>
-                        <a class="dropdown-item" href="/profile">Profile</a>
-                        <hr>
 						@if (Auth::guard(session('role'))->user())
+							<a class="dropdown-item" href="/collections">My Collections</a>
+							<a class="dropdown-item" href="/badges">Badges</a>
+							<a class="dropdown-item" href="/students/profile">Profile</a>
+							<hr>
 							<a class="dropdown-item" href="/logout">Logout</a>
 							<!-- 
 								admin view
@@ -64,7 +61,9 @@
 						@endif
                         <!--signIn/signOut if else-->
                     </div>
-                    <img src="images/AvatarIcon.png" alt="Avatar" id="avatar">
+					<a href="/home">
+                    	<img src="/images/AvatarIcon.png" alt="Avatar" id="avatar">
+					</a>
                 </div>
 				
                 <!-- Modules -->
