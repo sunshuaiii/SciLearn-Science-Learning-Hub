@@ -76,7 +76,7 @@
                 <!-- Logo -->
                 <div class="nav-item mx-2">
 					<a href="/home">
-                 	   <img src="images/SciLearn.png" alt="SciLearn" class="my-image img-fluid" style="width: 180px; height: 90px">
+                 	   <img src="/images/SciLearn.png" alt="SciLearn" class="my-image img-fluid" style="width: 180px; height: 90px">
 					</a>
 				</div>
             </div>

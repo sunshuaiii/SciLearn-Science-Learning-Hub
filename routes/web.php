@@ -24,13 +24,11 @@ Route::get('/logout', [LoginController::class,'logout']);
 
 // modules
 Route::view('/modules', 'modules');
-Route::view('/modules/learning-center', 'learning-center');
-Route::view('/modules/fun-facts', 'fun-facts');
-Route::view('/modules/challenges', 'challenges');
-
-// learning center
 Route::get('/modules/{moduleName}', [ModuleController::class, 'showTopics']);
-
+Route::get('/modules/{moduleName}/{topicId}', [ModuleController::class, 'showArticles']);
+Route::get('/modules/{moduleName}/{topicId}/{articleId}', function(){
+	return view('articleContent');
+});
 
 
 // leaderboard
@@ -47,9 +45,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Route::resource('modules', ModuleController::class);
-Route::resource('modules.topics', TopicController::class)->shallow();
-Route::resource('modules.topics.articles', ArticleController::class)->shallow();
-Route::resource('modules.topics.quizzess', QuizController::class)->shallow();
+// Route::resource('modules.topics', TopicController::class)->shallow();
+// Route::resource('modules.topics.articles', ArticleController::class)->shallow();
+// Route::resource('modules.topics.quizzess', QuizController::class)->shallow();
 Route::resource('students.collections', CollectionController::class)->shallow();
 Route::resource('students.badges', BadgeController::class)->shallow();
 
