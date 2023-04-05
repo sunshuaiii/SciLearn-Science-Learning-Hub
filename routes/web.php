@@ -21,7 +21,7 @@ Route::post('/register/student', [RegisterController::class,'createStudent']);
 Route::get('/logout', [LoginController::class,'logout']);
 #endregion
 
-Route::get('leaderboard', [StudentController::class, 'leaderboard']);
+Route::get('/leaderboard', [StudentController::class, 'leaderboard']);
 
 // if students want to do quiz, ask them to login first
 Route::middleware(['auth'])->group(function () {

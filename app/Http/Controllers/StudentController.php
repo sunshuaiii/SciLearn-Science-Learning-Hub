@@ -15,7 +15,7 @@ class StudentController extends Controller
 {
 	public function profile() {
 		$user = Auth::guard(session('role'))->user();
-		$quizzes = User::find(1)->getQuizzes; // TODO: change to current user
+		$quizzesTaken = User::find(1)->getQuizzes; // TODO: change to current user
 		// $quizzes = Quiz::getUsers->where('user_id')
 		// $users = DB::table('users')
         //     ->join('userquizzes', 'users.id', '=', 'userquizzes.user_id')
@@ -24,22 +24,27 @@ class StudentController extends Controller
         //     ->join('modules', 'modules.id', '=', 'topics.module_id')
         //     ->select('modules.name as module_name', 'topics.name as topic_name', 'quizzes.name as quiz_name')
         //     ->get();
-		
-		// foreach ($quizzes as $quizz) {
-		// 	$modules = Module::find(Topic::find($quizz->topic_id));
-		// }
-
-		// foreach ($modules as $module) {
-		// 	$module->get
-		// }
+		$progress = [];
+		$i = 0;
+		foreach (Module::all() as $module) {
+			foreach ($module->getTopics as $topic) {
+				$numberOfQuiz = $topic->getQuizzes->count();
+				$quizzesTakenCount = 0;
+				foreach ($topic->getQuizzes as $quiz) {
+					if ($quizzesTaken->contains($quiz))
+						$quizzesTakenCount++;
+				}
+				$progress[$i++] = $quizzesTakenCount / $numberOfQuiz;
+			}
+		}
 
 		// return $progress;
-		return response(view('student.profile', ['user' => $user, 'quizzes' => $quizzes]));
+		return response(view('student.profile', ['user' => $user, 'progress' => $progress]));
 	}
 
     public function leaderboard() {
 		$rankings = Leaderboard::get()
-			->sortBy('duration');
+			->sortBy('duration')->take(10);
 		$users = array();
 		$i = 1;
 		foreach ($rankings as $ranking) {

@@ -31,3 +31,9 @@ footer {
 .w-5 {
 	display: none;
 } /* laravel bug */
+
+.center {
+	display: block; 
+	margin-left: auto; 
+	margin-right: auto;
+}

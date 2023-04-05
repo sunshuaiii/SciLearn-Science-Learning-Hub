@@ -80,7 +80,7 @@ class LoginController extends Controller
 		Auth::logout(); // will remove the authentication information from the user's session
 		$request->session()->invalidate(); //  invalidate the user's session
 		$request->session()->regenerateToken(); // regenerate their CSRF token
-
+		session(['role' => 'guest']);
         return redirect()->intended('/');
 	}
 }

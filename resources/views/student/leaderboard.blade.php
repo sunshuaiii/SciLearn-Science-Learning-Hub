@@ -5,7 +5,13 @@
 @section('title', 'Leaderboard')
  
 @section('content')
-	<table class="table table-hover">
+<div class="container my-4">
+    <a href="/home">Home </a> > <a href="/leaderboard">Leaderboard </a>
+</div>
+
+<h1 style="text-align: center;">Leaderboard</h1>
+
+	<table class="table table-hover" style="margin-bottom: 3rem">
 		<thead>
 		<tr>
 			<th>Rank</th>
@@ -23,4 +29,10 @@
 			@endforeach
 		</tbody>
 	</table>
+
+	<hr>
+<div style="margin:3rem">
+	<h4 style="text-align: center;"> Start the challenge now!</h4>
+	<button class="center">Start</button>
+</div>
 @endsection
