@@ -8,7 +8,7 @@
 <html lang="en-US">
 
 <div class="container my-4">
-    <a href="/home">Home</a> > <a href="/modules">Modules</a> > <a href="$moduleName">{{ $moduleNameToShow }}</a> > <a href="$topicName">{{ $topicName }}</a>
+    <a href="/home">Home</a> > <a href="/modules">Modules</a> > <a href="/modules/$moduleName">{{ $moduleNameToShow }}</a> > <a>{{ $topicName }}</a>
 </div>
 
 <h1 style="text-align: center;">Articles</h1>
