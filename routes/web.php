@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -21,7 +22,19 @@ Route::post('/register/student', [RegisterController::class,'createStudent']);
 Route::get('/logout', [LoginController::class,'logout']);
 #endregion
 
-Route::get('/leaderboard', [StudentController::class, 'leaderboard']);
+// modules
+Route::view('/modules', 'modules');
+Route::view('/modules/learning-center', 'learning-center');
+Route::view('/modules/fun-facts', 'fun-facts');
+Route::view('/modules/challenges', 'challenges');
+
+// learning center
+Route::get('/modules/{moduleName}', [ModuleController::class, 'showTopics']);
+
+
+
+// leaderboard
+Route::get('leaderboard', [StudentController::class, 'leaderboard']);
 
 // if students want to do quiz, ask them to login first
 Route::middleware(['auth'])->group(function () {
@@ -33,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
 	});
 });
 
-Route::resource('modules', ModulesController::class);
+// Route::resource('modules', ModuleController::class);
 Route::resource('modules.topics', TopicController::class)->shallow();
 Route::resource('modules.topics.articles', ArticleController::class)->shallow();
 Route::resource('modules.topics.quizzess', QuizController::class)->shallow();

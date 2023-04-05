@@ -16,7 +16,7 @@ class ModulesSeeder extends Seeder
      */
     public function run()
     {
-        $moduleValues = ['Famous Scientists', 'Fun Facts', 'Learning Center', 'Challenges'];
+        $moduleValues = ['famous-scientists', 'fun-facts', 'learning-center', 'challenges'];
         $imagesPath = public_path('\images\module');
         $images = File::allFiles($imagesPath);
 
