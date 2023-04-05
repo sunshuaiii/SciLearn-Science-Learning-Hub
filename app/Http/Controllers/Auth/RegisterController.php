@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Models\Student;
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -48,7 +49,7 @@ class RegisterController extends Controller
     }
 
 	private function adminExist() {
-		if(Admin::get()->count() > 0)
+		if(User::where('is_admin', true)->get()->count() > 0)
 			abort(404);
 	}
 
@@ -62,17 +63,21 @@ class RegisterController extends Controller
 		$this->adminExist();
 
 		$request->validate([
-			'name' => 'required|unique:admins|max:255',
-			'email' => 'required|unique:admins|email|max:255',
+			'username' => 'required|unique:users|max:255',
+			'email' => 'required|unique:users|email|max:255',
 			'password' => 'required|min:8|confirmed',
 		]); // if invalid, return back to the original page and show error message
 				
-		Admin::create([
-			'name' => $request->name,
+		$faker = Faker::create();
+        $numberOfAvatars = DB::table('avatars')->count();
+
+		User::create([
+			'username' => $request->username,
 			'email' => $request->email,
 			'password' => Hash::make($request->password),
+			'is_admin' => true,
+			'avatar_id' => $faker->numberBetween(1, $numberOfAvatars),
 		]);
-
 		return redirect('/login/admin');
 	}
 
@@ -82,15 +87,19 @@ class RegisterController extends Controller
 
 	public function createStudent(Request $request) {
 		$request->validate([
-			'name' => 'required|unique:students|max:255',
-			'email' => 'required|unique:students|email|max:255',
+			'username' => 'required|unique:users|max:255',
+			'email' => 'required|unique:users|email|max:255',
 			'password' => 'required|min:8|confirmed',
 		]); // if invalid, return back to the original page and show error message
-				
-		Student::create([
-			'name' => $request->name,
+
+		$faker = Faker::create();
+        $numberOfAvatars = DB::table('avatars')->count();
+
+		User::create([
+			'username' => $request->username,
 			'email' => $request->email,
 			'password' => Hash::make($request->password),
+			'avatar_id' => $faker->numberBetween(1, $numberOfAvatars),
 		]);
 
 		return redirect('/login/student');

@@ -5,11 +5,13 @@
 @section('title', $role == 'admin' ? 'Admin Register' : 'Register')
  
 @section('content')
+<h1>{{$role == 'admin' ? 'Admin Register' : 'Register'}}</h1>
+
 	<form method="POST" action="{{'/register/'.$role}}" id="form_id" class="form-horizontal">
 		@csrf
 		<div class="form-group">
-			<label for="name" class="control-label col-sm-2">Username</label>
-			<input id="name" name="name" type="text" class="form-control col-sm-10" value="{{ old('name') }}">
+			<label for="username" class="control-label col-sm-2">Username</label>
+			<input id="username" name="username" type="text" class="form-control col-sm-10" value="{{ old('username') }}">
 			@error('name') <div class="alert alert-danger">{{ $message }}</div>	@enderror
 		</div>
 

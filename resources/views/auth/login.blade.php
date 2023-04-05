@@ -3,6 +3,8 @@
 @section('title', $role == 'admin' ? 'Admin Login' : 'Login')
  
 @section('content')
+	<h1>{{$role == 'admin' ? 'Admin Login' : 'Login'}}</h1>
+
 	<div class="container mt-3">
 		<h2>Login</h2>
 		<form method="POST" action="/login">
@@ -25,7 +27,7 @@
 
 			<input type='hidden' name='role' value='{{$role}}'>
 
-			<!-- @error('login failed') <div class="alert alert-danger">{{ $message }}</div>	@enderror -->
+			@error('login failed') <div class="alert alert-danger">{{ $message }}</div>	@enderror
 			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
 	</div>

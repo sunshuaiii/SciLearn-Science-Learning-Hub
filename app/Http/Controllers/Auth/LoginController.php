@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use App\Models\Student;
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -71,8 +70,8 @@ class LoginController extends Controller
 			$request->session()->regenerate(); // regenerate the user's session to prevent session fixation
 			return redirect()->intended('/');
 		}
-
-		return back()->withErrors(['login failed', 'Login failed. The email or password is incorrect.'])
+		
+		return back()->withErrors(['login failed' => 'Login failed. The email or password is incorrect.'])
 					->withInput(); // with role hidden input
 	}
 
@@ -80,7 +79,8 @@ class LoginController extends Controller
 		Auth::logout(); // will remove the authentication information from the user's session
 		$request->session()->invalidate(); //  invalidate the user's session
 		$request->session()->regenerateToken(); // regenerate their CSRF token
-		session(['role' => 'guest']);
+		// session(['role' => 'guest']);
+		session()->forget('role');
         return redirect()->intended('/');
 	}
 }
