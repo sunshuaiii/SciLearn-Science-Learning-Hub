@@ -3,9 +3,8 @@
 @section('title', 'Profile')
  
 @section('content')
-{{Auth::guard(session('role'))->user()->name}}
+{{Auth::guard(session('role'))->user()->name}} <br/>
 
-
-
+@include('student.progress')
 
 @endsection

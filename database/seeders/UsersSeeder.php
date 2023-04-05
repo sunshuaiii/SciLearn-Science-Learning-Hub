@@ -18,7 +18,6 @@ class UsersSeeder extends Seeder
     {
         $faker = Faker::create();
         $numberOfAvatars = DB::table('avatars')->count(); 
-        
         for ($i = 0; $i < 10; $i++) { 
             DB::table('users')->insert([ 
                 'username' => $faker->name(), 
