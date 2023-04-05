@@ -22,7 +22,7 @@ class LeaderboardsSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             DB::table('leaderboards')->insert([
                 'user_id' => $i + 1,
-                'duration' => $faker->randomFloat(2, 1, 99999),
+                'duration' => $faker->randomFloat(2, 1, 80000),
                 'created_at' => $faker->dateTimeBetween('2022-01-01', '2022-12-31')->format('Y:m:d H:i:s'),
             ]);
         }

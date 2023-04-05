@@ -21,6 +21,12 @@ footer {
     display: none;
 } /* laravel bug */
 
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .cartoonish-card {
     background-color: #cce5ff;
     border-radius: 20px;
@@ -73,7 +79,7 @@ footer {
 
 .carousel-control-prev:focus,
 .carousel-control-next:focus {
-    background-color: #393c56
+    background-color: #393c56;
 }
 
 .carousel-indicators li {
