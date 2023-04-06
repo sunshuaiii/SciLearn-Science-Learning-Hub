@@ -44,6 +44,14 @@ class ModuleController extends Controller
         return view('articles', ['moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow, 'topicId' => $topicId, 'topicName' => $topicName, 'articles' => $articles]);
     }
 
+    public function showArticleContent($moduleName, $topicId, $articleId){
+        $topicName = Topic::find($topicId)->name;
+        $articles = Article::where('topic_id', $topicId)->get();
+        $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
+
+        return view('articles', ['moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow, 'topicId' => $topicId, 'topicName' => $topicName, 'articles' => $articles]);
+    }
+
     public function startChallenge(){
         //
     }

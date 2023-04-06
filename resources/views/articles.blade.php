@@ -22,9 +22,11 @@
         @foreach($articles as $article)
         <div class="col-md-3">
             <div class="card cartoonish-card">
+                <img class="card-img" src="{{ $article['image'] }}" alt="Card image">
                 <div class="card-body">
                     <h5 class="card-title">{{ $article['title'] }}</h5>
-                    <!-- image -->
+                </div>
+                <div class="d-flex justify-content-center">
                     <a href={{"/modules/".$moduleName."/".$topicId."/".$article['id']}} class="btn cartoonish-btn">Show Article</a>
                 </div>
             </div>

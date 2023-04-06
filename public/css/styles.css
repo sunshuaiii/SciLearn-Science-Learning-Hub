@@ -27,12 +27,28 @@ footer {
     margin-right: auto;
 }
 
+.card-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.text-card {
+    background-color: #cce5ff;
+    border-radius: 20px;
+    text-align: center;
+    margin: 70px;
+    padding: 70px;
+    box-shadow: 15px 5px 15px 5px rgba(0, 0, 0, 0.1);
+}
+
 .cartoonish-card {
     background-color: #cce5ff;
     border-radius: 20px;
     text-align: center;
     margin: 20px;
     padding: 20px;
+    width: 280px;
+    height: 450px;
     box-shadow: 15px 5px 15px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -105,4 +121,5 @@ footer {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 10px;
+    color: #393c56;
 }

@@ -27,13 +27,14 @@ Route::get('/logout', [LoginController::class,'logout']);
 Route::view('/modules', 'modules');
 Route::get('/modules/{moduleName}', [ModuleController::class, 'showTopics']);
 Route::get('/modules/{moduleName}/{topicId}', [ModuleController::class, 'showArticles']);
-Route::get('/modules/{moduleName}/{topicId}/{articleId}', function(){
-	return view('articleContent');
-});
+Route::get('/modules/{moduleName}/{topicId}/{articleId}', [ModuleController::class, 'showArticleContent']);
 
 
 // leaderboard
 Route::get('leaderboard', [StudentController::class, 'leaderboard']);
+
+// testing
+Route::get('/test', [TestController::class, 'test'])->name('test');
 
 // features for registered students
 Route::middleware(['auth'])->group(function () {
@@ -47,8 +48,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('students.collections', CollectionController::class)->shallow();
 Route::resource('students.badges', BadgeController::class)->shallow();
-
-Route::get('/test', [TestController::class, 'test'])->name('test');
 
 /*
  * Actions Handled by Resource Controllers
