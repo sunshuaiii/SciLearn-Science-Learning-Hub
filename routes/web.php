@@ -8,8 +8,8 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
-Route::redirect('/', '/home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::view('/home', 'home');
+Route::redirect('/', 'home');
 
 #region authentication
 Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);

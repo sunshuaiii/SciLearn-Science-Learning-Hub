@@ -133,3 +133,22 @@ footer {
 .article-content {
     font-size: larger;
 }
+
+.card {
+    background-color: #bad7eb;
+    border-radius: 20x;
+}
+
+.form-check-label::before {
+    border: 2px solid #6666ff;
+}
+
+.form-check-input:checked + .form-check-label::before {
+    background-color: #6666ff;
+}
+
+.btn-primary {
+    background-color: #6666ff;
+
+    border-radius: 10px;
+}
