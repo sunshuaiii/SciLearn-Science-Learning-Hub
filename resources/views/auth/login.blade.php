@@ -7,7 +7,7 @@
 
 	<div class="container mt-3">
 		<h2>Login</h2>
-		<form method="POST" action="/login">
+		<form method="POST" action="{{'/login/'.$role}}">
 			@csrf
 			<div class="mb-3 mt-3">
 				<label for="email">Email</label>

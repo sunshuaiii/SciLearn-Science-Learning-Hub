@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\DB;
 class StudentController extends Controller
 {
 	public function profile() {
-		$quizzesTaken = Auth::guard(session('role'))->user()->getQuizzes;
+		$user = Auth::guard(session('role'))->user();
+		$quizzesTaken = $user->getQuizzes;
 		// $quizzes = Quiz::getUsers->where('user_id')
 		// $users = DB::table('users')
         //     ->join('userquizzes', 'users.id', '=', 'userquizzes.user_id')

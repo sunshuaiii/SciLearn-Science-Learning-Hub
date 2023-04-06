@@ -53,7 +53,7 @@ class LoginController extends Controller
 		return view('auth.login', ['role' => 'student']);
 	}
 
-	public function login(Request $request) {
+	public function loginAdmin(Request $request) {
 		$credentials = $request->validate([
 			'email' => 'required',
 			'password' => 'required',
@@ -61,7 +61,31 @@ class LoginController extends Controller
 
 		if (Auth::guard($request->role)->attempt([
 			'email' => $request->email, 
-			'password' => $request->password], 
+			'password' => $request->password, 
+			'is_admin' => true],
+			$request->get('remember')
+			)) { // true if authentication was successful
+			// An authenticated session will be started 
+			session(['role' => $request->role]); // to tell which guard is authenticated
+			
+			$request->session()->regenerate(); // regenerate the user's session to prevent session fixation
+			return redirect()->intended('/');
+		}
+		
+		return back()->withErrors(['login failed' => 'Login failed. The email or password is incorrect.'])
+					->withInput(); // with role hidden input
+	}
+
+	public function loginStudent(Request $request) {
+		$credentials = $request->validate([
+			'email' => 'required',
+			'password' => 'required',
+		]);
+
+		if (Auth::guard($request->role)->attempt([
+			'email' => $request->email, 
+			'password' => $request->password, 
+			'is_admin' => false],
 			$request->get('remember')
 			)) { // true if authentication was successful
 			// An authenticated session will be started 

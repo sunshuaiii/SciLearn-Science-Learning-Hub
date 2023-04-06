@@ -14,7 +14,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 #region authentication
 Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);
 Route::get('/login/student', [LoginController::class,'showStudentLoginForm']);
-Route::post('/login', [LoginController::class,'login']);
+Route::post('/login/admin', [LoginController::class,'loginAdmin']);
+Route::post('/login/student', [LoginController::class,'loginStudent']);
 Route::get('/register/admin', [RegisterController::class,'showAdminRegisterForm']);
 Route::post('/register/admin', [RegisterController::class,'createAdmin']);
 Route::get('/register/student', [RegisterController::class,'showStudentRegisterForm']);
@@ -36,9 +37,9 @@ Route::get('/modules/{moduleName}', [ModuleController::class, 'showTopics']);
 // leaderboard
 Route::get('leaderboard', [StudentController::class, 'leaderboard']);
 
-// if students want to do quiz, ask them to login first
+// features for registered students
 Route::middleware(['auth'])->group(function () {
-	// Route::get('/students/profile', [StudentController::class, 'profile']);
+	
 	// using the same controller
 	Route::controller(StudentController::class)->group(function() {
 		Route::get('/students/profile', 'profile');
