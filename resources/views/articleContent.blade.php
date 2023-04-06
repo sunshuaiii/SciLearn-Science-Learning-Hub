@@ -39,7 +39,7 @@
 
 <div style="margin:3rem; text-align: center;">
     <h3> Attempt the quiz on this article.</h3>
-    <a href="challenges" class="btn cartoonish-btn">Start the quiz</a>
+    <a href={{$article['id']."/quiz"}} class="btn cartoonish-btn">Start the quiz</a>
 </div>
 
 <br> <br>
