@@ -45,10 +45,6 @@ Route::middleware(['auth'])->group(function () {
 	});
 });
 
-// Route::resource('modules', ModuleController::class);
-// Route::resource('modules.topics', TopicController::class)->shallow();
-// Route::resource('modules.topics.articles', ArticleController::class)->shallow();
-// Route::resource('modules.topics.quizzess', QuizController::class)->shallow();
 Route::resource('students.collections', CollectionController::class)->shallow();
 Route::resource('students.badges', BadgeController::class)->shallow();
 
