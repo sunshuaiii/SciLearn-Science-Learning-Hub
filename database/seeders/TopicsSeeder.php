@@ -17,7 +17,6 @@ class TopicsSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $numberOfModules = DB::table('modules')->count();
         $tagValues = ['Physics', 'Chemistry', 'Biology', ''];
 
         for ($i = 0; $i < 40; $i++) { 
@@ -25,9 +24,7 @@ class TopicsSeeder extends Seeder
             if ($tag != '') {
                 $moduleId = 3;
             } else {
-                $moduleId = $faker->numberBetween(1, $numberOfModules);
-                if ($moduleId == 3)
-                    $moduleId = $faker->randomElement([1, 2, 4]);
+                $moduleId = $faker->numberBetween(1, 2);
             }
             DB::table('topics')->insert([ 
                 'name' => $faker->sentence(), 
