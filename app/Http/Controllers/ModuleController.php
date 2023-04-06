@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\Module;
 use App\Models\Article;
+use App\Models\Quiz;
 
 class ModuleController extends Controller
 {
@@ -48,10 +49,14 @@ class ModuleController extends Controller
         $article = Article::find($articleId);
 
         $topicName = Topic::find($topicId)->name;
-        // $articles = Article::where('topic_id', $topicId)->get();
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
         return view('articleContent', ['article' => $article, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName]);
+    }
+
+    public function startQuiz($quizId){
+        $quiz = Quiz::find($quizId);
+        return view('quiz', ['quiz' => $quiz]);
     }
 
     public function startChallenge(){

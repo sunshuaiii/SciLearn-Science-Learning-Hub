@@ -17,13 +17,13 @@ class QuizzesSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $numberOfTopics = DB::table('topics')->count();
+        $articleTitles = DB::table('articles')->pluck('title');
 
-        for ($i = 0; $i < 200; $i++) { 
-            DB::table('quizzes')->insert([ 
-                'name' => "Quiz ".$faker->words(2, true), 
-                'topic_id' => $faker->numberBetween(1, $numberOfTopics),
-            ]); 
+        for ($i = 0; $i < 200; $i++) {
+            DB::table('quizzes')->insert([
+                'name' => "Quiz " . $articleTitles[$i],
+                'article_id' => $i + 1,
+            ]);
         }
     }
 }

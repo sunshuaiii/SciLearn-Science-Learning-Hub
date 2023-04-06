@@ -15,4 +15,10 @@ class Article extends Model
     {
         return $this->belongsTo(Topic::class);
     }
+
+    // article->quiz = 1..1
+    public function getQuiz()
+    {
+        return $this->hasOne(Quiz::class);
+    }
 }

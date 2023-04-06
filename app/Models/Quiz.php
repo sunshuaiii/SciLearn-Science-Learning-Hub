@@ -22,9 +22,9 @@ class Quiz extends Model
         return $this->hasMany(Question::class);
     }
 
-    // quiz->topic = *..1
-    public function getTopic()
+    // quiz->article = 1..1
+    public function getArticle()
     {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsTo(Article::class);
     }
 }

@@ -9,7 +9,7 @@ class Leaderboard extends Model
 {
     use HasFactory;
 
-    // leaderboard->user = 1..*
+    // leaderboard->user = 1..1
     public function getUser()
     {
         return $this->belongsTo(User::class);

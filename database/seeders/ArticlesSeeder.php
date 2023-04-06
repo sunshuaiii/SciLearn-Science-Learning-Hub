@@ -31,7 +31,7 @@ class ArticlesSeeder extends Seeder
                 }
             }
             DB::table('articles')->insert([
-                'title' => $faker->sentence(),
+                'title' => ucfirst($faker->words(5, true)),
                 'content' => $content,
                 'image' => $faker->imageUrl($width = 640, $height = 480, 'science'),
                 'topic_id' => $faker->numberBetween(1, $numberOfTopics),

@@ -22,8 +22,8 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-		'is_admin',
-		'avatar_id',
+        'is_admin',
+        'avatar_id',
     ];
 
     /**
@@ -57,7 +57,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Quiz::class, 'userquizzes');
     }
 
-    // user->leaderboard = *..1
+    // user->leaderboard = 1..1
     public function getLeaderboard()
     {
         return $this->hasOne(Leaderboard::class);

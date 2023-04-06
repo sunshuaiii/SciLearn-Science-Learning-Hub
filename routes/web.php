@@ -28,7 +28,8 @@ Route::view('/modules', 'modules');
 Route::get('/modules/{moduleName}', [ModuleController::class, 'showTopics']);
 Route::get('/modules/{moduleName}/{topicId}', [ModuleController::class, 'showArticles']);
 Route::get('/modules/{moduleName}/{topicId}/{articleId}', [ModuleController::class, 'showArticleContent']);
-
+Route::get('/modules/{moduleName}/{topicId}/{articleId}/quiz', [ModuleController::class, 'startQuiz']);
+Route::get('/modules/{moduleName}/{quizId}', [ModuleController::class, 'startChallenge']);
 
 // leaderboard
 Route::get('leaderboard', [StudentController::class, 'leaderboard']);

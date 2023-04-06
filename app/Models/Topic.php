@@ -16,12 +16,6 @@ class Topic extends Model
         return $this->belongsToMany(User::class);
     }
 
-    // topic->quiz = 1..*
-    public function getQuizzes()
-    {
-        return $this->hasMany(Quiz::class);
-    }
-
     // topic->module = *..1
     public function getModule()
     {

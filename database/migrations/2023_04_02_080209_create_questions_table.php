@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('option3');
             $table->string('option4');
             $table->unsignedTinyInteger('answer')->check('answer >= 1 AND answer <= 4');
+            $table->string('explanation');
             $table->foreignId('quiz_id')->constrained('quizzes', 'id');
             $table->timestamps();
         });
