@@ -4,9 +4,14 @@
 
 @section('content')
 
+<!DOCTYPE html>
+<html lang="en-US">
+
 <div class="container my-4">
   <a href="home">Home</a> > <a href="/modules"> Modules </a>
 </div>
+
+<h1 style="text-align: center;">Choose a module to get started!</h1>
 
 <br> <br>
 

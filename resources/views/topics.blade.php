@@ -12,8 +12,9 @@
 </div>
 
 <h1 style="text-align: center;">{{$moduleNameToShow}}</h1>
-
-<br> <br>
+<br>
+<h2 style="text-align: center;">Choose a topic</h1>
+<br>
 
 <div class="container">
     <div class="row">
@@ -100,7 +101,7 @@
     </div>
 </div>
 
-<br> <br> <br>
+<br> <br>
 
 <div style="margin:3rem; text-align: center;">
     <h3> Start the challenge now!</h3>

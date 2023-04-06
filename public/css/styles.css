@@ -32,6 +32,12 @@ footer {
     justify-content: center;
 }
 
+.card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .text-card {
     background-color: #cce5ff;
     border-radius: 20px;
