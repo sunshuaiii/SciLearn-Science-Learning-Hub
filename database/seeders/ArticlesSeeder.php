@@ -17,15 +17,25 @@ class ArticlesSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $numberOfTopics = DB::table('topics')->count(); 
+        $numberOfTopics = DB::table('topics')->count();
 
-        for ($i = 0; $i < 200; $i++) { 
-            DB::table('articles')->insert([ 
-                'title' => $faker->sentence(), 
-                'content' => $faker->paragraph(), 
+        for ($i = 0; $i < 200; $i++) {
+            $paragraphs = $faker->paragraphs(8);
+            // Join sentences into paragraphs with 6 sentences each
+            $content = '';
+            foreach ($paragraphs as $paragraph) {
+                $sentences = preg_split('/(?<=[.?!])\s+/', $paragraph);
+                $chunks = array_chunk($sentences, 6);
+                foreach ($chunks as $chunk) {
+                    $content .= implode(' ', $chunk) . "\n\n";
+                }
+            }
+            DB::table('articles')->insert([
+                'title' => $faker->sentence(),
+                'content' => $content,
                 'image' => $faker->imageUrl($width = 640, $height = 480, 'science'),
-                'topic_id' => $faker->numberBetween(1, $numberOfTopics), 
-            ]); 
+                'topic_id' => $faker->numberBetween(1, $numberOfTopics),
+            ]);
         }
     }
 }

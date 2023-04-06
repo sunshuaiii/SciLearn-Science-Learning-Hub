@@ -32,11 +32,11 @@ footer {
     justify-content: center;
 }
 
-.card-body {
+/* .card-body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .text-card {
     background-color: #cce5ff;
@@ -54,7 +54,7 @@ footer {
     margin: 20px;
     padding: 20px;
     width: 280px;
-    height: 450px;
+    height: 430px;
     box-shadow: 15px 5px 15px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -128,4 +128,8 @@ footer {
     padding: 10px;
     border-radius: 10px;
     color: #393c56;
+}
+
+.article-content {
+    font-size: larger;
 }

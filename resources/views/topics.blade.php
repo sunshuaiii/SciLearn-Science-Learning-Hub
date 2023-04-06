@@ -11,18 +11,25 @@
     <a href="/home">Home</a> > <a href="/modules">Modules</a> > <a>{{ $moduleNameToShow }}</a>
 </div>
 
+<br> <br>
+
 <h1 style="text-align: center;">{{$moduleNameToShow}}</h1>
+
 <br>
+
+@if($moduleName != 'challenges')
 <h2 style="text-align: center;">Choose a topic</h1>
-<br>
+@endif
+
+<br> <br>
 
 <div class="container">
     <div class="row">
         @if(count($topicsWithTag1) > 0)
-        <h4 class="card-title">{{ $topicsWithTag1->first()->tag }}</h4>
+        <h4 class="card-title">Tag: {{ $topicsWithTag1->first()->tag }}</h4>
         @foreach($topicsWithTag1 as $topic)
         <div class="col-md-3">
-            <div class="card cartoonish-card" style="background-image: url('{{ $topic['image'] }}');">
+            <div class="card cartoonish-card">
                 <img class="card-img" src="{{ $topic['image'] }}" alt="Card image">
                 <div class="card-body">
                     <h5 class="card-title">{{ $topic['name'] }}</h5>
@@ -36,7 +43,7 @@
         @endif
 
         @if(count($topicsWithTag2) > 0)
-        <h4 class="card-title">{{ $topicsWithTag2->first()->tag }}</h4>
+        <h4 class="card-title">Tag: {{ $topicsWithTag2->first()->tag }}</h4>
         @foreach($topicsWithTag2 as $topic)
         <div class="col-md-3">
             <div class="card cartoonish-card">
@@ -53,7 +60,7 @@
         @endif
 
         @if(count($topicsWithTag3) > 0)
-        <h4 class="card-title">{{ $topicsWithTag3->first()->tag }}</h4>
+        <h4 class="card-title">Tag: {{ $topicsWithTag3->first()->tag }}</h4>
         @foreach($topicsWithTag3 as $topic)
         <div class="col-md-3">
             <div class="card cartoonish-card">

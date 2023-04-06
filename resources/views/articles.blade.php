@@ -11,14 +11,16 @@
     <a href="/home">Home</a> > <a href="/modules">Modules</a> > <a href="/modules/$moduleName">{{ $moduleNameToShow }}</a> > <a>{{ $topicName }}</a>
 </div>
 
+<br> <br>
+
 <h1 style="text-align: center;">Articles</h1>
 
-<br> <br> <br>
+<br> <br>
 
 <div class="container">
     <div class="row">
         @if(count($articles) > 0)
-        <h4 class="card-title">{{ $topicName }}</h4>
+        <h4 class="card-title">Topic: {{ $topicName }}</h4>
         @foreach($articles as $article)
         <div class="col-md-3">
             <div class="card cartoonish-card">

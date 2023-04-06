@@ -11,6 +11,8 @@
   <a href="home">Home</a> > <a href="/modules"> Modules </a>
 </div>
 
+<br> <br>
+
 <h1 style="text-align: center;">Choose a module to get started!</h1>
 
 <br> <br>

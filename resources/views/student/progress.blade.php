@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
+<br> <br>
 <h1 style="text-align: center;">User Progress</h1>
+<br> <br>
+
 <div id="verticalScroll">
 	<div style="display:none"> {{$i=0}} </div>
 	@foreach(App\Models\Module::all() as $module)
