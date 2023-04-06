@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary mt-3" onclick="checkAnswer()">Submit</button>
+                        <button type="button" class="btn btn-primary mt-3" onclick="checkAnswer('{{ json_encode($question) }}')">Submit</button>
                     </form>
                     <div id="answer-feedback" class="mt-3 d-none"></div>
                     <br>
@@ -68,8 +68,8 @@
 </div>
 
 <script>
-    function checkAnswer() {
-        const correctAnswer = $question['answer'];
+    function checkAnswer(question) {
+        const correctAnswer = question.answer;
         const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
         const answerFeedback = document.getElementById("answer-feedback");
 
@@ -80,7 +80,7 @@
         } else {
             answerFeedback.classList.remove("d-none");
             answerFeedback.classList.add("alert", "alert-danger");
-            answerFeedback.innerHTML = "Incorrect. The correct answer is " + $question['answer'];
+            answerFeedback.innerHTML = "Incorrect. The correct answer is " + question.answer;
         }
     }
 </script>
