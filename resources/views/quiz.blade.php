@@ -16,17 +16,17 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-sm-6">
-            @foreach()
+            @foreach($questions as $question)
             <div class="card bg-light">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-4">An object starts its linear motion from rest. Which of the following quantities does not change throughout the motion?</h5>
+                    <h5 class="card-title text-center mb-4">{{ $question['question'] }}</h5>
                     <form>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="answer" id="answer1" value="option1">
                                     <label class="form-check-label" for="answer1">
-                                        London
+                                        {{ $question['option1'] }}
                                     </label>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="answer" id="answer2" value="option2">
                                     <label class="form-check-label" for="answer2">
-                                        Berlin
+                                        {{ $question['option2'] }}
                                     </label>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="answer" id="answer3" value="option3">
                                     <label class="form-check-label" for="answer3">
-                                        Paris
+                                        {{ $question['option3'] }}
                                     </label>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="answer" id="answer4" value="option4">
                                     <label class="form-check-label" for="answer4">
-                                        Madrid
+                                        {{ $question['option4'] }}
                                     </label>
                                 </div>
                             </div>
@@ -58,8 +58,10 @@
                         <button type="button" class="btn btn-primary mt-3" onclick="checkAnswer()">Submit</button>
                     </form>
                     <div id="answer-feedback" class="mt-3 d-none"></div>
+                    <br>
                 </div>
             </div>
+            <br>
             @endforeach
         </div>
     </div>
@@ -67,18 +69,18 @@
 
 <script>
     function checkAnswer() {
-        const correctAnswer = "option3";
+        const correctAnswer = $question['answer'];
         const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
         const answerFeedback = document.getElementById("answer-feedback");
 
         if (selectedAnswer === correctAnswer) {
             answerFeedback.classList.remove("d-none");
             answerFeedback.classList.add("alert", "alert-success");
-            answerFeedback.innerHTML = "Correct! Paris is the capital of France.";
+            answerFeedback.innerHTML = "You got it right!";
         } else {
             answerFeedback.classList.remove("d-none");
             answerFeedback.classList.add("alert", "alert-danger");
-            answerFeedback.innerHTML = "Incorrect. The correct answer is Paris.";
+            answerFeedback.innerHTML = "Incorrect. The correct answer is " + $question['answer'];
         }
     }
 </script>

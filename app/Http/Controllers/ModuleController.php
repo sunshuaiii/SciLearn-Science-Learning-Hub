@@ -56,15 +56,14 @@ class ModuleController extends Controller
     }
 
     public function startQuiz($moduleName, $topicId, $articleId){
-        $quizId = Quiz::where('article_id', $articleId)->get()->id;
+        $quizId = Quiz::where('article_id', $articleId)->get()->value('id');
 
         $questions = Question::where('quiz_id', $quizId)->get();
-        echo $questions;
 
-        // $topicName = Topic::find($topicId)->name;
-        // $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
+        $topicName = Topic::find($topicId)->name;
+        $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
-        // return view('quiz', ['questions' => $questions, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName]);
+        return view('quiz', ['questions' => $questions, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName]);
     }
 
     public function startChallenge(){
