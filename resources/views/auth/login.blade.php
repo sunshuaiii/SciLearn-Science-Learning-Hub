@@ -7,7 +7,7 @@
 <h1>{{$role == 'admin' ? 'Admin Login' : 'Login'}}</h1>
 <br>
 <div class="container mt-3">
-	<form method="POST" action="/login">
+	<form method="POST" action="{{'/login/'.$role}}">
 		@csrf
 		<div class="mb-3 mt-3">
 			<label for="email">Email</label>
