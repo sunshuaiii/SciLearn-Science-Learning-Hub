@@ -14,43 +14,43 @@
 <br> <br>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-sm-6">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
             @foreach($questions as $question)
-            <div class="card bg-light">
+            <div class="quiz-card mx-auto">
                 <div class="card-body">
                     <h5 class="card-title text-center mb-4">{{ $question['question'] }}</h5>
                     <form>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer" id="answer1" value="option1">
+                                    <input class="form-check-input" type="radio" name="answer" id="answer1" value="1">
                                     <label class="form-check-label" for="answer1">
-                                        {{ $question['option1'] }}
+                                        1. {{ $question['option1'] }}
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer" id="answer2" value="option2">
+                                    <input class="form-check-input" type="radio" name="answer" id="answer2" value="2">
                                     <label class="form-check-label" for="answer2">
-                                        {{ $question['option2'] }}
+                                        2. {{ $question['option2'] }}
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer" id="answer3" value="option3">
+                                    <input class="form-check-input" type="radio" name="answer" id="answer3" value="3">
                                     <label class="form-check-label" for="answer3">
-                                        {{ $question['option3'] }}
+                                        3. {{ $question['option3'] }}
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer" id="answer4" value="option4">
+                                    <input class="form-check-input" type="radio" name="answer" id="answer4" value="4">
                                     <label class="form-check-label" for="answer4">
-                                        {{ $question['option4'] }}
+                                        4. {{ $question['option4'] }}
                                     </label>
                                 </div>
                             </div>
@@ -69,19 +69,28 @@
 
 <script>
     function checkAnswer(question) {
-        const correctAnswer = question.answer;
-        const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
-        const answerFeedback = document.getElementById("answer-feedback");
+        const correctAnswer = JSON.parse(question).answer;
+        console.log(correctAnswer);
+        if (document.querySelector('input[name="answer"]') === null) {
+            console.log("Please select an answer!");
 
-        if (selectedAnswer === correctAnswer) {
+        } else {
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked').value; //bug
+        }
+
+        const answerFeedback = document.getElementById("answer-feedback");
+        console.log(answerFeedback);
+
+        if (selectedAnswer.toString() === correctAnswer.toString()) {
             answerFeedback.classList.remove("d-none");
             answerFeedback.classList.add("alert", "alert-success");
             answerFeedback.innerHTML = "You got it right!";
         } else {
             answerFeedback.classList.remove("d-none");
             answerFeedback.classList.add("alert", "alert-danger");
-            answerFeedback.innerHTML = "Incorrect. The correct answer is " + question.answer;
+            answerFeedback.innerHTML = "Incorrect. The correct answer is " + correctAnswer + ".";
         }
+
     }
 </script>
 
