@@ -40,21 +40,17 @@
                 <div class="nav-item mx-2">
                     <form method="POST" action="{{ route('search') }}">
                         @csrf
-                        <input type="text" name="q" id="search" placeholder="Type to search for a topic"
-                            style="height:50px; width:230px; text-align:center">
+                        <input type="text" name="q" id="search" placeholder="Type to search for a topic">
                     </form>
                 </div>
 
                 <!-- Leaderboard -->
-                <div class="nav-item mx-2">
-                    <a href="/leaderboard" style="font-size:28px">Leaderboard</a>
+                <div class="nav-item mx-2 leaderboard">
+                    <a href="/leaderboard">Leaderboard</a>
                 </div>
 
                 <!-- My Collections, Badges, Profile and Sign In/Log Out -->
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" style="display:none">
-                    </button>
                     <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby=" userDropdown">
                         @if (Auth::guard(session('role'))->user())
                         <a class="dropdown-item" href="/collections">My Collections</a>
@@ -75,15 +71,14 @@
                 </div>
 
                 <!-- Modules -->
-                <div class="nav-item mx-2">
-                    <a href="/modules" style="font-size:28px">Modules</a>
+                <div class="nav-item mx-2 module">
+                    <a href="/modules">Modules</a>
                 </div>
 
                 <!-- Logo -->
                 <div class="nav-item mx-2">
                     <a href="/home">
-                        <img src="/images/SciLearn.png" alt="SciLearn" class="my-image img-fluid"
-                            style="width: 180px; height: 90px">
+                        <img src="/images/SciLearn.png" alt="SciLearn" class="my-image img-fluid logo">
                     </a>
                 </div>
             </div>
@@ -96,7 +91,7 @@
     </div>
 
     <footer>
-        <p style="font-size:1em; text-align:center">@SciLearn and the SciLearn logo are trademarks and/or registered
+        <p>@SciLearn and the SciLearn logo are trademarks and/or registered
             trademarks of UTAR.
             {{date("Y")}} UTAR, all rights
             reserved.</p>
