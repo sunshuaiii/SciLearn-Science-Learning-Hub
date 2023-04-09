@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Topic;
 use App\Models\Module;
 use App\Models\Article;
@@ -66,7 +67,10 @@ class ModuleController extends Controller
         return view('quiz', ['questions' => $questions, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName]);
     }
 
-    public function startChallenge(){
-        //
+    public function startChallenge($moduleName){
+        // select 10 random records from the 'questions' table. 
+        $questions = DB::table('questions')->inRandomOrder()->take(10)->get();
+
+        return view('challenges', ['questions' => $questions]);
     }
 }

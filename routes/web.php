@@ -14,14 +14,14 @@ Route::redirect('/', 'home');
 
 #region authentication
 Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);
-Route::get('/login/student', [LoginController::class,'showStudentLoginForm']);
-Route::post('/login/admin', [LoginController::class,'loginAdmin']);
-Route::post('/login/student', [LoginController::class,'loginStudent']);
-Route::get('/register/admin', [RegisterController::class,'showAdminRegisterForm']);
-Route::post('/register/admin', [RegisterController::class,'createAdmin']);
-Route::get('/register/student', [RegisterController::class,'showStudentRegisterForm']);
-Route::post('/register/student', [RegisterController::class,'createStudent']);
-Route::get('/logout', [LoginController::class,'logout']);
+Route::get('/login/student', [LoginController::class, 'showStudentLoginForm']);
+Route::post('/login/admin', [LoginController::class, 'loginAdmin']);
+Route::post('/login/student', [LoginController::class, 'loginStudent']);
+Route::get('/register/admin', [RegisterController::class, 'showAdminRegisterForm']);
+Route::post('/register/admin', [RegisterController::class, 'createAdmin']);
+Route::get('/register/student', [RegisterController::class, 'showStudentRegisterForm']);
+Route::post('/register/student', [RegisterController::class, 'createStudent']);
+Route::get('/logout', [LoginController::class, 'logout']);
 #endregion
 
 //search article and show result
@@ -33,7 +33,7 @@ Route::get('/modules/{moduleName}', [ModuleController::class, 'showTopics']);
 Route::get('/modules/{moduleName}/{topicId}', [ModuleController::class, 'showArticles']);
 Route::get('/modules/{moduleName}/{topicId}/{articleId}', [ModuleController::class, 'showArticleContent']);
 Route::get('/modules/{moduleName}/{topicId}/{articleId}/quiz', [ModuleController::class, 'startQuiz']);
-// Route::get('/modules/{moduleName}/{topicId}/{articleId}/quiz', [ModuleController::class, 'startChallenge']);
+Route::get('/modules/{moduleName}/start', [ModuleController::class, 'startChallenge']);  // bug
 
 // leaderboard
 Route::get('leaderboard', [StudentController::class, 'leaderboard']);
@@ -43,9 +43,8 @@ Route::get('/test', [TestController::class, 'test'])->name('test');
 
 // features for registered students
 Route::middleware(['auth'])->group(function () {
-	
 	// using the same controller
-	Route::controller(StudentController::class)->group(function() {
+	Route::controller(StudentController::class)->group(function () {
 		Route::get('/students/profile', 'profile');
 		Route::get('/students/progress', 'progress');
 	});
