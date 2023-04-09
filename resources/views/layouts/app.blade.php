@@ -34,10 +34,10 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-color">
-            <div class="container">
+        <nav>
+            <div class="header-container">
                 <!-- Search Box -->
-                <div class="nav-item mx-2">
+                <div class="nav-item">
                     <form method="POST" action="{{ route('search') }}">
                         @csrf
                         <input type="text" name="q" id="search" placeholder="Type to search for a topic">
@@ -45,38 +45,48 @@
                 </div>
 
                 <!-- Leaderboard -->
-                <div class="nav-item mx-2 leaderboard">
+                <div class="leaderboard-nav-item">
                     <a href="/leaderboard">Leaderboard</a>
                 </div>
 
                 <!-- My Collections, Badges, Profile and Sign In/Log Out -->
-                <div class="dropdown">
-                    <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby=" userDropdown">
-                        @if (Auth::guard(session('role'))->user())
-                        <a class="dropdown-item" href="/collections">My Collections</a>
-                        <a class="dropdown-item" href="/badges">Badges</a>
-                        <a class="dropdown-item" href="/students/profile">Profile</a>
-                        <hr>
-                        <a class="dropdown-item" href="/logout">Logout</a>
-                        <!-- 
+                <div class="user-nav-item">
+                    <div class="dropdown">
+                        <div class="dropdown-menu" aria-labelledby=" userDropdown">
+                            @if (Auth::guard(session('role'))->user())
+                            <a class="dropdown-item" href="/collections">My Collections</a>
+                            <a class="dropdown-item" href="/badges">Badges</a>
+                            <a class="dropdown-item" href="/students/profile">Profile</a>
+                            <hr>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                            <!-- 
 								admin view
 
 							-->
-                        @else
-                        <a class="dropdown-item" href="/login/student">Login</a>
-                        <a class="dropdown-item" href="/register/student">Sign Up</a>
-                        @endif
+                            @else
+                            <a class="dropdown-item" href="/login/student">Login</a>
+                            <a class="dropdown-item" href="/register/student">Sign Up</a>
+                            @endif
+                        </div>
+                        <img src="/images/AvatarIcon.png" alt="Avatar" id="avatar">
                     </div>
-                    <img src="/images/AvatarIcon.png" alt="Avatar" id="avatar">
                 </div>
 
                 <!-- Modules -->
-                <div class="nav-item mx-2 module">
-                    <a href="/modules">Modules</a>
+                <div class="nav-item module">
+                    <div class="dropdown">
+                        <div class="dropdown-menu" aria-labelledby=" userDropdown">
+                            <a class="dropdown-item" href="/modules/famous-scientists">Famous Scientists</a>
+                            <a class="dropdown-item" href="/modules/fun-facts">Fun Facts</a>
+                            <a class="dropdown-item" href="/modules/learning-center">Learning Center</a>
+                            <a class="dropdown-item" href="/modules/challenges">Challenges</a>
+                        </div>
+                        <a href="/modules">Modules</a>
+                    </div>
                 </div>
 
                 <!-- Logo -->
-                <div class="nav-item mx-2">
+                <div class="logo-nav-item">
                     <a href="/home">
                         <img src="/images/SciLearn.png" alt="SciLearn" class="my-image img-fluid logo">
                     </a>

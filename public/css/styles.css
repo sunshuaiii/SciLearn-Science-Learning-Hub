@@ -6,7 +6,7 @@ body {
 
 a {
     color: #393c56;
-    font-size: 20px;
+    font-size: 25px;
     text-decoration: none;
 }
 
@@ -14,14 +14,36 @@ a:hover {
     color: #ff6600;
 }
 
-.bg-color{
+nav{
     background-color: #CCE5FF; 
     height:100px;
+    max-width: 100%;
 }
 
-.container{
-    justify-content:center;
-    width:100%;
+.header-container{
+    display: flex;
+    justify-content:space-around;
+    max-width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.nav-item{
+    margin:10px;
+    padding:10px;
+}
+
+.user-nav-item{
+    margin-left:-60px;
+    margin-right: 10px;
+    margin-top: 5px;
+    padding:10px;
+}
+
+.logo-nav-item{
+    margin:10px;
+    margin-bottom: 0;
+    padding:0;
 }
 
 #search{
@@ -34,23 +56,37 @@ a:hover {
     font-size:28px;
 }
 
-.dropdown{
-    position: relative; 
-    display: inline-block;
-}
-
 .dropdown-menu {
     display: none; 
     position: absolute; 
     top: 100%; 
-    right: 0; 
+    left:-80%;
+    text-align: center;
+  }
+
+.module .dropdown-menu {
+    left:-30%;
+  }
+
+  
+.dropdown-menu a{
+    font-size:18px;
   }
   
   .dropdown:hover .dropdown-menu {
     display: block; 
 }
 
-.leaderboard a{
+.leaderboard-nav-item{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:10px;
+    margin-right: 0;
+    padding:10px;
+    padding-right: 0;
+}
+
+.leaderboard-nav-item a{
     font-size:28px;
 }
 
