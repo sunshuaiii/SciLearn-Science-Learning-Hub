@@ -29,11 +29,14 @@ Route::post('/search', [SearchController::class, 'search'])->name('search');
 
 // modules
 Route::view('/modules', 'modules');
+// Route to show topics for a module
 Route::get('/modules/{moduleName}', [ModuleController::class, 'showTopics']);
+// Route to show articles for a topic
 Route::get('/modules/{moduleName}/{topicId}', [ModuleController::class, 'showArticles']);
+// Route to show the content of an article
 Route::get('/modules/{moduleName}/{topicId}/{articleId}', [ModuleController::class, 'showArticleContent']);
+// Route to start a quiz for an article
 Route::get('/modules/{moduleName}/{topicId}/{articleId}/quiz', [ModuleController::class, 'startQuiz']);
-Route::get('/modules/{moduleName}/start', [ModuleController::class, 'startChallenge']);  // bug
 
 // leaderboard
 Route::get('leaderboard', [StudentController::class, 'leaderboard']);

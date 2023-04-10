@@ -19,10 +19,6 @@
 
 @if($moduleName != 'challenges')
 <h2 style="text-align: center;">Choose a topic</h1>
-    @endif
-
-    <br> <br>
-
     <div class="container">
         <div class="row">
             @if(count($topicsWithTag1) > 0)
@@ -95,7 +91,7 @@
         </div>
     </div>
 
-    @if($moduleName == 'challenges')
+    @elseif($moduleName == 'challenges')
     <div class="container">
         <div class="row">
             <div class="col-md-3; text-align: center;">
@@ -110,10 +106,7 @@
 
     <br> <br>
 
-    <div style="margin:3rem; text-align: center;">
-        <h3> Start the challenge now!</h3>
-        <a href="/modules/challenges/start" class="btn cartoonish-btn">Start Now</a>
-    </div>
+    @include('startChallenge')
 
     @endif
 

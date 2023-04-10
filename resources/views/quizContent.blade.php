@@ -9,14 +9,14 @@
             @foreach($questions as $question)
             <div class="quiz-card mx-auto">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-4">Question {{ $loop->iteration }} - {{ $question['question'] }}</h5>
+                    <h5 class="card-title text-center mb-4">Question {{ $loop->iteration }} - {{ $question->question }}</h5>
                     <form>
-                        <div class="row">
+                        <div class="row"> 
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer1{{ $loop->iteration }}" value="1">
                                     <label class="form-check-label" for="answer1{{ $loop->iteration }}">
-                                        1. {{ $question['option1'] }}
+                                        1. {{ $question->option1 }}
                                     </label>
                                 </div>
                             </div>
@@ -24,7 +24,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer2{{ $loop->iteration }}" value="2">
                                     <label class="form-check-label" for="answer2{{ $loop->iteration }}">
-                                        2. {{ $question['option2'] }}
+                                        2. {{ $question->option2 }}
                                     </label>
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer3{{ $loop->iteration }}" value="3">
                                     <label class="form-check-label" for="answer3{{ $loop->iteration }}">
-                                        3. {{ $question['option3'] }}
+                                        3. {{ $question->option3 }}
                                     </label>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer4{{ $loop->iteration }}" value="4">
                                     <label class="form-check-label" for="answer4{{ $loop->iteration }}">
-                                        4. {{ $question['option4'] }}
+                                        4. {{ $question->option4 }}
                                     </label>
                                 </div>
                             </div>
@@ -78,6 +78,7 @@
                 answerFeedback.classList.add("alert", "alert-success");
                 answerFeedback.innerHTML = "You got it right!";
             } else {
+                answerFeedback.classList.remove("d-none", "alert-success");
                 answerFeedback.classList.add("alert", "alert-danger");
                 answerFeedback.innerHTML = "Incorrect. The correct answer is " + correctAnswer + ".";
             }

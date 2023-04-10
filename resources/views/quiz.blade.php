@@ -13,4 +13,6 @@
 
 @include('quizContent')
 
+// todo: add a record to userquizzes if the user completed a quiz
+
 @endsection

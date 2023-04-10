@@ -49,6 +49,8 @@
 
 <br> <br> <br>
 
+<hr>
+
 @include('modulesContent')
 
 @endsection

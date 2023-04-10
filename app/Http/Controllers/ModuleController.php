@@ -34,20 +34,35 @@ class ModuleController extends Controller
 
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
-        return view('topics', ['moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow, 
-            'topicsWithTag1' => $topicsWithTag1, 'topicsWithTag2' => $topicsWithTag2, 
-            'topicsWithTag3' => $topicsWithTag3, 'topicsWithTag4' => $topicsWithTag4]);
+        return view('topics', [
+            'moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow,
+            'topicsWithTag1' => $topicsWithTag1, 'topicsWithTag2' => $topicsWithTag2,
+            'topicsWithTag3' => $topicsWithTag3, 'topicsWithTag4' => $topicsWithTag4
+        ]);
     }
 
-    public function showArticles($moduleName, $topicId){
-        $topicName = Topic::find($topicId)->name;
+    public function showArticles($moduleName, $topicId)
+    {
+        $topic = Topic::find($topicId);
+
+        // check if the topicId is selected
+        // no topicId will be selected if is a challenge
+        if (!$topic) {
+            // start challenge
+            // select 10 random records from the 'questions' table. 
+            $questions = DB::table('questions')->inRandomOrder()->take(10)->get();
+            return view('challenges', ['questions' => $questions]);
+        }
+
+        $topicName = $topic->name;
         $articles = Article::where('topic_id', $topicId)->get();
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
         return view('articles', ['moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow, 'topicId' => $topicId, 'topicName' => $topicName, 'articles' => $articles]);
     }
 
-    public function showArticleContent($moduleName, $topicId, $articleId){
+    public function showArticleContent($moduleName, $topicId, $articleId)
+    {
         $article = Article::find($articleId);
 
         $topicName = Topic::find($topicId)->name;
@@ -56,7 +71,8 @@ class ModuleController extends Controller
         return view('articleContent', ['article' => $article, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName]);
     }
 
-    public function startQuiz($moduleName, $topicId, $articleId){
+    public function startQuiz($moduleName, $topicId, $articleId)
+    {
         $quizId = Quiz::where('article_id', $articleId)->get()->value('id');
 
         $questions = Question::where('quiz_id', $quizId)->get();
@@ -65,12 +81,5 @@ class ModuleController extends Controller
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
         return view('quiz', ['questions' => $questions, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName]);
-    }
-
-    public function startChallenge($moduleName){
-        // select 10 random records from the 'questions' table. 
-        $questions = DB::table('questions')->inRandomOrder()->take(10)->get();
-
-        return view('challenges', ['questions' => $questions]);
     }
 }

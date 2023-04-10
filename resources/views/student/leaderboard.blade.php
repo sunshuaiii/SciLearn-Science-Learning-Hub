@@ -31,8 +31,7 @@
 </table>
 
 <hr>
-<div style="margin:3rem; text-align: center;">
-	<h3> Start the challenge now!</h3>
-	<a href="challenges" class="btn cartoonish-btn">Start Now</a>
-</div>
+
+@include('startChallenge')
+
 @endsection
