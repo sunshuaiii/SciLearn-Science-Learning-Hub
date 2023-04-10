@@ -78,8 +78,93 @@ class ModuleController extends Controller
         $questions = Question::where('quiz_id', $quizId)->get();
 
         $topicName = Topic::find($topicId)->name;
+        $articleTitle = Article::find($articleId)->title;
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
-        return view('quiz', ['questions' => $questions, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName]);
+        return view('quiz', ['questions' => $questions, 'moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName, 'articleTitle' => $articleTitle, 'topicId' => $topicId, 'articleId' => $articleId]);
+    }
+
+    public function submitQuiz(Request $request, $articleId)
+    {
+        $score = 0;
+        $answers = [];
+
+        $quizId = Quiz::where('article_id', $articleId)->get()->value('id');
+        $questions = Question::where('quiz_id', $quizId)->get();
+
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'answer') === 0) {
+                $questionNumber = str_replace('answer', '', $key);
+                $answers[$questionNumber - 1] = $value;
+            }
+        }
+
+        for ($i = 0; $i < count($questions); $i++) {
+            if ($answers[$i] === (string) $questions[$i]->answer) {
+                $score++;
+            }
+        }
+
+        $totalQuestions = count($questions);
+        $incorrectAnswers = $totalQuestions - $score;
+        $percentage = round(($score / $totalQuestions) * 100, 2);
+        $timeTaken = $request->input('time-taken');
+
+        // $userQuiz = new UserQuiz;
+        // $userQuiz->user_id = Auth::id();
+        // $userQuiz->quiz_id = $quizId;
+        // $userQuiz->save();
+
+        return view('quizResult', [
+            'score' => $score,
+            'totalQuestions' => $totalQuestions,
+            'incorrectAnswers' => $incorrectAnswers,
+            'percentage' => $percentage,
+            'timeTaken' => $timeTaken,
+            'questions' => $questions,
+            'answers' => $answers,
+        ]);
+    }
+
+    public function submitChallenges(Request $request)
+    {
+        $score = 0;
+        $answers = [];
+
+        $quizId = Quiz::where('article_id', $articleId)->get()->value('id');
+        $questions = Question::where('quiz_id', $quizId)->get();
+
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'answer') === 0) {
+                $questionNumber = str_replace('answer', '', $key);
+                $answers[$questionNumber - 1] = $value;
+            }
+        }
+
+        for ($i = 0; $i < count($questions); $i++) {
+            if ($answers[$i] === (string) $questions[$i]->answer) {
+                $score++;
+            }
+        }
+
+        $totalQuestions = count($questions);
+        $incorrectAnswers = $totalQuestions - $score;
+        $percentage = round(($score / $totalQuestions) * 100, 2);
+        $timeTaken = $request->input('time-taken');
+
+        // $userQuiz = new UserQuiz;
+        // $userQuiz->user_id = Auth::id();
+        // $userQuiz->quiz_id = $quizId;
+        // $userQuiz->save();
+
+        return view('quizResult', [
+            'score' => $score,
+            'totalQuestions' => $totalQuestions,
+            'incorrectAnswers' => $incorrectAnswers,
+            'percentage' => $percentage,
+            'timeTaken' => $timeTaken,
+            // 'questions' => $questions,
+            'answers' => $answers,
+        ]);
     }
 }

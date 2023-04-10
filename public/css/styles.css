@@ -144,6 +144,16 @@ footer{
     box-shadow: 15px 5px 15px 5px rgba(0, 0, 0, 0.1);
 }
 
+.challenges-card {
+    background-color: #CCE5FF;
+    border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+    width: 800px;
+    height: 230px;
+    box-shadow: 15px 5px 15px 5px rgba(0, 0, 0, 0.1);
+}
+
 .cartoonish-card {
     background-color: #cce5ff;
     border-radius: 20px;
