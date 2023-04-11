@@ -26,7 +26,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
             </div>
-            <form action="/collections/12/removeTopic" method="post">
+            <form action="/collections/{{$collection['id']}}/removeTopic" method="post">
               @csrf
               <input type="text" hidden name="id" id="id" value="{{ $topic['id'] }}">
               <div class="card-btn">
@@ -50,7 +50,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
             </div>
-            <form action="/collections/12/addTopic" method="post">
+            <form action="/collections/{{$collection['id']}}/addTopic" method="post">
               @csrf
               <input type="text" hidden name="id" id="id" value="{{ $topic['id'] }}">
               <div class="card-btn">

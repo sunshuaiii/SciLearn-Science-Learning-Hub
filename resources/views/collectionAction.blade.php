@@ -47,6 +47,8 @@
     </div>
   </div>
 
+  <br><br>
+
   <div class="container">
     <div class="row">
       @if(count($topicsWithTag1) <= 0 && count($topicsWithTag2) <=0 && count($topicsWithTag3) <=0 && count($topicsWithTag4) <=0) <br><br><br><br><br><br><br><br><br>
@@ -64,7 +66,7 @@
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
               </div>
               <div class="card-btn">
-                <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
+                <a href="" class="btn cartoonish-btn">Start Learning</a>
               </div>
             </div>
           </div>
@@ -81,7 +83,7 @@
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
               </div>
               <div class="card-btn">
-                <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
+                <a href="" class="btn cartoonish-btn">Start Learning</a>
               </div>
             </div>
           </div>
@@ -98,13 +100,13 @@
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
               </div>
               <div class="card-btn">
-                <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
+                <a href="" class="btn cartoonish-btn">Start Learning</a>
               </div>
             </div>
           </div>
           @endforeach
         @endif
-
+ 
         @if(count($topicsWithTag4) > 0)
           <h4 class="card-title">Topics</h4>
           @foreach($topicsWithTag4 as $topic)
@@ -115,7 +117,7 @@
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
               </div>
               <div class="card-btn">
-                <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
+                <a href="" class="btn cartoonish-btn">Start Learning</a>
               </div>
             </div>
           </div>
