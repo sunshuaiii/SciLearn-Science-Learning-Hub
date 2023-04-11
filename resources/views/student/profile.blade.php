@@ -7,13 +7,7 @@
     <a href="/home">Home </a> > <a href="/students/profile">Profile </a>
 </div>
 
-Hi, {{$user->username}} <br/> <br/>
-
-@if(session('message'))
-<div class="alert alert-success">
-	{{session('message')}}
-</div>
-@endif
+{{$user->username}} <br/> <br/>
 
 @include('student.edit')
 
