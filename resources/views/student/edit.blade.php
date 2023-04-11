@@ -57,13 +57,21 @@
 		@error('password_confirmation') <div class="alert alert-danger">{{ $message }}</div> @enderror
 	</div>
 
-	<input type="submit" value="Save">
-	<button id="cancel change password">Cancel</button>
+	
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+	<input type="submit" value="Save" class="btn btn-primary">
+	<button id="cancel change password" class="btn btn-primary">Cancel</button>
+	</div>
+</div>
+
 </form>
 
 <script>
-	// document.getElementById("reload").onclick = location.reload();
-
+	document.getElementById("reload").onclick = function() {
+		location.reload();
+	};
+	
 	document.getElementById("change password").onclick = function() {
 		const changePasswordForm = document.getElementById("changePasswordForm");
 		if (changePasswordForm.style.display === "none")
