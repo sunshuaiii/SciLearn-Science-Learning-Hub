@@ -3,10 +3,14 @@
 @section('title', 'Collections')
 
 @section('content')
+<br>
 
-<div class="container my-4">
-  <a href="home">Home</a> > <a href="/collections"> Collections </a>
-</div>
+<nav class="head-nav" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Collections</li>
+  </ol>
+</nav>
 
 <br>
 
