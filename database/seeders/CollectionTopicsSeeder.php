@@ -17,14 +17,35 @@ class CollectionTopicsSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $numberOfCollections = DB::table('collections')->count(); 
-        $numberOfTopics = DB::table('topics')->count(); 
+        $numberOfCollections = DB::table('collections')->count();
+        $numberOfTopics = DB::table('topics')->count();
 
-        for ($i = 0; $i < 20; $i++) { 
-            DB::table('collection_topics')->insert([ 
-                'collection_id' => $faker->numberBetween(1, $numberOfCollections),
-                'topic_id' => $faker->numberBetween(1, $numberOfTopics),
-            ]); 
+        $collectionIds = range(1, $numberOfCollections);
+        $topicIds = range(1, $numberOfTopics);
+        shuffle($collectionIds);
+        shuffle($topicIds);
+
+        $count = 0;
+        $i = 0;
+        $j = 0;
+
+        while ($count < 20 && $i < count($collectionIds) && $j < count($topicIds)) {
+            DB::table('collection_topics')->insert([
+                'collection_id' => $collectionIds[$i],
+                'topic_id' => $topicIds[$j]
+            ]);
+            $count++;
+            $i++;
+            $j++;
+            // If we have exhausted the collections or topics array, shuffle it again to generate more random combinations
+            if ($i >= count($collectionIds)) {
+                shuffle($collectionIds);
+                $i = 0;
+            }
+            if ($j >= count($topicIds)) {
+                shuffle($topicIds);
+                $j = 0;
+            }
         }
     }
 }
