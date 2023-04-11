@@ -26,7 +26,7 @@ Route::get('/logout', [LoginController::class, 'logout']);
 #endregion
 
 //search article and show result
-Route::post('/search', [SearchController::class, 'search']);
+Route::get('/search', [SearchController::class, 'search']);
 
 
 // modules
@@ -43,7 +43,7 @@ Route::get('/modules/{moduleName}/{topicId}/{articleId}/quiz', [ModuleController
 Route::post('/modules/{moduleName}/{topicId}/{articleId}/quiz/submit', [ModuleController::class, 'submitQuiz'])->name('quiz.submit');
 
 // leaderboard
-Route::get('leaderboard', [StudentController::class, 'leaderboard']);
+Route::get('/leaderboard', [StudentController::class, 'leaderboard']);
 
 // testing
 Route::get('/test', [TestController::class, 'test'])->name('test');
@@ -67,7 +67,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('/collections', CollectionController::class);
 });
 
-Route::resource('students.badges', BadgeController::class)->shallow();
 
 // Route::view('testing', 'welcome');
 // Route::view('topics', 'showTopics');
