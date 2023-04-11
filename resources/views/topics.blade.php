@@ -34,6 +34,7 @@
                 <div class="row">
                     @if(count($topicsWithTag1) > 0)
                     <h4 class="card-title">Tag: {{ $topicsWithTag1->first()->tag }}</h4>
+                    <div style="display:none">{{ $i=0 }}</div>
                     @foreach($topicsWithTag1 as $topic)
                     <div class="col-md-3">
                         <div class="card cartoonish-card">
@@ -44,6 +45,13 @@
                             <div class="card-btn">
                                 <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
                             </div>
+                            <div style="margin-bottom: 0.5rem;">
+                                <div class="progress" style="height: 1.5rem;">
+                                    <div class="progress-bar bg-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
+                                        {{ number_format($progress[$i - 1], 2, '.', ',') }}%
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -51,6 +59,7 @@
 
                     @if(count($topicsWithTag2) > 0)
                     <h4 class="card-title">Tag: {{ $topicsWithTag2->first()->tag }}</h4>
+                    <div style="display:none">{{ $i=0 }}</div>
                     @foreach($topicsWithTag2 as $topic)
                     <div class="col-md-3">
                         <div class="card cartoonish-card">
@@ -61,6 +70,13 @@
                             <div class="card-btn">
                                 <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
                             </div>
+                            <div style="margin-bottom: 0.5rem;">
+                                <div class="progress" style="height: 1.5rem;">
+                                    <div class="progress-bar bg-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
+                                        {{ number_format($progress[$i - 1], 2, '.', ',') }}%
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -68,6 +84,7 @@
 
                     @if(count($topicsWithTag3) > 0)
                     <h4 class="card-title">Tag: {{ $topicsWithTag3->first()->tag }}</h4>
+                    <div style="display:none">{{ $i=0 }}</div>
                     @foreach($topicsWithTag3 as $topic)
                     <div class="col-md-3">
                         <div class="card cartoonish-card">
@@ -78,6 +95,13 @@
                             <div class="card-btn">
                                 <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
                             </div>
+                            <div style="margin-bottom: 0.5rem;">
+                                <div class="progress" style="height: 1.5rem;">
+                                    <div class="progress-bar bg-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
+                                        {{ number_format($progress[$i - 1], 2, '.', ',') }}%
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -85,6 +109,7 @@
 
                     @if(count($topicsWithTag4) > 0)
                     <h4 class="card-title">Topics</h4>
+                    <div style="display:none">{{ $i=0 }}</div>
                     @foreach($topicsWithTag4 as $topic)
                     <div class="col-md-3">
                         <div class="card cartoonish-card">
@@ -94,6 +119,13 @@
                             </div>
                             <div class="card-btn">
                                 <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
+                            </div>
+                            <div style="margin-bottom: 0.5rem;">
+                                <div class="progress" style="height: 1.5rem;">
+                                    <div class="progress-bar bg-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
+                                        {{ number_format($progress[$i - 1], 2, '.', ',') }}%
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

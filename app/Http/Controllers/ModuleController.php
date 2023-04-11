@@ -37,6 +37,28 @@ class ModuleController extends Controller
 
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
+        if (Auth::guard(session('role'))->user()) {
+            $user = Auth::guard(session('role'))->user();
+            $quizzesTaken = $user->getQuizzes;
+            $progress = [];
+            $i = 0;
+    
+            foreach (Module::take(3)->get() as $module) {
+                foreach ($module->getTopics as $topic) {
+                    $numberOfQuiz = $topic->getArticles->count();
+                    $quizzesTakenCount = 0;
+                    foreach ($topic->getArticles as $article) {
+                        // return Quiz::find(1);
+                        // return Quiz::where('article_id', $article->id)->get();
+    
+                        if ($quizzesTaken->contains($article->getQuiz))
+                            $quizzesTakenCount++;
+                    }
+                    $progress[$i++] = $quizzesTakenCount / $numberOfQuiz;
+                }
+            }
+        }
+
         return view('topics', [
             'moduleName' => $moduleName,
             'moduleNameToShow' => $moduleNameToShow,
@@ -44,6 +66,7 @@ class ModuleController extends Controller
             'topicsWithTag2' => $topicsWithTag2,
             'topicsWithTag3' => $topicsWithTag3,
             'topicsWithTag4' => $topicsWithTag4,
+            'progress' => $progress,
         ]);
     }
 
@@ -73,7 +96,8 @@ class ModuleController extends Controller
         ]);
     }
 
-    public function showArticleContent($moduleName, $topicId, $articleId){
+    public function showArticleContent($moduleName, $topicId, $articleId)
+    {
         $article = Article::find($articleId);
 
         $topicName = Topic::find($topicId)->name;
@@ -209,14 +233,14 @@ class ModuleController extends Controller
                     // If the user first enter the leaderboard, create a new record in the table
                     $leaderboard = new Leaderboard();
                     $leaderboard->user_id = $userId;
-                    $leaderboard->duration = $elapsedTime/1000;
+                    $leaderboard->duration = $elapsedTime / 1000;
                     $leaderboard->save();
                 } else {
                     if ($elapsedTime < $leaderboard->duration) {
                         // If the user already existed in the leaderboard and the current duration is shorter than the duration in the table,
                         // update the record in the table
                         $leaderboard = Leaderboard::where('user_id', $userId)->first();
-                        $leaderboard->duration = $elapsedTime/1000;
+                        $leaderboard->duration = $elapsedTime / 1000;
                         $leaderboard->save();
                     }
                 }

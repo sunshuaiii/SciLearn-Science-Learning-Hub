@@ -294,3 +294,7 @@ footer {
     height: 8rem;
     border-radius: 4rem;
 }
+
+.progress-bar {
+    background-color: #6666ff;
+}
