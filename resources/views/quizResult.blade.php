@@ -32,7 +32,6 @@
                     <p>Score: {{ $score }}/{{ $totalQuestions }}</p>
                     <p>Incorrect Answers: {{ $incorrectAnswers }}</p>
                     <p>Percentage: {{ $percentage }}%</p>
-                    <p>Time Taken: {{ $timeTaken }} seconds</p>
 
                     <table class="table table-striped">
                         <thead>
