@@ -7,7 +7,14 @@
     <a href="/home">Home </a> > <a href="/admin/lectureContent">Lecture Content </a>
 </div>
 <br>
-<table class="table table-hover" >
+
+@if(session('message'))
+<div class="alert alert-success">
+    {{session('message')}}
+</div>
+@endif
+
+<table class="table" >
 	<thead>
 		<tr>
 			<th>Module</th>
@@ -20,16 +27,23 @@
 		@foreach(App\Models\Module::all() as $module)
 			@foreach($module->getTopics as $topic)
 				@foreach($topic->getArticles as $article)
-				<tr>
-					<td>{{$module->name}}</td>
-					<td>{{$topic->name}}</td>
-					<td>{{$article->title}}</td>
-					<td>{{$article->getQuiz->name}}</td>
+				
+				<tr class="showEdit">
+					<td onclick="window.location.href='/editModule/{{$module->id}}';">{{$module->name}} </td>
+					<td onclick="window.location.href='/editTopic/{{$topic->id}}';">{{$topic->name}} </td>
+					<td onclick="window.location.href='/editArticle/{{$article->id}}';">{{$article->title}} </td>
+					<td onclick="window.location.href='/editQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>
 				</tr>
 				@endforeach
 			@endforeach
 		@endforeach
 	</tbody>
 </table>
+
+<style>
+td:hover {
+	color: #ff6600;
+}
+</style>
 
 @endsection

@@ -72,7 +72,19 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth:admin'])->group(function () {
 	Route::controller(AdminController::class)->group(function () {
-		Route::get('/admin/lecture_content', 'lectureContent');
+		Route::get('/lecture_content', 'lectureContent');
+
+		Route::get('/createModule', 'createModule');
+		Route::get('/createTopic', 'createTopic');
+		Route::get('/createArticle', 'createArticle');
+		Route::get('/createQuiz', 'createQuiz');
+
+		Route::get('/editModule/{id}', 'editModule');
+		Route::get('/editTopic/{id}', 'editTopic');
+		Route::get('/editArticle/{id}', 'editArticle');
+		Route::get('/editQuiz/{id}', 'editQuiz');
+
+		Route::post('/storeModule', 'storeModule');
 	});
 });
 

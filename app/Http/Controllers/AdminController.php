@@ -32,11 +32,28 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createModule()
     {
 		$this->authorizeAdmin();
-        //
+        return view('admin.module.create');
     }
+
+	public function storeModule() {
+		$request->validate([
+			'username' => 'required|unique:users|max:255',
+			'email' => 'required|unique:users|email|max:255',
+			'password' => 'required|min:8|confirmed',
+		]); // if invalid, return back to the original page and show error message
+		User::create([
+			'username' => $request->username,
+			'email' => $request->email,
+			'password' => Hash::make($request->password),
+			'avatar_id' => 0,
+		]);
+
+		$request->session()->flash('message', 'Module created.');
+		return $this->lectureContent();
+	}
 
     /**
      * Store a newly created resource in storage.

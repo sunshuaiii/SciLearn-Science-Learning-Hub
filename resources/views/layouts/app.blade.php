@@ -24,6 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
     <!-- public/css/styles.css -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
@@ -56,13 +57,17 @@
                             @if (Auth::guard(session('role'))->user() && Auth::guard(session('role'))->user()->can('hasLogined'))
 								<a class="dropdown-item" href="/collections">My Collections</a>
 								<a class="dropdown-item" href="/students/profile">Profile</a>
-								
+								<hr>
 
 								@if (Auth::guard(session('role'))->user()->can('isAdmin'))
-									<a class="dropdown-item" href="/admin/lecture_content">Lecture Content</a>
+									<a class="dropdown-item" href="/lecture_content">Lecture Content</a>
+									<a class="dropdown-item" href="/createModule">Create Module</a>
+									<a class="dropdown-item" href="/createTopic">Create Topic</a>
+									<a class="dropdown-item" href="/createArticle">Create Article</a>
+									<a class="dropdown-item" href="/createQuiz">Create Quiz</a>
+									<hr>
 								@endif
 
-								<hr>
 								<a class="dropdown-item" href="/logout">Logout</a>
                             @else
 								<a class="dropdown-item" href="/login/student">Login</a>
