@@ -17,9 +17,9 @@
     </ol>
 </nav>
 
-// todo: show challenges result
-// todo: add record to leaderboard
+<br> <br> <br>
 
+<!-- The section includes a button with an onclick function to start a stopwatch and show the questions. -->
 <div class="text-center">
     <button type="button" class="btn btn-primary" id="start-stopwatch" onclick="startStopwatch(); showQuestions()">Start</button>
     <div id="stopwatch" class="text-center">Press Start To Start the Challenges</div>
@@ -31,7 +31,10 @@
             <form id="challenges-form" method="POST" action="{{ route('challenges.submit') }}" onsubmit="return validateSubmit();">
                 @csrf
 
+                <input type="hidden" name="start_time" id="start-time" value="">
+
                 @foreach($questions as $question)
+                console.log({{$question->answer}});
                 <div class="challenges-card mx-auto">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-4">Question {{ $loop->iteration }} - {{ $question->question }}</h5>
@@ -77,6 +80,9 @@
                 </div>
                 <br>
                 @endforeach
+                <input type="hidden" name="questions" value="{{ json_encode($questions) }}">
+                <input type="hidden" name="elapsed_time" id="elapsed-time">
+
                 <button type="submit" id="submit-button" class="btn btn-primary mt-1 center">Submit</button>
             </form>
         </div>
@@ -93,6 +99,7 @@
         startTime = Date.now();
         intervalId = setInterval(updateStopwatch, 10);
         document.getElementById("start-stopwatch").disabled = true;
+        document.getElementById("start-time").value = startTime;
     }
 
     function updateStopwatch() {
@@ -131,6 +138,20 @@
                 return false;
             }
         }
+
+        // Calculate time taken
+        var elapsedTime = Date.now() - startTime;
+        // convert elapsed time to minutes and seconds
+        var minutes = Math.floor(elapsedTime / (60 * 1000));
+        var seconds = Math.floor((elapsedTime % (60 * 1000)) / 1000);
+        var timeTaken = minutes + ' minutes ' + (seconds < 10 ? '0' + seconds : seconds) + ' seconds';
+        // Add the time taken as a hidden input to the form
+        var timeTakenInput = document.createElement("input");
+        timeTakenInput.setAttribute("type", "hidden");
+        timeTakenInput.setAttribute("name", "time_taken");
+        timeTakenInput.setAttribute("value", timeTaken);
+        document.getElementById("challenges-form").appendChild(timeTakenInput);
+        document.getElementById('elapsed-time').value = elapsedTime;
         return true;
     }
 </script>

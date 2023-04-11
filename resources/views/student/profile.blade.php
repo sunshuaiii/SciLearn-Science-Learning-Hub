@@ -14,7 +14,13 @@
 
 <br>
 
-{{$user->username}} <br/> <br/>
+Hi, {{$user->username}} <br/> <br/>
+
+@if(session('message'))
+<div class="alert alert-success">
+	{{session('message')}}
+</div>
+@endif
 
 @include('student.edit')
 

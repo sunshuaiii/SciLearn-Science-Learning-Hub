@@ -45,16 +45,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // user->badge = *..*
-    public function getBadges()
-    {
-        return $this->belongsToMany(Badge::class, 'userbadges');
-    }
-
     // user->quiz = *..*
     public function getQuizzes()
     {
-        return $this->belongsToMany(Quiz::class, 'userquizzes');
+        return $this->belongsToMany(Quiz::class, 'user_quizzes');
     }
 
     // user->leaderboard = 1..1
