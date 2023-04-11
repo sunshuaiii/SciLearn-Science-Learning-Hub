@@ -276,3 +276,9 @@ footer {
 .btn-danger {
     border-radius: 10px;
 }
+
+.avatar-img {
+    weight: 8rem;
+    height: 8rem;
+    border-radius: 4rem;
+}

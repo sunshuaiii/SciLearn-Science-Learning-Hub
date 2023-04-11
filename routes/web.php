@@ -46,7 +46,7 @@ Route::post('/modules/{moduleName}/{topicId}/{articleId}/quiz/submit', [ModuleCo
 Route::get('/leaderboard', [StudentController::class, 'leaderboard']);
 
 // testing
-Route::get('/test', [TestController::class, 'test'])->name('test');
+// Route::get('/test', [TestController::class, 'test'])->name('test');
 
 // features for registered students
 Route::middleware(['auth'])->group(function () {
@@ -54,19 +54,25 @@ Route::middleware(['auth'])->group(function () {
 	Route::controller(StudentController::class)->group(function () {
 		Route::get('/students/profile', 'profile');
 		Route::get('/students/progress', 'progress');
+		Route::get('/students/profile/avatar', 'avatar');
+		Route::put('/students/profile/avatar/changeAvatar/{id}', 'changeAvatar');
+		Route::get('/students/edit', 'edit');
+		Route::get('/students/password', 'editPassword');
 		Route::put('/students', 'update');
-		Route::put('/students/password', 'changePassword');
+		Route::put('/students/password', 'updatePassword');
 	});
 
-	// collection/topics
-	Route::view('/collections/{id}/topics', [TopicController::class, 'showTopics']);
-	Route::post('/collections/{id}/addTopics', [TopicController::class, 'addTopic']);
-	Route::post('/collections/{id}/removeTopics', [TopicController::class, 'removeTopic']);
-	
 	// collection
+	Route::get('/collections/{collectionId}/showTopics', [CollectionController::class, 'showTopics']);
+	Route::post('/collections/{collectionId}/addTopic', [CollectionController::class, 'addTopic']);
+	Route::post('/collections/{collectionId}/removeTopic', [CollectionController::class, 'removeTopic']);
 	Route::resource('/collections', CollectionController::class);
 });
 
+<<<<<<< HEAD
+=======
+// Route::resource('students.badges', BadgeController::class)->shallow();
+>>>>>>> 2efce39ae12326f5989450df7218cb06ad8006cd
 
 // Route::view('testing', 'welcome');
 // Route::view('topics', 'showTopics');
