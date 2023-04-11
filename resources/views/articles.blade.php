@@ -7,9 +7,16 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<div class="container my-4">
-    <a href="/home">Home</a> > <a href="/modules">Modules</a> > <a href="/modules/$moduleName">{{ $moduleNameToShow }}</a> > <a>{{ $topicName }}</a>
-</div>
+<br>
+
+<nav class="head-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/modules">Modules</a></li>
+        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}">{{ isset($moduleNameToShow) ? $moduleNameToShow : '' }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ isset($topicName) ? $topicName : '' }}</li>
+    </ol>
+</nav>
 
 <br> <br>
 

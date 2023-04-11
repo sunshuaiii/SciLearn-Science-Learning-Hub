@@ -1,28 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\TopicController;
 
 Route::view('/home', 'home');
 Route::redirect('/', 'home');
 
 #region authentication
 Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);
-Route::get('/login/student', [LoginController::class,'showStudentLoginForm']);
-Route::post('/login/admin', [LoginController::class,'loginAdmin']);
-Route::post('/login/student', [LoginController::class,'loginStudent']);
-Route::get('/register/admin', [RegisterController::class,'showAdminRegisterForm']);
-Route::post('/register/admin', [RegisterController::class,'createAdmin']);
-Route::get('/register/student', [RegisterController::class,'showStudentRegisterForm']);
-Route::post('/register/student', [RegisterController::class,'createStudent']);
-Route::get('/logout', [LoginController::class,'logout']);
+Route::get('/login/student', [LoginController::class, 'showStudentLoginForm']);
+Route::post('/login/admin', [LoginController::class, 'loginAdmin']);
+Route::post('/login/student', [LoginController::class, 'loginStudent']);
+Route::get('/register/admin', [RegisterController::class, 'showAdminRegisterForm']);
+Route::post('/register/admin', [RegisterController::class, 'createAdmin']);
+Route::get('/register/student', [RegisterController::class, 'showStudentRegisterForm']);
+Route::post('/register/student', [RegisterController::class, 'createStudent']);
+Route::get('/logout', [LoginController::class, 'logout']);
 #endregion
 
 //search article and show result
@@ -31,11 +31,16 @@ Route::post('/search', [SearchController::class, 'search']);
 
 // modules
 Route::view('/modules', 'modules');
+// Route to show topics for a module
 Route::get('/modules/{moduleName}', [ModuleController::class, 'showTopics']);
+Route::post('/modules/challenges/submit', [ModuleController::class, 'submitChallenges'])->name('challenges.submit');
+// Route to show articles for a topic
 Route::get('/modules/{moduleName}/{topicId}', [ModuleController::class, 'showArticles']);
+// Route to show the content of an article
 Route::get('/modules/{moduleName}/{topicId}/{articleId}', [ModuleController::class, 'showArticleContent']);
+// Route to start a quiz for an article
 Route::get('/modules/{moduleName}/{topicId}/{articleId}/quiz', [ModuleController::class, 'startQuiz']);
-// Route::get('/modules/{moduleName}/{topicId}/{articleId}/quiz', [ModuleController::class, 'startChallenge']);
+Route::post('/modules/{moduleName}/{topicId}/{articleId}/quiz/submit', [ModuleController::class, 'submitQuiz'])->name('quiz.submit');
 
 // leaderboard
 Route::get('leaderboard', [StudentController::class, 'leaderboard']);
@@ -45,16 +50,27 @@ Route::get('/test', [TestController::class, 'test'])->name('test');
 
 // features for registered students
 Route::middleware(['auth'])->group(function () {
-	
 	// using the same controller
-	Route::controller(StudentController::class)->group(function() {
+	Route::controller(StudentController::class)->group(function () {
 		Route::get('/students/profile', 'profile');
 		Route::get('/students/progress', 'progress');
+		Route::put('/students', 'update');
+		Route::put('/students/password', 'changePassword');
 	});
+
+	// collection/topics
+	Route::view('/collections/{id}/topics', [TopicController::class, 'showTopics']);
+	Route::post('/collections/{id}/addTopics', [TopicController::class, 'addTopic']);
+	Route::post('/collections/{id}/removeTopics', [TopicController::class, 'removeTopic']);
+	
+	// collection
+	Route::resource('/collections', CollectionController::class);
 });
 
-Route::resource('students.collections', CollectionController::class)->shallow();
 Route::resource('students.badges', BadgeController::class)->shallow();
+
+// Route::view('testing', 'welcome');
+// Route::view('topics', 'showTopics');
 
 /*
  * Actions Handled by Resource Controllers

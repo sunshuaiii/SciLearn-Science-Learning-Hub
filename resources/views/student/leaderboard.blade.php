@@ -5,9 +5,14 @@
 @section('title', 'Leaderboard')
 
 @section('content')
-<div class="container my-4">
-	<a href="/home">Home </a> > <a href="/leaderboard">Leaderboard </a>
-</div>
+<br>
+
+<nav class="head-nav" aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Home</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Leaderboard</li>
+	</ol>
+</nav>
 
 <h1 style="text-align: center;">Leaderboard</h1>
 
@@ -31,8 +36,7 @@
 </table>
 
 <hr>
-<div style="margin:3rem; text-align: center;">
-	<h3> Start the challenge now!</h3>
-	<a href="challenges" class="btn cartoonish-btn">Start Now</a>
-</div>
+
+@include('startChallenge')
+
 @endsection

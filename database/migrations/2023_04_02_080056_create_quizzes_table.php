@@ -19,6 +19,11 @@ return new class extends Migration
             $table->foreignId('article_id')->constrained('articles', 'id');
             $table->timestamps();
         });
+
+
+        Schema::table('user_quizzes', function (Blueprint $table) {
+            $table->foreignId('quiz_id')->constrained('quizzes', 'id');
+        });
     }
 
     /**

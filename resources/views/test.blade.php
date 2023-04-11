@@ -1,31 +1,12 @@
-@extends('layouts.app')
-
-@section('title', 'Quiz')
-
-@section('content')
-
 <!DOCTYPE html>
 <html lang="en-US">
 
-<br>
-
-<nav class="head-nav" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="/modules">Modules</a></li>
-        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}">{{ isset($moduleNameToShow) ? $moduleNameToShow : '' }}</a></li>
-        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}/{{ isset($topicId) ? $topicId : '' }}">{{ isset($topicName) ? $topicName : '' }}</a></li>
-        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}/{{ isset($topicId) ? $topicId : '' }}/{{ isset($articleId) ? $articleId : '' }}">{{ isset($articleTitle) ? $articleTitle : '' }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Quiz</li>
-    </ol>
-</nav>
-
-<br> <br> <br>// todo: add a record to userquizzes if the user completed a quiz
+<br> <br>
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <form id="quiz-form" method="POST" action="{{ route('quiz.submit', ['moduleName' => $moduleName, 'topicId' => $topicId, 'articleId' => $articleId]) }}" onsubmit="return validateQuiz()">
+            <form method="POST" action="{{ route('quiz.submit') }}">
                 @csrf
 
                 @foreach($questions as $question)
@@ -36,7 +17,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="1">
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer1{{ $loop->iteration }}" value="1">
                                     <label class="form-check-label" for="answer1{{ $loop->iteration }}">
                                         1. {{ $question->option1 }}
                                     </label>
@@ -44,7 +25,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="2">
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer2{{ $loop->iteration }}" value="2">
                                     <label class="form-check-label" for="answer2{{ $loop->iteration }}">
                                         2. {{ $question->option2 }}
                                     </label>
@@ -52,7 +33,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="3">
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer3{{ $loop->iteration }}" value="3">
                                     <label class="form-check-label" for="answer3{{ $loop->iteration }}">
                                         3. {{ $question->option3 }}
                                     </label>
@@ -60,14 +41,14 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="4">
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer4{{ $loop->iteration }}" value="4">
                                     <label class="form-check-label" for="answer4{{ $loop->iteration }}">
                                         4. {{ $question->option4 }}
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" id="check-answer-{{ $loop->iteration }}" class="btn btn-primary mt-3" onclick="checkAnswer('{{ json_encode($question) }}', {{ $loop->iteration }})">Check Answer</button>
+                        <button type="button" class="btn btn-primary mt-3" onclick="checkAnswer('{{ json_encode($question) }}', {{ $loop->iteration }})">Submit</button>
 
                         <div id="answer-feedback{{ $loop->iteration }}" class="mt-3 d-none"></div>
                         <br>
@@ -75,17 +56,43 @@
                 </div>
                 <br>
                 @endforeach
-                <button type="submit" class="btn btn-primary mt-1 center">Submit Quiz</button>
             </form>
         </div>
     </div>
 </div>
 
 <script>
+    var timeLimit = 120; // 2 minutes in seconds
+    var timeElapsed = 0;
+    var timerId;
+
+    function startTimer() {
+        timerId = setInterval(countdown, 1000);
+        document.getElementById("start-timer-btn").disabled = true;
+    }
+
+    function countdown() {
+        timeElapsed++;
+        const timeRemaining = timeLimit - timeElapsed;
+        document.getElementById("timer").innerHTML = formatTime(timeRemaining);
+
+        if (timeRemaining <= 0) {
+            clearInterval(timerId);
+            document.getElementById("submit-btn").click();
+        }
+    }
+
+    function formatTime(seconds) {
+        const min = Math.floor(seconds / 60);
+        const sec = seconds % 60;
+        return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    }
+
     function checkAnswer(question, questionNumber) {
         const correctAnswer = JSON.parse(question).answer;
         const selectedAnswer = document.querySelector('input[name="answer' + questionNumber + '"]:checked');
         const answerFeedback = document.getElementById("answer-feedback" + questionNumber);
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
 
         // check if an answer is selected
         if (!selectedAnswer) {
@@ -94,8 +101,8 @@
             answerFeedback.classList.add("alert", "alert-danger");
             answerFeedback.innerHTML = "Please select an answer!";
         } else {
-            // can only check the answer once
-            document.getElementById("check-answer-" + questionNumber).disabled = true;
+            // If an answer is selected, it disables all radio buttons for that question to prevent changing the answer. 
+            $('input[name=answer' + questionNumber + ']').attr('disabled', true);
 
             // checks whether the selected answer is correct or not 
             if (selectedAnswer.value.toString() === correctAnswer.toString()) {
@@ -107,35 +114,10 @@
                 // otherwise, it shows an error message with the correct answer.
                 answerFeedback.classList.remove("d-none", "alert-success");
                 answerFeedback.classList.add("alert", "alert-danger");
-                answerFeedback.innerHTML = "Incorrect answer.";
+                answerFeedback.innerHTML = "Incorrect. The correct answer is " + correctAnswer + ".";
             }
         }
-    }
-
-    function validateQuiz() {
-        // check if at least one answer is selected for each question
-        var questions = document.querySelectorAll('.quiz-card');
-        for (var i = 0; i < questions.length; i++) {
-            var questionNumber = i + 1;
-            var answerSelected = false;
-            var answerInputs = questions[i].querySelectorAll('input[type="radio"]');
-            for (var j = 0; j < answerInputs.length; j++) {
-                if (answerInputs[j].checked) {
-                    answerSelected = true;
-                    break;
-                }
-            }
-            if (!answerSelected) {
-                // if no answer is selected, show an error message and stop form submission
-                var errorMessage = 'Please select an answer for Question ' + questionNumber + '.';
-                alert(errorMessage);
-                return false;
-            }
-        }
-        return true;
     }
 </script>
 
 <br> <br> <br>
-
-@endsection

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Quiz')
+@section('title', 'Challenges')
 
 @section('content')
 
@@ -13,23 +13,26 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
         <li class="breadcrumb-item"><a href="/modules">Modules</a></li>
-        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}">{{ isset($moduleNameToShow) ? $moduleNameToShow : '' }}</a></li>
-        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}/{{ isset($topicId) ? $topicId : '' }}">{{ isset($topicName) ? $topicName : '' }}</a></li>
-        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}/{{ isset($topicId) ? $topicId : '' }}/{{ isset($articleId) ? $articleId : '' }}">{{ isset($articleTitle) ? $articleTitle : '' }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Quiz</li>
+        <li class="breadcrumb-item active" aria-current="page">Challenges</li>
     </ol>
 </nav>
 
-<br> <br> <br>// todo: add a record to userquizzes if the user completed a quiz
+// todo: show challenges result
+// todo: add record to leaderboard
 
-<div class="container">
+<div class="text-center">
+    <button type="button" class="btn btn-primary" id="start-stopwatch" onclick="startStopwatch(); showQuestions()">Start</button>
+    <div id="stopwatch" class="text-center">Press Start To Start the Challenges</div>
+</div>
+
+<div class="container mt-5" hidden id="challenges-container">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <form id="quiz-form" method="POST" action="{{ route('quiz.submit', ['moduleName' => $moduleName, 'topicId' => $topicId, 'articleId' => $articleId]) }}" onsubmit="return validateQuiz()">
+            <form id="challenges-form" method="POST" action="{{ route('challenges.submit') }}" onsubmit="return validateSubmit();">
                 @csrf
 
                 @foreach($questions as $question)
-                <div class="quiz-card mx-auto">
+                <div class="challenges-card mx-auto">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-4">Question {{ $loop->iteration }} - {{ $question->question }}</h5>
 
@@ -67,7 +70,6 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" id="check-answer-{{ $loop->iteration }}" class="btn btn-primary mt-3" onclick="checkAnswer('{{ json_encode($question) }}', {{ $loop->iteration }})">Check Answer</button>
 
                         <div id="answer-feedback{{ $loop->iteration }}" class="mt-3 d-none"></div>
                         <br>
@@ -75,46 +77,42 @@
                 </div>
                 <br>
                 @endforeach
-                <button type="submit" class="btn btn-primary mt-1 center">Submit Quiz</button>
+                <button type="submit" id="submit-button" class="btn btn-primary mt-1 center">Submit</button>
             </form>
         </div>
     </div>
 </div>
 
+<br> <br> <br>
+
 <script>
-    function checkAnswer(question, questionNumber) {
-        const correctAnswer = JSON.parse(question).answer;
-        const selectedAnswer = document.querySelector('input[name="answer' + questionNumber + '"]:checked');
-        const answerFeedback = document.getElementById("answer-feedback" + questionNumber);
+    var startTime;
+    var intervalId;
 
-        // check if an answer is selected
-        if (!selectedAnswer) {
-            // If not, it shows an error message.
-            answerFeedback.classList.remove("d-none");
-            answerFeedback.classList.add("alert", "alert-danger");
-            answerFeedback.innerHTML = "Please select an answer!";
-        } else {
-            // can only check the answer once
-            document.getElementById("check-answer-" + questionNumber).disabled = true;
-
-            // checks whether the selected answer is correct or not 
-            if (selectedAnswer.value.toString() === correctAnswer.toString()) {
-                // if the answer is correct, it shows a success message
-                answerFeedback.classList.remove("d-none", "alert-danger");
-                answerFeedback.classList.add("alert", "alert-success");
-                answerFeedback.innerHTML = "You got it right!";
-            } else {
-                // otherwise, it shows an error message with the correct answer.
-                answerFeedback.classList.remove("d-none", "alert-success");
-                answerFeedback.classList.add("alert", "alert-danger");
-                answerFeedback.innerHTML = "Incorrect answer.";
-            }
-        }
+    function startStopwatch() {
+        startTime = Date.now();
+        intervalId = setInterval(updateStopwatch, 10);
+        document.getElementById("start-stopwatch").disabled = true;
     }
 
-    function validateQuiz() {
+    function updateStopwatch() {
+        var elapsedTime = Date.now() - startTime;
+        var minutes = Math.floor(elapsedTime / (60 * 1000));
+        var seconds = Math.floor((elapsedTime % (60 * 1000)) / 1000);
+        document.getElementById('stopwatch').innerHTML = minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
+    }
+
+    function stopStopwatch() {
+        clearInterval(intervalId);
+    }
+
+    function showQuestions() {
+        document.getElementById("challenges-container").removeAttribute("hidden");
+    }
+
+    function validateSubmit() {
         // check if at least one answer is selected for each question
-        var questions = document.querySelectorAll('.quiz-card');
+        var questions = document.querySelectorAll('.challenges-card');
         for (var i = 0; i < questions.length; i++) {
             var questionNumber = i + 1;
             var answerSelected = false;
@@ -122,6 +120,7 @@
             for (var j = 0; j < answerInputs.length; j++) {
                 if (answerInputs[j].checked) {
                     answerSelected = true;
+                    stopStopwatch();
                     break;
                 }
             }
@@ -135,7 +134,5 @@
         return true;
     }
 </script>
-
-<br> <br> <br>
 
 @endsection
