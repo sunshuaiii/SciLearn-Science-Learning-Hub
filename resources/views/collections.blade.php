@@ -24,7 +24,6 @@
     </div>
   </div>
 
-
   @if($errors->any())
   <br>
   <div class="alert alert-danger" role="alert">
@@ -49,13 +48,15 @@
       </div>
     </div>
   @empty
-  <br><br><br><br><br><br><br><br><br>
-  <h2 class="text-center text-secondary">You do not have any collection yet!</h2>
-  <br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <h2 class="text-center text-secondary">You do not have any collection yet!</h2>
+    <br><br><br><br><br>
   @endforelse
   </div>
 
 </div>
+
+<br><br><br>
 
 <!-- Create Collection Modal -->
 <div class="modal" id="createCollectionForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
@@ -82,8 +83,6 @@
     </div>
   </div>
 </div>
-
-<br><br><br>
 
 @endsection
 

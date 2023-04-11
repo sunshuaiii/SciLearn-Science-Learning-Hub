@@ -27,11 +27,6 @@
 <h2 style="text-align: center;">Choose a topic</h1>
     <div class="container">
         <div class="row">
-            @endif
-
-            @if($isCollection)
-            @include('collectionAction', ['collectionId' => $moduleName, 'errors' => $errors])
-            @endif
 
             <br> <br>
 
@@ -109,9 +104,9 @@
                         @endforeach
                         @endif
                 </div>
-                @endif
 
             </div>
+            @endif
 
             @if($moduleName == 'challenges')
             <div class="container">
@@ -131,8 +126,7 @@
             @include('startChallenge')
 
             @endif
-            @include('editCollectionModal', ['collectionId' => $moduleName, 'collectionName' => $moduleNameToShow])
-            @include('deleteCollectionModal', ['collectionId' => $moduleName])
+            @endif
 
             <br> <br> <br>
 

@@ -101,14 +101,12 @@ class CollectionController extends Controller
             }
         }
 
-        return view('topics', [
-            'moduleName' => $collection->id, 
-            'moduleNameToShow' => $collection->name,
+        return view('collectionAction', [
+            'collection' => $collection,
             'topicsWithTag1' => $topicsWithTag1,
             'topicsWithTag2' => $topicsWithTag2,
             'topicsWithTag3' => $topicsWithTag3,
             'topicsWithTag4' => $topicsWithTag4,
-            'isCollection' => true,
         ]);
     }
 

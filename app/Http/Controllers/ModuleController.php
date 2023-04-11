@@ -43,7 +43,6 @@ class ModuleController extends Controller
             'topicsWithTag2' => $topicsWithTag2,
             'topicsWithTag3' => $topicsWithTag3,
             'topicsWithTag4' => $topicsWithTag4,
-            'isCollection' => false,
         ]);
     }
 
