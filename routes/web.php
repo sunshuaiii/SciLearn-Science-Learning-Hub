@@ -26,7 +26,8 @@ Route::get('/logout', [LoginController::class, 'logout']);
 #endregion
 
 //search article and show result
-Route::post('/search', [SearchController::class, 'search'])->name('search');
+Route::post('/search', [SearchController::class, 'search']);
+
 
 // modules
 Route::view('/modules', 'modules');

@@ -72,8 +72,7 @@ class ModuleController extends Controller
         ]);
     }
 
-    public function showArticleContent($moduleName, $topicId, $articleId)
-    {
+    public function showArticleContent($moduleName, $topicId, $articleId){
         $article = Article::find($articleId);
 
         $topicName = Topic::find($topicId)->name;

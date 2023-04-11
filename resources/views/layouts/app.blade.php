@@ -38,7 +38,7 @@
             <div class="header-container">
                 <!-- Search Box -->
                 <div class="nav-item">
-                    <form method="POST" action="{{ route('search') }}">
+                    <form method="POST" action="/search">
                         @csrf
                         <input type="text" name="q" id="search" placeholder="Type to search for a topic">
                     </form>
