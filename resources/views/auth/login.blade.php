@@ -5,6 +5,13 @@
 @section('content')
 <br>
 <h1>{{$role == 'admin' ? 'Admin Login' : 'Login'}}</h1>
+
+<nav class="head-nav" aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active" aria-current="page">Login</li>
+	</ol>
+</nav>
+
 <br>
 <div class="container mt-3">
 	<form method="POST" action="{{'/login/'.$role}}">

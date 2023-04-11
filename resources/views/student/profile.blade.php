@@ -1,17 +1,24 @@
 @extends('layouts.app')
- 
-@section('title', 'Profile')
- 
-@section('content')
-<div class="container my-4">
-    <a href="/home">Home </a> > <a href="/students/profile">Profile </a>
-</div>
 
-Hi, {{$user->username}} <br/> <br/>
+@section('title', 'Profile')
+
+@section('content')
+<br>
+
+<nav class="head-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+    </ol>
+</nav>
+
+<br>
+
+Hi, {{$user->username}} <br /> <br />
 
 @if(session('message'))
 <div class="alert alert-success">
-	{{session('message')}}
+    {{session('message')}}
 </div>
 @endif
 
