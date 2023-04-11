@@ -11,6 +11,6 @@ class TestController extends Controller
 {
     public function test()
     {
-        //
+        echo User::find(10)->getBadges;
     }
 }

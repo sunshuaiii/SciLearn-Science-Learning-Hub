@@ -19,7 +19,7 @@ class QuizzesSeeder extends Seeder
         $faker = Faker::create();
         $articleTitles = DB::table('articles')->pluck('title');
 
-        for ($i = 0; $i < 400; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             DB::table('quizzes')->insert([
                 'name' => "Quiz " . $articleTitles[$i],
                 'article_id' => $i + 1,

@@ -68,12 +68,15 @@ class RegisterController extends Controller
 			'password' => 'required|min:8|confirmed',
 		]); // if invalid, return back to the original page and show error message
 				
+		$faker = Faker::create();
+        $numberOfAvatars = DB::table('avatars')->count();
+
 		User::create([
 			'username' => $request->username,
 			'email' => $request->email,
 			'password' => Hash::make($request->password),
 			'is_admin' => true,
-			'avatar_id' => 0,
+			'avatar_id' => $faker->numberBetween(1, $numberOfAvatars),
 		]);
 		return redirect('/login/admin');
 	}
@@ -88,11 +91,15 @@ class RegisterController extends Controller
 			'email' => 'required|unique:users|email|max:255',
 			'password' => 'required|min:8|confirmed',
 		]); // if invalid, return back to the original page and show error message
+
+		$faker = Faker::create();
+        $numberOfAvatars = DB::table('avatars')->count();
+
 		User::create([
 			'username' => $request->username,
 			'email' => $request->email,
 			'password' => Hash::make($request->password),
-			'avatar_id' => 0,
+			'avatar_id' => $faker->numberBetween(1, $numberOfAvatars),
 		]);
 
 		return redirect('/login/student');
