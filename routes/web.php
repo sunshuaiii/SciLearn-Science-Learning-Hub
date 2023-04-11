@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::controller(StudentController::class)->group(function () {
 		Route::get('/students/profile', 'profile');
 		Route::get('/students/progress', 'progress');
+		Route::put('/students', 'update');
+		Route::put('/students/password', 'changePassword');
 	});
 });
 

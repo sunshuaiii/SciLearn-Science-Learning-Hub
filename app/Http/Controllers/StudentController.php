@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Module;
+use App\Models\Quiz;
 use App\Models\Leaderboard;
 use App\Models\Topic;
 use Illuminate\Support\Facades\Auth;
@@ -28,10 +29,13 @@ class StudentController extends Controller
 		$i = 0;
 		foreach (Module::all() as $module) {
 			foreach ($module->getTopics as $topic) {
-				$numberOfQuiz = $topic->getQuizzes->count();
+				$numberOfQuiz = $topic->getArticles->count();
 				$quizzesTakenCount = 0;
-				foreach ($topic->getQuizzes as $quiz) {
-					if ($quizzesTaken->contains($quiz))
+				foreach ($topic->getArticles as $article) {
+					// return Quiz::find(1);
+					// return Quiz::where('article_id', $article->id)->get();
+
+					if ($quizzesTaken->contains($article->getQuiz))
 						$quizzesTakenCount++;
 				}
 				$progress[$i++] = $quizzesTakenCount / $numberOfQuiz;
@@ -53,5 +57,40 @@ class StudentController extends Controller
 		}
 		// return $users;
 		return response(view('student.leaderboard', ['users' => $users]));
+	}
+
+	public function update(Request $request) {
+		$user = Auth::guard(session('role'))->user();
+
+		$request->validate([
+			'username' => 'required|unique:users|max:255|'.$user->id,
+			'email' => 'required|unique:users|email|max:255|'.$user->id,
+		]); // unique rule without itself 
+
+		$user->update([
+			'username' => $request->username,
+			'email' => $request->email,
+			'password' => Hash::make($request->password),
+		]);
+
+		return back();
+	}
+
+	public function changePassword(Request $request) {
+		$user = Auth::guard(session('role'))->user();
+		
+		$request->validate([
+			'oldPassword' => ['required', function ($value) {
+				if (!Hash::check($value, $user->password))
+					$fail('Old Password is not correct.');
+			}],
+			'new_password' => 'required|min:8|confirmed|different:password',
+		]);
+
+		$user->update([
+			'password' => Hash::make($request->new_password),
+		]);
+
+		return back();
 	}
 }

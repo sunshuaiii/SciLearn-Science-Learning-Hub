@@ -7,8 +7,12 @@
     <a href="/home">Home </a> > <a href="/students/profile">Profile </a>
 </div>
 
-{{Auth::guard(session('role'))->user()->name}} <br/>
+{{$user->username}} <br/> <br/>
+
+@include('student.edit')
 
 @include('student.progress')
+
+
 
 @endsection
