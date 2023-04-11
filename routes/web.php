@@ -8,6 +8,7 @@ use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TopicController;
 
 Route::view('/home', 'home');
@@ -68,6 +69,13 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/collections/{collectionId}/removeTopic', [CollectionController::class, 'removeTopic']);
 	Route::resource('/collections', CollectionController::class);
 });
+
+Route::middleware(['auth:admin'])->group(function () {
+	Route::controller(AdminController::class)->group(function () {
+		Route::get('/admin/lecture_content', 'lectureContent');
+	});
+});
+
 
 // Route::resource('students.badges', BadgeController::class)->shallow();
 

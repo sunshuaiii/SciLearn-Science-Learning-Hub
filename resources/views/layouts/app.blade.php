@@ -53,19 +53,21 @@
                 <div class="user-nav-item">
                     <div class="dropdown">
                         <div class="dropdown-menu" aria-labelledby=" userDropdown">
-                            @if (Auth::guard(session('role'))->user())
-                            <a class="dropdown-item" href="/collections">My Collections</a>
-                            <a class="dropdown-item" href="/students/profile">Profile</a>
-                            <hr>
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                            <!-- 
-								admin view
+                            @if (Auth::guard(session('role'))->user() && Auth::guard(session('role'))->user()->can('hasLogined'))
+								<a class="dropdown-item" href="/collections">My Collections</a>
+								<a class="dropdown-item" href="/students/profile">Profile</a>
+								
 
-							-->
+								@if (Auth::guard(session('role'))->user()->can('isAdmin'))
+									<a class="dropdown-item" href="/admin/lecture_content">Lecture Content</a>
+								@endif
+
+								<hr>
+								<a class="dropdown-item" href="/logout">Logout</a>
                             @else
-                            <a class="dropdown-item" href="/login/student">Login</a>
-                            <a class="dropdown-item" href="/register/student">Sign Up</a>
-                            @endif
+								<a class="dropdown-item" href="/login/student">Login</a>
+								<a class="dropdown-item" href="/register/student">Sign Up</a>
+							@endif
                         </div>
                         <img src="/images/AvatarIcon.png" alt="Avatar" id="avatar">
                     </div>

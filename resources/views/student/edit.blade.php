@@ -17,7 +17,7 @@
 	</div>
 </form>
 
-<br/>
+<br/><br/>
 
 <div class="col-sm-offset-2 col-sm-10">
 	<button class="btn btn-primary" onclick="window.location.href='/students/profile/avatar';">Change Avatar</button>

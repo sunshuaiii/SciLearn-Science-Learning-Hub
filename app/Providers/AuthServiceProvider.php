@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Access\Response;
+use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,15 +28,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-		// Gate::define('isAdmin', function($user) {
-		// 	return $user == Auth::guard('admin')->user();
-		// }
-		// Gate::define('isGuest', function($user) {
+		Gate::define('hasLogined', function($user) {
+			$guards = ['admin', 'student'];
 
-		// }
-		// return $user -->role == '
-		// Gate::define('isUser', function($user) {
-		// return $user -->role == '
-		// 	}
+			foreach ($guards as $guard)
+            	if (Auth::guard($guard)->check())
+					return true;
+
+			return false;
+		});
+
+		Gate::define('isAdmin', function(User $user) {
+			return $user->is_admin == 1
+			? Response::allow()
+            : Response::denyAsNotFound();
+		});
 	}
 }

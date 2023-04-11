@@ -3,6 +3,9 @@
 @section('title', 'Profile')
  
 @section('content')
+<div class="container my-4">
+    <a href="/home">Home </a> > <a href="/students/profile">Profile </a> > <a href="/students/edit">Change Username Or Email </a>
+</div>
 
 <br/>
 <h1>Change Username Or Email</h1>

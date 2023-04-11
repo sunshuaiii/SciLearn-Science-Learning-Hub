@@ -15,7 +15,7 @@ A science learning web application created using Laravel framework.
 
 # # Misc
 1. Clear cache                      `php artisan optimize:clear`
-
+2. Clear route cach					`php artisan route:cache`
 
 ## authentication
 two guards: admin and student
@@ -27,6 +27,13 @@ url: localhost/register/admin
 url: localhost/login/admin
 admin cannot login from localhost/login/student
 
+## authorization 
+gate: 'isAdmin'
+	only admin can
+
+gate: 'hasLogined'
+	only logined user (admin and student) can
+	return 404 not found for non-admin
 
 ## session
 cannot retrieve what guard is used for authentication
