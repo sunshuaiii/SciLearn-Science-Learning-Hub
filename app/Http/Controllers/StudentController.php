@@ -80,7 +80,7 @@ class StudentController extends Controller
 		$user = Auth::guard(session('role'))->user();
 		
 		$request->validate([
-			'oldPassword' => ['required', function ($value) {
+			'oldPassword' => ['required', function ($attribute, $value, $faile) {
 				if (!Hash::check($value, $user->password))
 					$fail('Old Password is not correct.');
 			}],
