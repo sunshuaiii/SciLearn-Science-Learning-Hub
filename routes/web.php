@@ -59,13 +59,11 @@ Route::middleware(['auth'])->group(function () {
 		Route::put('/students', 'update');
 		Route::put('/students/password', 'changePassword');
 	});
-
-	// collection/topics
-	Route::view('/collections/{id}/topics', [TopicController::class, 'showTopics']);
-	Route::post('/collections/{id}/addTopics', [TopicController::class, 'addTopic']);
-	Route::post('/collections/{id}/removeTopics', [TopicController::class, 'removeTopic']);
 	
 	// collection
+	Route::get('/collections/{collectionId}/showTopics', [CollectionController::class, 'showTopics']);
+	Route::post('/collections/{collectionId}/addTopic', [CollectionController::class, 'addTopic']);
+	Route::post('/collections/{collectionId}/removeTopic', [CollectionController::class, 'removeTopic']);
 	Route::resource('/collections', CollectionController::class);
 });
 

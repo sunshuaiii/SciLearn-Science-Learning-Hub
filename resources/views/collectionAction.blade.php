@@ -34,7 +34,7 @@
           Actions
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/collections/{{ $collection['id'] }}/topics">Add or Delete Topics</a></li>
+          <li><a class="dropdown-item" href="/collections/{{ $collection['id'] }}/showTopics">Add or Delete Topics</a></li>
           <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editCollectionModal">Edit Collection Name</a></li>
         </ul>
       </div>

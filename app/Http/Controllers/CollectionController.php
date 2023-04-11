@@ -172,4 +172,42 @@ class CollectionController extends Controller
         $collections= Collection::all()->where('user_id', $user->id);
         return redirect()->route('collections.index', ['collections' => $collections]);
     }
+
+    public function showTopics($collectionId) 
+    {
+        $collection = Collection::findOrFail($collectionId);
+        $collectionTopics = CollectionTopic::where('collection_id', $collectionId)->get();
+        $addedTopics = DBCollection::make();
+
+        foreach ($collectionTopics as $item) {
+            $topic = Topic::findOrFail($item->topic_id);
+            $addedTopics->push($topic);
+        }
+
+        $otherTopics = Topic::all();
+
+        return view('showCollectionTopics', [
+            'collection' => $collection,
+            'addedTopics' => $addedTopics,
+            'otherTopics' => $otherTopics,
+        ]);
+    }
+
+    public function addTopic(Request $request, $collectionId)
+    {
+        $collectionTopics = new CollectionTopic;
+        $collectionTopics->collection_id = $collectionId;
+        $collectionTopics->topic_id = $request->id;
+        $collectionTopics->save();
+
+        return redirect()->back();
+    }
+
+    public function removeTopic(Request $request, $collectionId)
+    {
+        $collectionTopics = CollectionTopic::where('collection_id', $collectionId)->where('topic_id', $request->id);
+        $collectionTopics->delete();
+
+        return redirect()->back();
+    }
 }
