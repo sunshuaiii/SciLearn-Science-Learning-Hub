@@ -4,6 +4,7 @@
 
 @section('content')
 <br>
+
 <h1>{{$role == 'admin' ? 'Admin Login' : 'Login'}}</h1>
 
 <nav class="head-nav" aria-label="breadcrumb">

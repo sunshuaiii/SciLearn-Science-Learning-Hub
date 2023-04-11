@@ -3,6 +3,7 @@
 @section('title', 'Collections')
 
 @section('content')
+<br>
 
 <nav class="head-nav" aria-label="breadcrumb">
   <ol class="breadcrumb">
