@@ -56,8 +56,10 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/students/progress', 'progress');
 		Route::get('/students/profile/avatar', 'avatar');
 		Route::put('/students/profile/avatar/changeAvatar/{id}', 'changeAvatar');
+		Route::get('/students/edit', 'edit');
+		Route::get('/students/password', 'editPassword');
 		Route::put('/students', 'update');
-		Route::put('/students/password', 'changePassword');
+		Route::put('/students/password', 'updatePassword');
 	});
 	
 	// collection
@@ -67,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('/collections', CollectionController::class);
 });
 
-Route::resource('students.badges', BadgeController::class)->shallow();
+// Route::resource('students.badges', BadgeController::class)->shallow();
 
 // Route::view('testing', 'welcome');
 // Route::view('topics', 'showTopics');

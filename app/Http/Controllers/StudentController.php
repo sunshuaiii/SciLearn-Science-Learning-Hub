@@ -12,6 +12,8 @@ use App\Models\Topic;
 use App\Models\Avatar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -47,7 +49,17 @@ class StudentController extends Controller
 		return response(view('student.profile', ['user' => $user, 'progress' => $progress]));
 	} 
 
-  public function leaderboard() {
+	public function edit() {
+		$user = Auth::guard(session('role'))->user();
+		return response(view('student.changeUsernameOrEmail', ['user' => $user]));
+	}
+
+	public function editPassword() {
+		$user = Auth::guard(session('role'))->user();
+		return response(view('student.changePassword', ['user' => $user]));
+	}
+
+  	public function leaderboard() {
 		$rankings = Leaderboard::get()
 			->sortBy('duration')->take(10);
 		$users = array();
@@ -64,35 +76,35 @@ class StudentController extends Controller
 		$user = Auth::guard(session('role'))->user();
 
 		$request->validate([
-			'username' => 'required|unique:users|max:255|'.$user->id,
-			'email' => 'required|unique:users|email|max:255|'.$user->id,
+			'username' => ['required', 'max:255', Rule::unique('users')->ignore($user->id)],
+			'email' => ['required', 'max:255', Rule::unique('users')->ignore($user->id)],
 		]); // unique rule without itself 
 
 		$user->update([
 			'username' => $request->username,
 			'email' => $request->email,
-			'password' => Hash::make($request->password),
 		]);
-
-		return back();
+		$request->session()->flash('message', 'Username or email updated.');
+		return $this->profile();
 	}
 
-	public function changePassword(Request $request) {
+	public function updatePassword(Request $request) {
 		$user = Auth::guard(session('role'))->user();
 		
 		$request->validate([
-			'oldPassword' => ['required', function ($attribute, $value, $faile) {
+			'oldPassword' => ['required', function ($attribute, $value, $fail) use ($user) {
 				if (!Hash::check($value, $user->password))
 					$fail('Old Password is not correct.');
 			}],
-			'new_password' => 'required|min:8|confirmed|different:password',
+			'new_password' => 'required|min:8|different:oldPassword',
+			'new_password_confirmation' => 'same:new_password',
 		]);
 
 		$user->update([
 			'password' => Hash::make($request->new_password),
 		]);
-
-		return back();
+		$request->session()->flash('message', 'Password updated.');
+		return $this->profile();
 	}
 
 	public function avatar() {
@@ -115,7 +127,7 @@ class StudentController extends Controller
 		$user = User::findOrFail($user->id);
 		$user->avatar_id = $id;
 		$user->save();
-
+		$request->session()->flash('message', 'Avatar updated.');
 		return redirect()->back();
 	}
 }
