@@ -10,7 +10,7 @@ class Topic extends Model
     use HasFactory;
     public $timestamps = false;
 
-    // topic->colletion = *..*
+    // topic->collection = *..*
     public function getCollections()
     {
         return $this->belongsToMany(User::class);

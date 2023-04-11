@@ -38,7 +38,7 @@
             <div class="header-container">
                 <!-- Search Box -->
                 <div class="nav-item">
-                    <form method="POST" action="/search">
+                    <form method="GET" action="/search">
                         @csrf
                         <input type="text" name="q" id="search" placeholder="Type to search for a topic">
                     </form>
@@ -100,7 +100,7 @@
     <div class="container">
         @yield('content')
     </div>
-
+    <br>
     <footer>
         <p>@SciLearn and the SciLearn logo are trademarks and/or registered
             trademarks of UTAR.

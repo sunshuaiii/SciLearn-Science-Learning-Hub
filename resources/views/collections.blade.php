@@ -3,10 +3,14 @@
 @section('title', 'Collections')
 
 @section('content')
+<br>
 
-<div class="container my-4">
-  <a href="home">Home</a> > <a href="/collections"> Collections </a>
-</div>
+<nav class="head-nav" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Collections</li>
+  </ol>
+</nav>
 
 <br>
 
@@ -15,12 +19,7 @@
   <div class="row">
     <h1 class="col-8">My Collections</h1>
     <div class="col-4 justify-content-end d-flex">
-      <button 
-      type="button" 
-      class="btn btn-primary"
-      data-bs-toggle="modal" 
-      data-bs-target="#createCollectionForm"
-      >Create collection</button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCollectionForm">Create collection</button>
     </div>
   </div>
 
@@ -28,30 +27,30 @@
   <br>
   <div class="alert alert-danger" role="alert">
     @foreach ($errors->all() as $error)
-      <span style="color: red;">{{ $error }}</span>
+    <span style="color: red;">{{ $error }}</span>
     @endforeach
   </div>
   @endif
 
   <br>
- 
+
   <div class="row gy-5 ">
-  @forelse($collections as $collection)
+    @forelse($collections as $collection)
     <div class="col-3">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{$collection['name']}}</h5>
-          
+
           <br><br>
           <a href="collections/{{$collection['id']}}" class="btn cartoonish-btn center">See Collection</a>
         </div>
       </div>
     </div>
-  @empty
+    @empty
     <br><br><br><br><br><br><br><br><br>
     <h2 class="text-center text-secondary">You do not have any collection yet!</h2>
     <br><br><br><br><br>
-  @endforelse
+    @endforelse
   </div>
 
 </div>
@@ -74,15 +73,14 @@
 
           <br>
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
     </div>
   </div>
 </div>
 
 @endsection
-

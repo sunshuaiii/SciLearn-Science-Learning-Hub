@@ -6,7 +6,16 @@
 
 @section('content')
 <br>
+
 <h1>{{$role == 'admin' ? 'Admin Register' : 'Register'}}</h1>
+
+<nav class="head-nav" aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active" aria-current="page">Register</li>
+	</ol>
+
+</nav>
+
 <br>
 <form method="POST" action="{{'/register/'.$role}}" id="form_id" class="form-horizontal">
 	@csrf
