@@ -8,6 +8,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ArticleController;
 
 Route::view('/home', 'home');
 Route::redirect('/', 'home');
@@ -25,7 +26,8 @@ Route::get('/logout', [LoginController::class,'logout']);
 #endregion
 
 //search article and show result
-Route::post('/search', [SearchController::class, 'search'])->name('search');
+Route::post('/search', [SearchController::class, 'search']);
+
 
 // modules
 Route::view('/modules', 'modules');

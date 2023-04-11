@@ -46,6 +46,7 @@ class ModuleController extends Controller
         return view('articles', ['moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow, 'topicId' => $topicId, 'topicName' => $topicName, 'articles' => $articles]);
     }
 
+
     public function showArticleContent($moduleName, $topicId, $articleId){
         $article = Article::find($articleId);
 
