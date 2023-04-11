@@ -69,11 +69,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('/collections', CollectionController::class);
 });
 
-<<<<<<< HEAD
-=======
 // Route::resource('students.badges', BadgeController::class)->shallow();
->>>>>>> 2efce39ae12326f5989450df7218cb06ad8006cd
-
 // Route::view('testing', 'welcome');
 // Route::view('topics', 'showTopics');
 
