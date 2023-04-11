@@ -24,11 +24,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('userbadges', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained('users', 'id');
-        });
-
-        Schema::table('userquizzes', function (Blueprint $table) {
+        Schema::table('user_quizzes', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users', 'id');
         });
     }

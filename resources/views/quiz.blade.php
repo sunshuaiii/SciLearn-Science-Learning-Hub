@@ -22,8 +22,6 @@
 
 <br> <br> <br>// todo: add a record to userquizzes if the user completed a quiz
 
-@include('quizContent')
-
 <div class="container">
     <div class="row">
         <div class="col-md-8 mx-auto">

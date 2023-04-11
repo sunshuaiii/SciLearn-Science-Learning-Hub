@@ -10,6 +10,7 @@ use App\Models\Module;
 use App\Models\Article;
 use App\Models\Quiz;
 use App\Models\Question;
+use App\Models\UserQuiz;
 
 class ModuleController extends Controller
 {
@@ -64,11 +65,12 @@ class ModuleController extends Controller
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
         return view('articles', [
-            'moduleName' => $moduleName, 
-            'moduleNameToShow' => $moduleNameToShow, 
-            'topicId' => $topicId, 
-            'topicName' => $topicName, 
-            'articles' => $articles]);
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicId' => $topicId,
+            'topicName' => $topicName,
+            'articles' => $articles
+        ]);
     }
 
     public function showArticleContent($moduleName, $topicId, $articleId)
@@ -78,11 +80,13 @@ class ModuleController extends Controller
         $topicName = Topic::find($topicId)->name;
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
-        return view('articleContent', ['article' => $article, 
-        'moduleName' => $moduleName, 
-        'moduleNameToShow' => $moduleNameToShow, 
-        'topicId' => $topicId, 
-        'topicName' => $topicName]);
+        return view('articleContent', [
+            'article' => $article,
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicId' => $topicId,
+            'topicName' => $topicName
+        ]);
     }
 
     public function startQuiz($moduleName, $topicId, $articleId)
@@ -96,13 +100,14 @@ class ModuleController extends Controller
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
         return view('quiz', [
-            'questions' => $questions, 
-            'moduleName' => $moduleName, 
-            'moduleNameToShow' => $moduleNameToShow, 
-            'topicName' => $topicName, 
-            'articleTitle' => $articleTitle, 
-            'topicId' => $topicId, 
-            'articleId' => $articleId]);
+            'questions' => $questions,
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicName' => $topicName,
+            'articleTitle' => $articleTitle,
+            'topicId' => $topicId,
+            'articleId' => $articleId
+        ]);
     }
 
     public function submitQuiz(Request $request, $moduleName, $topicId, $articleId)
@@ -134,22 +139,21 @@ class ModuleController extends Controller
         $incorrectAnswers = $totalQuestions - $score;
         $percentage = round(($score / $totalQuestions) * 100, 2);
         $timeTaken = $request->input('time-taken');
-
-        if(auth()->check()) {
-            $userId = auth()->id();
+        echo Auth::guard(session('role'))->user()->user_id;
+        if (Auth::guard(session('role'))->user()) {
+            $userId = Auth::guard(session('role'))->user()->user_id;
             $userQuiz = new UserQuiz;
-            $userQuiz->user_id = Auth::id();
+            $userQuiz->user_id = $userId;
             $userQuiz->quiz_id = $quizId;
             $userQuiz->save();
         }
 
-
         return view('quizResult', [
-            'moduleName' => $moduleName, 
-            'moduleNameToShow' => $moduleNameToShow, 
-            'topicName' => $topicName, 
-            'articleTitle' => $articleTitle, 
-            'topicId' => $topicId, 
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicName' => $topicName,
+            'articleTitle' => $articleTitle,
+            'topicId' => $topicId,
             'articleId' => $articleId,
             'score' => $score,
             'totalQuestions' => $totalQuestions,
@@ -198,7 +202,7 @@ class ModuleController extends Controller
             'incorrectAnswers' => $incorrectAnswers,
             'percentage' => $percentage,
             'timeTaken' => $timeTaken,
-            // 'questions' => $questions,
+            'questions' => $questions,
             'answers' => $answers,
         ]);
     }
