@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Quiz Result')
+@section('title', 'Challenges Result')
 
 @section('content')
 
@@ -13,18 +13,22 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
         <li class="breadcrumb-item"><a href="/modules">Modules</a></li>
-        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}">{{ isset($moduleNameToShow) ? $moduleNameToShow : '' }}</a></li>
-        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}/{{ isset($topicId) ? $topicId : '' }}">{{ isset($topicName) ? $topicName : '' }}</a></li>
-        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}/{{ isset($topicId) ? $topicId : '' }}/{{ isset($articleId) ? $articleId : '' }}">{{ isset($articleTitle) ? $articleTitle : '' }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Quiz Results</li>
+        <li class="breadcrumb-item"><a href="/modules/challenges">Challenges</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Challenges Results</li>
     </ol>
 </nav>
 
 <br> <br> <br>
 
+@if($score == 10)
 <div style="text-align:center;">
-    <h3>You can check your progress in the user profile.</h3>
+    <h3>Your result is recorded on the Leaderboard.</h3>
 </div>
+@else
+<div style="text-align:center;">
+    <h3>You need to score 10/10 to enter the leaderboard.</h3>
+</div>
+@endif
 
 <div class="container">
     <div class="row justify-content-center">
@@ -36,6 +40,7 @@
                     <p>Score: {{ $score }}/{{ $totalQuestions }}</p>
                     <p>Incorrect Answers: {{ $incorrectAnswers }}</p>
                     <p>Percentage: {{ $percentage }}%</p>
+                    <p>Time Taken: {{ $timeTaken }}</p>
 
                     <table class="table table-striped">
                         <thead>
@@ -48,10 +53,10 @@
                         </thead>
                         <tbody>
                             @for ($i = 0; $i < count($questions); $i++) <tr>
-                                <td>{{ $questions[$i]->question }}</td>
+                                <td>{{ $questions[$i]['question'] }}</td>
                                 <td>{{ $answers[$i] }}</td>
-                                <td>{{ $questions[$i]->answer }}</td>
-                                <td>{{ $questions[$i]->explanation }}</td>
+                                <td>{{ $questions[$i]['answer'] }}</td>
+                                <td>{{ $questions[$i]['explanation'] }}</td>
                                 </tr>
                                 @endfor
                         </tbody>
