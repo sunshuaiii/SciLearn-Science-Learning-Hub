@@ -47,11 +47,11 @@
 
 <div style="margin:3rem; text-align: center;">
     <h3> Attempt the quiz on this article.</h3>
-    @auth
+    @if (Auth::guard(session('role'))->user())
     <a href={{$article['id']."/quiz"}} class="btn cartoonish-btn">Start the quiz</a>
     @else
     <a href="/login/student" class="btn cartoonish-btn">Login to Start the quiz</a>
-    @endauth
+    @endif
 </div>
 
 <br> <br>
