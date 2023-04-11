@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\Quiz;
 use App\Models\Leaderboard;
 use App\Models\Topic;
+use App\Models\Avatar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -92,5 +93,29 @@ class StudentController extends Controller
 		]);
 
 		return back();
+	}
+
+	public function avatar() {
+		$user = Auth::guard(session('role'))->user();
+		$user = User::findOrFail($user->id);
+
+		if ($user->avatar_id == 0) {
+			$userAvatarImagePath = "/images/AvatarIcon.png";
+		} else {
+			$userAvatarImagePath = Avatar::findOrFail($user->avatar_id)->image;
+		}
+
+		$avatars = Avatar::all();
+
+		return response(view('student.avatar', ['userAvatarImagePath' => $userAvatarImagePath, 'avatars' => $avatars]));
+	}
+
+	public function changeAvatar($id) {
+		$user = Auth::guard(session('role'))->user();
+		$user = User::findOrFail($user->id);
+		$user->avatar_id = $id;
+		$user->save();
+
+		return redirect()->back();
 	}
 }

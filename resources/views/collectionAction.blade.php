@@ -4,9 +4,6 @@
 
 @section('content')
 
-@isset($collection)
-<h1>Collection is set</h1>
-@endisset
 
 <br>
 

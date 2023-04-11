@@ -53,6 +53,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::controller(StudentController::class)->group(function () {
 		Route::get('/students/profile', 'profile');
 		Route::get('/students/progress', 'progress');
+		Route::get('/students/profile/avatar', 'avatar');
+		Route::put('/students/profile/avatar/changeAvatar/{id}', 'changeAvatar');
 		Route::put('/students', 'update');
 		Route::put('/students/password', 'changePassword');
 	});
