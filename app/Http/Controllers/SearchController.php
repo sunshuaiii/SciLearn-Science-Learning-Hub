@@ -10,10 +10,11 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $searchTerm = $request->input('q');
+        $search = $request->input('q');
     
-        $results = Topic::where('name', 'LIKE', '%'.$searchTerm.'%')->get();
+        $results = Topic::where('name', 'LIKE', "%$search%")->get();
     
-        return view('searchResults', ['results' => $results]);
+        return view('searchResults', compact('results'));
+    
     }
 }

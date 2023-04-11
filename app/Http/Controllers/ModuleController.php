@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Topic;
 use App\Models\Module;
 use App\Models\Article;
 use App\Models\Quiz;
 use App\Models\Question;
+use App\Models\UserQuiz;
 
 class ModuleController extends Controller
 {
@@ -35,9 +37,12 @@ class ModuleController extends Controller
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
         return view('topics', [
-            'moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow,
-            'topicsWithTag1' => $topicsWithTag1, 'topicsWithTag2' => $topicsWithTag2,
-            'topicsWithTag3' => $topicsWithTag3, 'topicsWithTag4' => $topicsWithTag4
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicsWithTag1' => $topicsWithTag1,
+            'topicsWithTag2' => $topicsWithTag2,
+            'topicsWithTag3' => $topicsWithTag3,
+            'topicsWithTag4' => $topicsWithTag4,
         ]);
     }
 
@@ -58,17 +63,28 @@ class ModuleController extends Controller
         $articles = Article::where('topic_id', $topicId)->get();
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
-        return view('articles', ['moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow, 'topicId' => $topicId, 'topicName' => $topicName, 'articles' => $articles]);
+        return view('articles', [
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicId' => $topicId,
+            'topicName' => $topicName,
+            'articles' => $articles
+        ]);
     }
 
-    public function showArticleContent($moduleName, $topicId, $articleId)
-    {
+    public function showArticleContent($moduleName, $topicId, $articleId){
         $article = Article::find($articleId);
 
         $topicName = Topic::find($topicId)->name;
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
-        return view('articleContent', ['article' => $article, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName]);
+        return view('articleContent', [
+            'article' => $article,
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicId' => $topicId,
+            'topicName' => $topicName
+        ]);
     }
 
     public function startQuiz($moduleName, $topicId, $articleId)
@@ -81,11 +97,23 @@ class ModuleController extends Controller
         $articleTitle = Article::find($articleId)->title;
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
-        return view('quiz', ['questions' => $questions, 'moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName, 'articleTitle' => $articleTitle, 'topicId' => $topicId, 'articleId' => $articleId]);
+        return view('quiz', [
+            'questions' => $questions,
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicName' => $topicName,
+            'articleTitle' => $articleTitle,
+            'topicId' => $topicId,
+            'articleId' => $articleId
+        ]);
     }
 
-    public function submitQuiz(Request $request, $articleId)
+    public function submitQuiz(Request $request, $moduleName, $topicId, $articleId)
     {
+        $topicName = Topic::find($topicId)->name;
+        $articleTitle = Article::find($articleId)->title;
+        $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
+
         $score = 0;
         $answers = [];
 
@@ -110,12 +138,25 @@ class ModuleController extends Controller
         $percentage = round(($score / $totalQuestions) * 100, 2);
         $timeTaken = $request->input('time-taken');
 
-        // $userQuiz = new UserQuiz;
-        // $userQuiz->user_id = Auth::id();
-        // $userQuiz->quiz_id = $quizId;
-        // $userQuiz->save();
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+            // Check if the user ID and quiz ID combination already exists in the table
+            if (DB::table('user_quizzes')->where('user_id', $userId)->where('quiz_id', $quizId)->count() == 0){
+                // If the combination is distinct, create a new record in the table
+                $userQuiz = new UserQuiz;
+                $userQuiz->user_id = $userId;
+                $userQuiz->quiz_id = $quizId;
+                $userQuiz->save();
+            }
+        }
 
         return view('quizResult', [
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicName' => $topicName,
+            'articleTitle' => $articleTitle,
+            'topicId' => $topicId,
+            'articleId' => $articleId,
             'score' => $score,
             'totalQuestions' => $totalQuestions,
             'incorrectAnswers' => $incorrectAnswers,
@@ -163,7 +204,7 @@ class ModuleController extends Controller
             'incorrectAnswers' => $incorrectAnswers,
             'percentage' => $percentage,
             'timeTaken' => $timeTaken,
-            // 'questions' => $questions,
+            'questions' => $questions,
             'answers' => $answers,
         ]);
     }

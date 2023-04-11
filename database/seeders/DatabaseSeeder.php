@@ -22,8 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(AvatarsSeeder::class);
         $this->call(UsersSeeder::class);
-        $this->call(BadgesSeeder::class);
-        $this->call(UserBadgesSeeder::class);
         $this->call(LeaderboardsSeeder::class);
         $this->call(CollectionsSeeder::class);
         $this->call(ModulesSeeder::class);

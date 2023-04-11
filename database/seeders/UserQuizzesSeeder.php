@@ -17,14 +17,30 @@ class UserQuizzesSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $numberOfUsers = DB::table('users')->count(); 
-        $numberOfQuizzes = DB::table('quizzes')->count(); 
+        $numberOfUsers = DB::table('users')->count();
+        $numberOfQuizzes = DB::table('quizzes')->count();
 
-        for ($i = 0; $i < 1000; $i++) { 
-            DB::table('userquizzes')->insert([ 
-                'user_id' => $faker->numberBetween(1, $numberOfUsers),
-                'quiz_id' => $faker->numberBetween(1, $numberOfQuizzes),
-            ]); 
+        // Generate an array of unique user and quiz IDs
+        $userIds = range(1, $numberOfUsers);
+        $quizIds = range(1, $numberOfQuizzes);
+
+        // Shuffle the arrays to randomize the order
+        shuffle($userIds);
+        shuffle($quizIds);
+
+        // Loop through the arrays and insert each unique pair into the table, up to 1000 iterations
+        $count = 0;
+        for ($i = 0; $i < count($userIds); $i++) {
+            for ($j = 0; $j < count($quizIds); $j++) {
+                DB::table('user_quizzes')->insert([
+                    'user_id' => $userIds[$i],
+                    'quiz_id' => $quizIds[$j]
+                ]);
+                $count++;
+                if ($count >= 1000) {
+                    break 2;
+                }
+            }
         }
     }
 }

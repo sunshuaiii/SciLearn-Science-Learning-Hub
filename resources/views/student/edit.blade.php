@@ -23,11 +23,18 @@
 </form>
 <br/>
 
-<div class="form-group">
-	<div class="col-sm-offset-2 col-sm-10">
-		<button id="change password" class="btn btn-primary">Change Password</button>
+<div class="row">
+	<div class="rol-3">
+		<a href="/students/profile/avatar" class="btn btn-secondary">Change Avatar</a>
+	</div>
+	<div class="rol-3">
+		<button id="change password">Change Password</button>
 	</div>
 </div>
+
+<br>
+
+
 
 <form method="POST" action="/student/password" id="changePasswordForm" class="form-horizontal" style="display:none">
 	@csrf

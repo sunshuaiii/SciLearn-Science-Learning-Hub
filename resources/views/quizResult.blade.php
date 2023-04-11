@@ -6,10 +6,19 @@
 
 <!DOCTYPE html>
 <html lang="en-US">
+    
+<br>
 
-<div class="container my-4">
-    <a href="home">Home</a> > <a href="/modules"> Modules </a> > <a href="quiz"> Quiz </a>
-</div>
+<nav class="head-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/modules">Modules</a></li>
+        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}">{{ isset($moduleNameToShow) ? $moduleNameToShow : '' }}</a></li>
+        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}/{{ isset($topicId) ? $topicId : '' }}">{{ isset($topicName) ? $topicName : '' }}</a></li>
+        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}/{{ isset($topicId) ? $topicId : '' }}/{{ isset($articleId) ? $articleId : '' }}">{{ isset($articleTitle) ? $articleTitle : '' }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Quiz Results</li>
+    </ol>
+</nav>
 
 <br> <br> <br>
 
@@ -23,7 +32,6 @@
                     <p>Score: {{ $score }}/{{ $totalQuestions }}</p>
                     <p>Incorrect Answers: {{ $incorrectAnswers }}</p>
                     <p>Percentage: {{ $percentage }}%</p>
-                    <p>Time Taken: {{ $timeTaken }} seconds</p>
 
                     <table class="table table-striped">
                         <thead>

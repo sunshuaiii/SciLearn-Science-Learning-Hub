@@ -7,9 +7,15 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<div class="container my-4">
-    <a href="home">Home</a> > <a href="/modules"> Modules </a> > <a href="challenges"> Challenge </a>
-</div>
+<br>
+
+<nav class="head-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/modules">Modules</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Challenges</li>
+    </ol>
+</nav>
 
 // todo: show challenges result
 // todo: add record to leaderboard

@@ -13,10 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('badges', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('image');
+        Schema::create('user_quizzes', function (Blueprint $table) {
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('badges');
+        Schema::dropIfExists('user_quizzes');
     }
 };

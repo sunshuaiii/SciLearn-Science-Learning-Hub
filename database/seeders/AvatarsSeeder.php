@@ -16,11 +16,11 @@ class AvatarsSeeder extends Seeder
      */
     public function run()
     {
-        $imagesPath = public_path('\images\avatar');  
+        $imagesPath = public_path('images/avatar');  
         $images = File::allFiles($imagesPath);
         
-        for ($i = 0; $i < count($images); $i++) { 
-            $imagePath = $images[$i]->getPathname();
+        for ($i = 0; $i < count($images); $i++) {
+            $imagePath = strstr($images[$i]->getPathname(), '/images');;
             DB::table('avatars')->insert([ 
                 'image' => $imagePath,
             ]); 

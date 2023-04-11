@@ -7,7 +7,7 @@
 @if (count($results) > 0)
 <ul>
     @foreach ($results as $result)
-    <a href=>
+    <a href="/">
         <li>{{ $result->name }}</li>
     </a>
     @endforeach

@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TopicController;
 
 Route::view('/home', 'home');
 Route::redirect('/', 'home');
@@ -25,7 +26,8 @@ Route::get('/logout', [LoginController::class, 'logout']);
 #endregion
 
 //search article and show result
-Route::post('/search', [SearchController::class, 'search'])->name('search');
+Route::post('/search', [SearchController::class, 'search']);
+
 
 // modules
 Route::view('/modules', 'modules');
@@ -52,13 +54,23 @@ Route::middleware(['auth'])->group(function () {
 	Route::controller(StudentController::class)->group(function () {
 		Route::get('/students/profile', 'profile');
 		Route::get('/students/progress', 'progress');
+		Route::get('/students/profile/avatar', 'avatar');
+		Route::put('/students/profile/avatar/changeAvatar/{id}', 'changeAvatar');
 		Route::put('/students', 'update');
 		Route::put('/students/password', 'changePassword');
 	});
+	
+	// collection
+	Route::get('/collections/{collectionId}/showTopics', [CollectionController::class, 'showTopics']);
+	Route::post('/collections/{collectionId}/addTopic', [CollectionController::class, 'addTopic']);
+	Route::post('/collections/{collectionId}/removeTopic', [CollectionController::class, 'removeTopic']);
+	Route::resource('/collections', CollectionController::class);
 });
 
-Route::resource('students.collections', CollectionController::class)->shallow();
 Route::resource('students.badges', BadgeController::class)->shallow();
+
+// Route::view('testing', 'welcome');
+// Route::view('topics', 'showTopics');
 
 /*
  * Actions Handled by Resource Controllers

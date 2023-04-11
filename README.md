@@ -25,3 +25,6 @@ admin cannot login from localhost/login/student
 
 cannot retrieve what guard is used for authentication
 so create a session to remember the role of the user
+
+# # Misc
+1. Clear cache                      `php artisan optimize:clear`

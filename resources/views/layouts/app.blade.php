@@ -38,7 +38,7 @@
             <div class="header-container">
                 <!-- Search Box -->
                 <div class="nav-item">
-                    <form method="POST" action="{{ route('search') }}">
+                    <form method="POST" action="/search">
                         @csrf
                         <input type="text" name="q" id="search" placeholder="Type to search for a topic">
                     </form>
@@ -49,13 +49,12 @@
                     <a href="/leaderboard">Leaderboard</a>
                 </div>
 
-                <!-- My Collections, Badges, Profile and Sign In/Log Out -->
+                <!-- My Collections, Profile and Sign In/Log Out -->
                 <div class="user-nav-item">
                     <div class="dropdown">
                         <div class="dropdown-menu" aria-labelledby=" userDropdown">
                             @if (Auth::guard(session('role'))->user())
                             <a class="dropdown-item" href="/collections">My Collections</a>
-                            <a class="dropdown-item" href="/badges">Badges</a>
                             <a class="dropdown-item" href="/students/profile">Profile</a>
                             <hr>
                             <a class="dropdown-item" href="/logout">Logout</a>

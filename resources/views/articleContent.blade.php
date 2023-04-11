@@ -7,9 +7,17 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<div class="container my-4">
-    <a href="/home">Home</a> > <a href="/modules">Modules</a> > <a href="/modules/$moduleName">{{ $moduleNameToShow }}</a> > <a>{{ $topicName }}</a> > <a>{{ $article['title'] }}</a>
-</div>
+<br>
+
+<nav class="head-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/modules">Modules</a></li>
+        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}">{{ isset($moduleNameToShow) ? $moduleNameToShow : '' }}</a></li>
+        <li class="breadcrumb-item"><a href="/modules/{{ isset($moduleName) ? $moduleName : '' }}/{{ isset($topicId) ? $topicId : '' }}">{{ isset($topicName) ? $topicName : '' }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ isset($article['title']) ? $article['title'] : '' }}</li>
+    </ol>
+</nav>
 
 <br><br>
 
@@ -39,7 +47,11 @@
 
 <div style="margin:3rem; text-align: center;">
     <h3> Attempt the quiz on this article.</h3>
+    @if (Auth::guard(session('role'))->user())
     <a href={{$article['id']."/quiz"}} class="btn cartoonish-btn">Start the quiz</a>
+    @else
+    <a href="/login/student" class="btn cartoonish-btn">Login to Start the quiz</a>
+    @endif
 </div>
 
 <br> <br>
