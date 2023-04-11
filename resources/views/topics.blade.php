@@ -100,31 +100,32 @@
                     @endforeach
                     @endif
                 </div>
-
             </div>
-            @endif
+        </div>
+    </div>
+    @endif
 
-            @if($moduleName == 'challenges')
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3; text-align: center;">
-                        <div class="text-card">
-                            <div class="card-body">
-                                <h3 class="card-title">Challenge yourself to complete all 10 random questions correctly to enter the leaderboard!</h3>
-                            </div>
-                        </div>
+    @if($moduleName == 'challenges')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3; text-align: center;">
+                <div class="text-card">
+                    <div class="card-body">
+                        <h3 class="card-title">Challenge yourself to complete all 10 random questions correctly to enter the leaderboard!</h3>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <br> <br>
+    <br> <br>
 
-            @include('startChallenge')
+    @include('startChallenge')
 
-            @endif
+    @endif
 
-            <br> <br> <br>
+    <br> <br> <br>
 
-            <br> <br> <br>
+    <br> <br> <br>
 
-            @endsection
+    @endsection

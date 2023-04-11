@@ -41,7 +41,7 @@
                 <div class="nav-item">
                     <form method="GET" action="/search">
                         @csrf
-                        <input type="text" name="q" id="search" placeholder="Type to search for a topic">
+                        <input type="text" name="searchTerm" id="search" placeholder="Type to search for a topic">
                     </form>
                 </div>
 

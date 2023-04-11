@@ -15,7 +15,7 @@ A science learning web application created using Laravel framework.
 
 # # Misc
 1. Clear cache                      `php artisan optimize:clear`
-2. Clear route cach					`php artisan route:cache`
+2. Clear route cache				`php artisan route:cache`
 
 ## authentication
 two guards: admin and student

@@ -1,28 +1,54 @@
 @extends('layouts.app')
 
+@section('title', 'Search Results')
+
 @section('content')
+
+<!DOCTYPE html>
+<html lang="en-US">
+
 <br>
-<h3>Search Results</h3>
+
+<nav class="head-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Search Results</li>
+    </ol>
+</nav>
+
+<br>
+<h3 style="text-align: center;">Search Results</h3>
 <hr>
+
+<h5 style="text-align: left;">{{ count($results) }} topics found</h3>
+
 @if (count($results) > 0)
-<ul>
-    @foreach ($results as $result)
-    <div class="col-md-3">
-        <div class="card cartoonish-card">
-            <img class="card-img" src="{{ $result['image'] }}" alt="Card image">
-            <div class="card-body">
-                <h5 class="card-title">{{ $result['name']}}</h5>
-            </div>
-            <div class="card-btn">
-                <a href="{{ url('/modules/{moduleId}/{topicId}', ['moduleId'=>$result['module_id']],['id'=> $result['id']]) }}"
-                    class=" btn cartoonish-btn">Start
-                    Learning</a>
+<div class="container">
+    <div class="row">
+        <br> <br>
+        <div class="container">
+            <div class="row">
+                @foreach ($results as $result)
+                <div class="col-md-3">
+                    <div class="card cartoonish-card">
+                        <img class="card-img" src="{{ $result->image }}" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $result->name }}</h5>
+                        </div>
+                        <div class="card-btn">
+                            <a href={{"/modules/".$result->moduleName."/".$result->id}} class="btn cartoonish-btn">Start
+                                Learning</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </div>
-    @endforeach
-</ul>
+</div>
 @else
-<h4>No results found.</h4>
+<br> <br> <br>
+<h4  style="text-align: center;">Type something else to search for the topics.</h4>
 @endif
+
 @endsection
