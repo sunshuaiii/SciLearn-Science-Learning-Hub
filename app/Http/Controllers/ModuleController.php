@@ -139,12 +139,16 @@ class ModuleController extends Controller
         $percentage = round(($score / $totalQuestions) * 100, 2);
         $timeTaken = $request->input('time-taken');
 
-        if (Auth::guard(session('role'))->user()) {
-            $userId = Auth::guard(session('role'))->user()->id;
-            $userQuiz = new UserQuiz;
-            $userQuiz->user_id = $userId;
-            $userQuiz->quiz_id = $quizId;
-            $userQuiz->save();
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+            // Check if the user ID and quiz ID combination already exists in the table
+            if (DB::table('user_quizzes')->where('user_id', $userId)->where('quiz_id', $quizId)->count() == 0){
+                // If the combination is distinct, create a new record in the table
+                $userQuiz = new UserQuiz;
+                $userQuiz->user_id = $userId;
+                $userQuiz->quiz_id = $quizId;
+                $userQuiz->save();
+            }
         }
 
         return view('quizResult', [
