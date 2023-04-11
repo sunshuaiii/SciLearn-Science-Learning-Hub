@@ -36,9 +36,13 @@ class ModuleController extends Controller
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
         return view('topics', [
-            'moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow,
-            'topicsWithTag1' => $topicsWithTag1, 'topicsWithTag2' => $topicsWithTag2,
-            'topicsWithTag3' => $topicsWithTag3, 'topicsWithTag4' => $topicsWithTag4
+            'moduleName' => $moduleName, 
+            'moduleNameToShow' => $moduleNameToShow, 
+            'topicsWithTag1' => $topicsWithTag1, 
+            'topicsWithTag2' => $topicsWithTag2, 
+            'topicsWithTag3' => $topicsWithTag3, 
+            'topicsWithTag4' => $topicsWithTag4,
+            'isCollection' => false,
         ]);
     }
 

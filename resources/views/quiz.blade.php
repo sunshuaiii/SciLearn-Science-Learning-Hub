@@ -22,7 +22,7 @@
 
 <br> <br> <br>// todo: add a record to userquizzes if the user completed a quiz
 
-<br> <br>
+@include('quizContent')
 
 <div class="container">
     <div class="row">

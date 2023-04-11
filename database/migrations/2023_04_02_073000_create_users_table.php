@@ -23,6 +23,14 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::table('userbadges', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users', 'id');
+        });
+
+        Schema::table('userquizzes', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users', 'id');
+        });
     }
 
     /**

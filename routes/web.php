@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TopicController;
 
 Route::view('/home', 'home');
 Route::redirect('/', 'home');
@@ -55,10 +56,20 @@ Route::middleware(['auth'])->group(function () {
 		Route::put('/students', 'update');
 		Route::put('/students/password', 'changePassword');
 	});
+
+	// collection/topics
+	Route::view('/collections/{id}/topics', [TopicController::class, 'showTopics']);
+	Route::post('/collections/{id}/addTopics', [TopicController::class, 'addTopic']);
+	Route::post('/collections/{id}/removeTopics', [TopicController::class, 'removeTopic']);
+	
+	// collection
+	Route::resource('/collections', CollectionController::class);
 });
 
-Route::resource('students.collections', CollectionController::class)->shallow();
 Route::resource('students.badges', BadgeController::class)->shallow();
+
+// Route::view('testing', 'welcome');
+// Route::view('topics', 'showTopics');
 
 /*
  * Actions Handled by Resource Controllers

@@ -44,9 +44,9 @@ class StudentController extends Controller
 
 		// return $progress;
 		return response(view('student.profile', ['user' => $user, 'progress' => $progress]));
-	}
+	} 
 
-    public function leaderboard() {
+  public function leaderboard() {
 		$rankings = Leaderboard::get()
 			->sortBy('duration')->take(10);
 		$users = array();

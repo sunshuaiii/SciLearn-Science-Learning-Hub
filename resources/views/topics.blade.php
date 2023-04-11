@@ -26,6 +26,47 @@
 <h2 style="text-align: center;">Choose a topic</h1>
     <div class="container">
         <div class="row">
+@endif
+
+@if($isCollection)
+    @if($errors->any())
+        <br>
+        <div class="alert alert-danger" role="alert">
+        @foreach ($errors->all() as $error)
+            <span style="color: red;">{{ $error }}</span>
+        @endforeach
+        </div>
+    @endif
+    <div class="row">
+        <div class="col-1">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Actions
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/collections/{{ $moduleName }}/opics">Add or Delete Topics</a></li>
+                    <li><a class="dropdown-item"data-bs-toggle="modal" data-bs-target="#editCollectionModal">Edit Collection Name</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-2">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCollectionModal">
+                Delete Collection
+            </button>
+        </div>
+    </div>
+@endif
+
+<br> <br>
+
+<div class="container">
+    <div class="row">
+        @if(count($topicsWithTag1) <= 0 && count($topicsWithTag2) <= 0 && count($topicsWithTag3) <= 0 && count($topicsWithTag4) <= 0)
+        <br><br><br><br><br><br><br><br><br>
+        <h5 class="text-center text-secondary">You do not have any topic in this collection yet!</h5>
+        <br><br><br><br><br>
+        @else
             @if(count($topicsWithTag1) > 0)
             <h4 class="card-title">Tag: {{ $topicsWithTag1->first()->tag }}</h4>
             @foreach($topicsWithTag1 as $topic)
@@ -94,6 +135,8 @@
             @endforeach
             @endif
         </div>
+        @endif
+        
     </div>
 
     @elseif($moduleName == 'challenges')
@@ -114,6 +157,10 @@
     @include('startChallenge')
 
     @endif
+@include('editCollectionModal', ['collectionId' => $moduleName, 'collectionName' => $moduleNameToShow])
+@include('deleteCollectionModal', ['collectionId' => $moduleName])
+
+<br> <br> <br>
 
     <br> <br> <br>
 

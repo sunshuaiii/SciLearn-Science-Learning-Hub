@@ -13,16 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('quizzes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignId('article_id')->constrained('articles', 'id');
+        Schema::create('userbadges', function (Blueprint $table) {
             $table->timestamps();
-        });
-
-
-        Schema::table('userquizzes', function (Blueprint $table) {
-            $table->foreignId('quiz_id')->constrained('quizzes', 'id');
         });
     }
 
@@ -33,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quizzes');
+        Schema::dropIfExists('userbadges');
     }
 };

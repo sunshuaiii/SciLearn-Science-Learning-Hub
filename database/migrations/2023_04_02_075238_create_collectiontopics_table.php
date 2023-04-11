@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('collectiontopics', function (Blueprint $table) {
-            $table->foreignId('collection_id')->constrained('collections', 'id');
-            $table->foreignId('topic_id')->constrained('topics', 'id');
+        Schema::create('collection_topics', function (Blueprint $table) {
+            $table->foreignId('collection_id')->constrained('collections', 'id')->onDelete('cascade');
+            $table->foreignId('topic_id')->constrained('topics', 'id')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collectiontopics');
+        Schema::dropIfExists('collection_topics');
     }
 };
