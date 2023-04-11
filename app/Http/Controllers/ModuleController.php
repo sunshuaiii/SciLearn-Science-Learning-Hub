@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Topic;
 use App\Models\Module;
 use App\Models\Article;
@@ -130,10 +131,14 @@ class ModuleController extends Controller
         $percentage = round(($score / $totalQuestions) * 100, 2);
         $timeTaken = $request->input('time-taken');
 
-        // $userQuiz = new UserQuiz;
-        // $userQuiz->user_id = Auth::id();
-        // $userQuiz->quiz_id = $quizId;
-        // $userQuiz->save();
+        if(auth()->check()) {
+            $userId = auth()->id();
+            $userQuiz = new UserQuiz;
+            $userQuiz->user_id = Auth::id();
+            $userQuiz->quiz_id = $quizId;
+            $userQuiz->save();
+        }
+
 
         return view('quizResult', [
             'moduleName' => $moduleName, 
