@@ -19,7 +19,7 @@ class ArticlesSeeder extends Seeder
         $faker = Faker::create();
         $numberOfTopics = DB::table('topics')->count();
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 400; $i++) {
             $paragraphs = $faker->paragraphs(8);
             // Join sentences into paragraphs with 6 sentences each
             $content = '';
