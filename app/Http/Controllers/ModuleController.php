@@ -37,11 +37,11 @@ class ModuleController extends Controller
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
         return view('topics', [
-            'moduleName' => $moduleName, 
-            'moduleNameToShow' => $moduleNameToShow, 
-            'topicsWithTag1' => $topicsWithTag1, 
-            'topicsWithTag2' => $topicsWithTag2, 
-            'topicsWithTag3' => $topicsWithTag3, 
+            'moduleName' => $moduleName,
+            'moduleNameToShow' => $moduleNameToShow,
+            'topicsWithTag1' => $topicsWithTag1,
+            'topicsWithTag2' => $topicsWithTag2,
+            'topicsWithTag3' => $topicsWithTag3,
             'topicsWithTag4' => $topicsWithTag4,
             'isCollection' => false,
         ]);
@@ -139,9 +139,9 @@ class ModuleController extends Controller
         $incorrectAnswers = $totalQuestions - $score;
         $percentage = round(($score / $totalQuestions) * 100, 2);
         $timeTaken = $request->input('time-taken');
-        echo Auth::guard(session('role'))->user()->user_id;
+
         if (Auth::guard(session('role'))->user()) {
-            $userId = Auth::guard(session('role'))->user()->user_id;
+            $userId = Auth::guard(session('role'))->user()->id;
             $userQuiz = new UserQuiz;
             $userQuiz->user_id = $userId;
             $userQuiz->quiz_id = $quizId;
