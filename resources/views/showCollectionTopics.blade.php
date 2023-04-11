@@ -19,6 +19,7 @@
 
 <div class="container">
   <h1>Added Topics</h1>
+  <div class="row">
   @forelse($addedTopics as $topic)
     <div class="col-md-3">
         <div class="card cartoonish-card">
@@ -40,6 +41,7 @@
     <h4 class="text-secondary">No topics added in this collection yet!</h4>
     <br>
   @endforelse
+  </div>
 
   <h1>Other Topics</h1>
   <div class="row">

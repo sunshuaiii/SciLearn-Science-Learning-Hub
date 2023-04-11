@@ -178,13 +178,17 @@ class CollectionController extends Controller
         $collection = Collection::findOrFail($collectionId);
         $collectionTopics = CollectionTopic::where('collection_id', $collectionId)->get();
         $addedTopics = DBCollection::make();
+        $addedTopicsId = CollectionTopic::where('collection_id', $collectionId)->pluck('topic_id')->toArray();
 
-        foreach ($collectionTopics as $item) {
+        foreach ($collectionTopics as $item) { // get added topics refer to collection topic table
             $topic = Topic::findOrFail($item->topic_id);
             $addedTopics->push($topic);
         }
 
         $otherTopics = Topic::all();
+        $otherTopics = $otherTopics->filter(function($item) use ($addedTopicsId) { // filter out added topics
+            return !in_array($item->id, $addedTopicsId);
+        });
 
         return view('showCollectionTopics', [
             'collection' => $collection,
