@@ -122,7 +122,6 @@
             @include('startChallenge')
 
             @endif
-            @endif
 
             <br> <br> <br>
 

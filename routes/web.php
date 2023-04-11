@@ -46,7 +46,7 @@ Route::post('/modules/{moduleName}/{topicId}/{articleId}/quiz/submit', [ModuleCo
 Route::get('leaderboard', [StudentController::class, 'leaderboard']);
 
 // testing
-Route::get('/test', [TestController::class, 'test'])->name('test');
+// Route::get('/test', [TestController::class, 'test'])->name('test');
 
 // features for registered students
 Route::middleware(['auth'])->group(function () {
@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
 		Route::put('/students', 'update');
 		Route::put('/students/password', 'updatePassword');
 	});
-	
+
 	// collection
 	Route::get('/collections/{collectionId}/showTopics', [CollectionController::class, 'showTopics']);
 	Route::post('/collections/{collectionId}/addTopic', [CollectionController::class, 'addTopic']);
