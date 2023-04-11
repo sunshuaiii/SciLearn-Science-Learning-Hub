@@ -68,7 +68,7 @@ class ModuleController extends Controller
         $topicName = Topic::find($topicId)->name;
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
 
-        return view('articleContent', ['article' => $article, 'moduleNameToShow' => $moduleNameToShow, 'topicName' => $topicName]);
+        return view('articleContent', ['article' => $article, 'moduleName' => $moduleName, 'moduleNameToShow' => $moduleNameToShow, 'topicId' => $topicId, 'topicName' => $topicName]);
     }
 
     public function startQuiz($moduleName, $topicId, $articleId)
