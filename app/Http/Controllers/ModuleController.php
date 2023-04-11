@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Topic;
 use App\Models\Module;
 use App\Models\Article;
+use App\Models\Leaderboard;
 use App\Models\Quiz;
 use App\Models\Question;
 use App\Models\UserQuiz;
@@ -138,10 +139,10 @@ class ModuleController extends Controller
         $percentage = round(($score / $totalQuestions) * 100, 2);
         $timeTaken = $request->input('time-taken');
 
-        if (Auth::user()) {
-            $userId = Auth::user()->id;
+        if (Auth::guard(session('role'))->user()) {
+            $userId = Auth::guard(session('role'))->user()->id;
             // Check if the user ID and quiz ID combination already exists in the table
-            if (DB::table('user_quizzes')->where('user_id', $userId)->where('quiz_id', $quizId)->count() == 0){
+            if (DB::table('user_quizzes')->where('user_id', $userId)->where('quiz_id', $quizId)->count() == 0) {
                 // If the combination is distinct, create a new record in the table
                 $userQuiz = new UserQuiz;
                 $userQuiz->user_id = $userId;
@@ -172,8 +173,8 @@ class ModuleController extends Controller
         $score = 0;
         $answers = [];
 
-        $quizId = Quiz::where('article_id', $articleId)->get()->value('id');
-        $questions = Question::where('quiz_id', $quizId)->get();
+        $questions = json_decode($request->input('questions'), true);
+        $questionNumber = range(0, 9);
 
         foreach ($request->all() as $key => $value) {
             if (strpos($key, 'answer') === 0) {
@@ -183,7 +184,7 @@ class ModuleController extends Controller
         }
 
         for ($i = 0; $i < count($questions); $i++) {
-            if ($answers[$i] === (string) $questions[$i]->answer) {
+            if ($answers[$i] === (string) $questions[$i]['answer']) {
                 $score++;
             }
         }
@@ -191,14 +192,38 @@ class ModuleController extends Controller
         $totalQuestions = count($questions);
         $incorrectAnswers = $totalQuestions - $score;
         $percentage = round(($score / $totalQuestions) * 100, 2);
-        $timeTaken = $request->input('time-taken');
+        $elapsedTime = $request->input('elapsed_time');
+        $timeTaken = $_POST['time_taken'];
+        echo $elapsedTime;
 
-        // $userQuiz = new UserQuiz;
-        // $userQuiz->user_id = Auth::id();
-        // $userQuiz->quiz_id = $quizId;
-        // $userQuiz->save();
+        if (Auth::guard(session('role'))->user()) {
+            $userId = Auth::guard(session('role'))->user()->id;
 
-        return view('quizResult', [
+            // Check if the user already in the leaderboard table
+            // only the user who get 10/10 get enter the leaderboard
+            // Check if the user already in the leaderboard table
+            if ($score == 10) {
+                $leaderboard = DB::table('leaderboards')->where('user_id', $userId)->first();
+
+                if (!$leaderboard) {
+                    // If the user first enter the leaderboard, create a new record in the table
+                    $leaderboard = new Leaderboard();
+                    $leaderboard->user_id = $userId;
+                    $leaderboard->duration = $elapsedTime/1000;
+                    $leaderboard->save();
+                } else {
+                    if ($elapsedTime < $leaderboard->duration) {
+                        // If the user already existed in the leaderboard and the current duration is shorter than the duration in the table,
+                        // update the record in the table
+                        $leaderboard = Leaderboard::where('user_id', $userId)->first();
+                        $leaderboard->duration = $elapsedTime/1000;
+                        $leaderboard->save();
+                    }
+                }
+            }
+        }
+
+        return view('challengesResult', [
             'score' => $score,
             'totalQuestions' => $totalQuestions,
             'incorrectAnswers' => $incorrectAnswers,
