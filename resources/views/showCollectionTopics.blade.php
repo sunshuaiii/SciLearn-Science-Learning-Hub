@@ -19,6 +19,7 @@
 
 <div class="container">
   <h1>Added Topics</h1>
+  <div class="row">
   @forelse($addedTopics as $topic)
     <div class="col-md-3">
         <div class="card cartoonish-card">
@@ -26,7 +27,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
             </div>
-            <form action="/collections/12/removeTopic" method="post">
+            <form action="/collections/{{$collection['id']}}/removeTopic" method="post">
               @csrf
               <input type="text" hidden name="id" id="id" value="{{ $topic['id'] }}">
               <div class="card-btn">
@@ -40,6 +41,7 @@
     <h4 class="text-secondary">No topics added in this collection yet!</h4>
     <br>
   @endforelse
+  </div>
 
   <h1>Other Topics</h1>
   <div class="row">
@@ -50,7 +52,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
             </div>
-            <form action="/collections/12/addTopic" method="post">
+            <form action="/collections/{{$collection['id']}}/addTopic" method="post">
               @csrf
               <input type="text" hidden name="id" id="id" value="{{ $topic['id'] }}">
               <div class="card-btn">

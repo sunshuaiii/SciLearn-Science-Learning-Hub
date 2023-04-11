@@ -47,16 +47,18 @@
     </div>
   </div>
 
+  <br><br>
+
   <div class="container">
     <div class="row">
-      @if(count($topicsWithTag1) <= 0 && count($topicsWithTag2) <=0 && count($topicsWithTag3) <=0 && count($topicsWithTag4) <=0) <br><br><br><br><br><br><br><br><br>
+      @if(count($famousScientistTopics) <= 0 && count($funFactsTopics) <=0 && count($learningCenterTopics) <=0 && count($challengesTopics) <=0) <br><br><br><br><br><br><br><br><br>
         <br><br>
         <h5 class="text-center text-secondary">You do not have any topic in this collection yet!</h5>
         <br><br><br><br><br>
       @else
-        @if(count($topicsWithTag1) > 0)
-          <h4 class="card-title">Tag: {{ $topicsWithTag1->first()->tag }}</h4>
-          @foreach($topicsWithTag1 as $topic)
+        @if(count($famousScientistTopics) > 0)
+          <h4 class="card-title">Module: Famous Scientist</h4>
+          @foreach($famousScientistTopics as $topic)
           <div class="col-md-3">
             <div class="card cartoonish-card">
               <img class="card-img" src="{{ $topic['image'] }}" alt="Card image">
@@ -64,16 +66,16 @@
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
               </div>
               <div class="card-btn">
-                <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
+                <a href="/modules/famous-scientists/{{$topic['id']}}" class="btn cartoonish-btn">Start Learning</a>
               </div>
             </div>
           </div>
           @endforeach
         @endif
 
-        @if(count($topicsWithTag2) > 0)
-          <h4 class="card-title">Tag: {{ $topicsWithTag2->first()->tag }}</h4>
-          @foreach($topicsWithTag2 as $topic)
+        @if(count($funFactsTopics) > 0)
+          <h4 class="card-title">Module: Fun Facts</h4>
+          @foreach($funFactsTopics as $topic)
           <div class="col-md-3">
             <div class="card cartoonish-card">
               <img class="card-img" src="{{ $topic['image'] }}" alt="Card image">
@@ -81,16 +83,16 @@
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
               </div>
               <div class="card-btn">
-                <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
+                <a href="/modules/fun-facts/{{$topic['id']}}" class="btn cartoonish-btn">Start Learning</a>
               </div>
             </div>
           </div>
           @endforeach
         @endif
 
-        @if(count($topicsWithTag3) > 0)
-          <h4 class="card-title">Tag: {{ $topicsWithTag3->first()->tag }}</h4>
-          @foreach($topicsWithTag3 as $topic)
+        @if(count($learningCenterTopics) > 0)
+          <h4 class="card-title">Module: Learning Center</h4>
+          @foreach($learningCenterTopics as $topic)
           <div class="col-md-3">
             <div class="card cartoonish-card">
               <img class="card-img" src="{{ $topic['image'] }}" alt="Card image">
@@ -98,16 +100,16 @@
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
               </div>
               <div class="card-btn">
-                <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
+                <a href="/modules/learning-center/{{$topic['id']}}" class="btn cartoonish-btn">Start Learning</a>
               </div>
             </div>
           </div>
           @endforeach
         @endif
-
-        @if(count($topicsWithTag4) > 0)
-          <h4 class="card-title">Topics</h4>
-          @foreach($topicsWithTag4 as $topic)
+ 
+        @if(count($challengesTopics) > 0)
+          <h4 class="card-title">Module: Challenges</h4>
+          @foreach($challengesTopics as $topic)
           <div class="col-md-3">
             <div class="card cartoonish-card">
               <img class="card-img" src="{{ $topic['image'] }}" alt="Card image">
@@ -115,7 +117,7 @@
                 <h5 class="card-title">{{ $topic['name'] }}</h5>
               </div>
               <div class="card-btn">
-                <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
+                <a href="/modules/challenges/{{$topic['id']}}" class="btn cartoonish-btn">Start Learning</a>
               </div>
             </div>
           </div>
