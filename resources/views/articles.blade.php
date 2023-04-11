@@ -31,6 +31,13 @@
         @foreach($articles as $article)
         <div class="col-md-3">
             <div class="card cartoonish-card">
+                <div style="margin-bottom: 0.5rem;">
+                    <span style="display: inline-block; padding: 2px 6px; border-radius: 10px; text-align: center; background-color: {{ $article->completed ? '#28a745' : '#5598e0' }};">
+                        <span style="color: black;">
+                            {{ $article->completed ? 'Completed' : 'In Progress' }}
+                        </span>
+                    </span>
+                </div>
                 <img class="card-img" src="{{ $article['image'] }}" alt="Card image">
                 <div class="card-body">
                     <h5 class="card-title">{{ $article['title'] }}</h5>

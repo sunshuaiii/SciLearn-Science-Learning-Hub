@@ -42,7 +42,7 @@ class ModuleController extends Controller
             $quizzesTaken = $user->getQuizzes;
             $progress = [];
             $i = 0;
-    
+
             foreach (Module::take(3)->get() as $module) {
                 foreach ($module->getTopics as $topic) {
                     $numberOfQuiz = $topic->getArticles->count();
@@ -50,7 +50,6 @@ class ModuleController extends Controller
                     foreach ($topic->getArticles as $article) {
                         // return Quiz::find(1);
                         // return Quiz::where('article_id', $article->id)->get();
-    
                         if ($quizzesTaken->contains($article->getQuiz))
                             $quizzesTakenCount++;
                     }
@@ -72,6 +71,8 @@ class ModuleController extends Controller
 
     public function showArticles($moduleName, $topicId)
     {
+        $completed = [];
+        $i = 0;
         $topic = Topic::find($topicId);
 
         // check if the topicId is selected
@@ -86,6 +87,23 @@ class ModuleController extends Controller
         $topicName = $topic->name;
         $articles = Article::where('topic_id', $topicId)->get();
         $moduleNameToShow = ucwords(str_replace('-', ' ', $moduleName));
+
+        $articleIds = Article::where('topic_id', $topicId)->pluck('id');
+
+        if (Auth::guard(session('role'))->user()) {
+            $userId = Auth::guard(session('role'))->user()->id;
+            foreach ($articleIds as $articleId) {
+                // get the quiz ID for the article
+                $quizId = DB::table('quizzes')->where('article_id', $articleId)->value('id');
+                // check if the user has completed the quiz
+                $completed[$i++] = DB::table('user_quizzes')->where('user_id', $userId)->where('quiz_id', $quizId)->exists();
+            }
+        }
+
+        // Add the completed to the articles array as a new key
+        foreach ($articles as $key => $result) {
+            $articles[$key]->completed = $completed[$key];
+        }
 
         return view('articles', [
             'moduleName' => $moduleName,

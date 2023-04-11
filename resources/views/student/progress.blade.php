@@ -13,13 +13,14 @@
 		<div style="margin-bottom: 1rem;">
 			<h5>{{ $topic->name }}</h5>
 			<div class="progress" style="height: 1.5rem;">
-				<div class="progress-bar bg-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
-					{{ number_format($progress[$i - 1], 2, '.', ',') }}%
+				<div class="progress-bar bg-success progress-bar-striped active rounded-pill" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
+					{{ number_format($progress[$i - 1]*100, 2, '.', ',') }}%
 				</div>
 			</div>
 			@endforeach
 		</div>
-	@endforeach
+		@endforeach
+	</div>
 </div>
 
 <style>

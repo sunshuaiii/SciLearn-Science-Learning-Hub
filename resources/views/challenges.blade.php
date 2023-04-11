@@ -34,6 +34,8 @@
                 <input type="hidden" name="start_time" id="start-time" value="">
 
                 @foreach($questions as $question)
+
+                <!-- to show the correct answers for testing purpose -->
                 console.log({{$question->answer}});
                 <div class="challenges-card mx-auto">
                     <div class="card-body">
