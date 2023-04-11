@@ -75,38 +75,41 @@ class CollectionController extends Controller
         $collection = Collection::findOrFail($id);
         $collectionTopics = CollectionTopic::where('collection_id', $id)->get();
 
-        $topicsWithTag1 = DBCollection::make();
-        $topicsWithTag2 = DBCollection::make();
-        $topicsWithTag3 = DBCollection::make();
-        $topicsWithTag4 = DBCollection::make();
+        $famousScientistTopics = DBCollection::make();
+        $funFactsTopics = DBCollection::make();
+        $learningCenterTopics = DBCollection::make();
+        $challengesTopics = DBCollection::make();
 
         foreach($collectionTopics as $item) {
             
             $topic = Topic::findOrFail($item->topic_id);
-            switch ($topic->tag) {
-                case "Physics": 
-                    $topicsWithTag1->push($topic);
+            switch ($topic->module_id) {
+                case "1": 
+                    $famousScientistTopics->push($topic);
                     break;
-                case "Chemistry": 
-                    $topicsWithTag2->push($topic);
+                case "2": 
+                    $funFactsTopics->push($topic);
                     break;
-                case "Biology": 
-                    $topicsWithTag3->push($topic);
+                case "3": 
+                    $learningCenterTopics->push($topic);
                     break;
-                case " ": 
-                    $topicsWithTag4->push($topic);
+                case "4": 
+                    $challengesTopics->push($topic);
                     break;
                 default:
                     break;
             }
         }
 
+        // modules/famous-scientists/12
+        // modules/{{module_id}}/{{topic_id}}
+
         return view('collectionAction', [
             'collection' => $collection,
-            'topicsWithTag1' => $topicsWithTag1,
-            'topicsWithTag2' => $topicsWithTag2,
-            'topicsWithTag3' => $topicsWithTag3,
-            'topicsWithTag4' => $topicsWithTag4,
+            'famousScientistTopics' => $famousScientistTopics,
+            'funFactsTopics' => $funFactsTopics,
+            'learningCenterTopics' => $learningCenterTopics,
+            'challengesTopics' => $challengesTopics,
         ]);
     }
 
