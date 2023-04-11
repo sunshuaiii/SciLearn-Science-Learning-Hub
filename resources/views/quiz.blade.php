@@ -20,7 +20,7 @@
     </ol>
 </nav>
 
-<br> <br> <br>
+<br> <br> <br>// todo: add a record to userquizzes if the user completed a quiz
 
 <div class="container">
     <div class="row">

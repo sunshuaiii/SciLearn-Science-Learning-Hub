@@ -6,7 +6,7 @@
 
 <!DOCTYPE html>
 <html lang="en-US">
-
+    
 <br>
 
 <nav class="head-nav" aria-label="breadcrumb">
@@ -21,10 +21,6 @@
 </nav>
 
 <br> <br> <br>
-
-<div style="text-align:center;">
-    <h3>You can check your progress in the user profile.</h3>
-</div>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -47,13 +43,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 0; $i < count($questions); $i++) <tr>
+                            @for ($i = 0; $i < count($questions); $i++)
+                            <tr>
                                 <td>{{ $questions[$i]->question }}</td>
                                 <td>{{ $answers[$i] }}</td>
                                 <td>{{ $questions[$i]->answer }}</td>
                                 <td>{{ $questions[$i]->explanation }}</td>
-                                </tr>
-                                @endfor
+                            </tr>
+                            @endfor
                         </tbody>
                     </table>
                 </div>

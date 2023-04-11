@@ -78,10 +78,7 @@ class LoginController extends Controller
 
 	public function loginStudent(Request $request) {
 		$credentials = $request->validate([
-			'email' => ['required', function ($attribute, $value, $fail) {
-				if (User::where('email', $value)->get()->count() == 0)
-					$fail('This email is not registered.');
-			}],
+			'email' => 'required',
 			'password' => 'required',
 		]);
 

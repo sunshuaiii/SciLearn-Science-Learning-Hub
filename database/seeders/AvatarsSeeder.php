@@ -19,8 +19,8 @@ class AvatarsSeeder extends Seeder
         $imagesPath = public_path('images/avatar');  
         $images = File::allFiles($imagesPath);
         
-        for ($i = 0; $i < count($images); $i++) {
-            $imagePath = strstr($images[$i]->getPathname(), '/images');;
+        for ($i = 0; $i < count($images); $i++) { 
+            $imagePath = $images[$i]->getPathname();
             DB::table('avatars')->insert([ 
                 'image' => $imagePath,
             ]); 
