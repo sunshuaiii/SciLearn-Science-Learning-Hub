@@ -9,7 +9,7 @@
 <nav class="head-nav" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+    <li class="breadcrumb-item"><a href="/students/profile">Profile</a></li>
     <li class="breadcrumb-item active" aria-current="page">Avatar</li>
   </ol>
 </nav>
