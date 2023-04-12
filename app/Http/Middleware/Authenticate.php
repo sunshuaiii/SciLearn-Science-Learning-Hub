@@ -22,7 +22,6 @@ class Authenticate extends Middleware
 		// group/route middleware need to declare in routes\web also
 		// if ($request->session()->has('user')) // null value will return false
 		// if (Auth::check()) // does not work
-		dd($request->route());
 
 		$guards = empty($guards) ? ['admin', 'student'] : $guards;
 
