@@ -74,35 +74,29 @@ Route::middleware(['auth:admin'])->group(function () {
 	Route::controller(AdminController::class)->group(function () {
 		Route::get('/lecture_content', 'lectureContent');
 
-		Route::get('/createModule', 'createModule');
 		Route::get('/createTopic', 'createTopic');
 		Route::get('/createArticle', 'createArticle');
 		Route::get('/createQuiz', 'createQuiz');
 
-		Route::post('/storeModule', 'storeModule');
 		Route::post('/storeTopic', 'storeTopic');
 		Route::post('/storeArticle', 'storeArticle');
 		Route::post('/storeQuiz', 'storeQuiz');
 
-		Route::get('/showModule/{id}', 'showModule');
 		Route::get('/showTopic/{id}', 'showTopic');
 		Route::get('/showArticle/{id}', 'showArticle');
 		Route::get('/showQuiz/{id}', 'showQuiz');
 
-		Route::get('/editModule/{id}', 'editModule');
 		Route::get('/editTopic/{id}', 'editTopic');
 		Route::get('/editArticle/{id}', 'editArticle');
 		Route::get('/editQuiz/{id}', 'editQuiz');
 
-		Route::put('/updateModule/{id}', 'updateModule');
 		Route::put('/updateTopic/{id}', 'updateTopic');
 		Route::put('/updateArticle/{id}', 'updateArticle');
 		Route::put('/updateQuiz/{id}', 'updateQuiz');
 
-		Route::delete('/deleteModule/{id}', 'deleteModule');
-		Route::delete('/deleteTopic/{id}', 'deleteTopic');
-		Route::delete('/deleteArticle/{id}', 'deleteArticle');
-		Route::delete('/deleteQuiz/{id}', 'deleteQuiz');		
+		Route::delete('/destroyTopic/{id}', 'destroyTopic');
+		Route::delete('/destroyArticle/{id}', 'destroyArticle');
+		Route::delete('/destroyQuiz/{id}', 'destroyQuiz');		
 	});
 });
 
