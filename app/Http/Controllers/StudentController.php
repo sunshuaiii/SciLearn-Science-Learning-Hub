@@ -137,6 +137,11 @@ class StudentController extends Controller
 		$user->avatar_id = $id;
 		$user->save();
 		$request->session()->flash('message', 'Avatar updated.');
+
+		// store imagepath in session
+		$avatar= Avatar::findOrFail($id);
+		session(['userAvatarImagePath' => $avatar->image]);
+		
 		return redirect()->back();
 	}
 }
