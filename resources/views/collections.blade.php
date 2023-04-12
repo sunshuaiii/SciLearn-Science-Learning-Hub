@@ -12,12 +12,14 @@
   </ol>
 </nav>
 
-<br>
+<br> <br> <br>
+  <h1 style="text-align: center;">My Collections</h1>
+<hr>
 
 </div>
 <div class="container">
   <div class="row">
-    <h1 class="col-8">My Collections</h1>
+    <h5 class="col-8">Collections</h5>
     <div class="col-4 justify-content-end d-flex">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCollectionForm">Create collection</button>
     </div>

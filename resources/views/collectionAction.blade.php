@@ -15,7 +15,9 @@
   </ol>
 </nav>
 
-<br> <br>
+<br> <br> <br>
+  <h1 style="text-align: center;">Topics Collected</h1>
+<hr>
 
 <div class="container">
   @if($errors->any())

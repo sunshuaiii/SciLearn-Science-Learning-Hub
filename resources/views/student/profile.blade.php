@@ -12,7 +12,9 @@
     </ol>
 </nav>
 
-<br>
+<br> <br> <br>
+  <h1 style="text-align: center;">User Profile</h1>
+<hr>
 
 Hi, {{$user->username}} <br /> <br />
 

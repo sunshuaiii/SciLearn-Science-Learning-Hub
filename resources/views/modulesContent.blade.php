@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<br> <br>
-
-<h1 style="text-align: center;">Choose a module to get started!</h1>
-
-<br> <br>
+<br> <br> <br>
+  <h1 style="text-align: center;">Choose a module to get started!</h1>
+<hr>
 
 <div class="container">
   <div class="row">

@@ -18,11 +18,9 @@
     </ol>
 </nav>
 
-<br> <br>
-
-<h1 style="text-align: center;">Articles</h1>
-
-<br> <br>
+<br> <br> <br>
+  <h1 style="text-align: center;">Articles</h1>
+<hr>
 
 <div class="container">
     <div class="row">

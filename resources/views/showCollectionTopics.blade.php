@@ -15,6 +15,10 @@
   </ol>
 </nav>
 
+<br> <br> <br>
+  <h1 style="text-align: center;">Collection Topics</h1>
+<hr>
+
 <br> <br>
 
 <div class="container">
@@ -70,5 +74,6 @@
   
 </div>
 
+<br> <br> <br>
 
 @endsection

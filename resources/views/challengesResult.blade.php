@@ -19,10 +19,13 @@
 </nav>
 
 <br> <br> <br>
+  <h1 style="text-align: center;">Your Results</h1>
+<hr>
 
 @if($score == 10)
 <div style="text-align:center;">
-    <h3>Your result is recorded on the Leaderboard.</h3>
+    <h2>You scored 10/10!</h2>
+    <h4>Your result is recorded on the Leaderboard.</h4>
 </div>
 @else
 <div style="text-align:center;">

@@ -17,11 +17,9 @@
     </ol>
 </nav>
 
-<br> <br>
-
-<h1 style="text-align: center;">{{$moduleNameToShow}}</h1>
-
-<br>
+<br> <br> <br>
+  <h1 style="text-align: center;">{{$moduleNameToShow}}</h1>
+<hr>
 
 @if($moduleName != 'challenges')
 <h2 style="text-align: center;">Choose a topic</h2>
