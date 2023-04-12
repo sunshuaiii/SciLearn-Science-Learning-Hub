@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Topic;
 
 class AdminController extends Controller
 {
@@ -26,9 +27,9 @@ class AdminController extends Controller
         return view('admin.lectureContent');
     }
 
-	public function showModule($id) {
+	public function showTopic($id) {
 		$this->authorizeAdmin();
-        return view('admin.module.show', ['module' => Module::find($id)]);
+        return view('admin.topic.show', ['topic' => Topic::find($id)]);
 	}
 
     /**
@@ -36,55 +37,54 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createModule()
+    public function createTopic()
     {
 		$this->authorizeAdmin();
-        return view('admin.module.create');
+        return view('admin.topic.create');
     }
 
-	public function editModule($id) {
+	public function editTopic($id) {
 		$this->authorizeAdmin();
-        return view('admin.module.edit', ['module' => Module::find($id)]);
+        return view('admin.topic.edit', ['topic' => Topic::find($id)]);
 	}
 
-	public function storeModule(Request $request) {
+	public function storeTopic(Request $request) {
 		$request->validate([
-			'username' => ['required', 'max:255', Rule::unique('modules')->ignore($id)],
-			'email' => ['required', 'max:255', Rule::unique('modules')->ignore($id)],
+			'name' => ['required', Rule::unique('topics')->ignore($id)],
+			'image' => ['required', 'image', Rule::unique('topics')->ignore($id)],
 		]); // unique rule without itself 
 
-		Module::create([
-			'username' => $request->username,
-			'email' => $request->email,
+		Topic::find($id)->update([
+			'name' => $request->name,
+			'image' => $request->image,
 		]);
-		$request->session()->flash('message', 'Module created.');
+		$request->session()->flash('message', 'Topic created.');
 		return $this->lectureContent();
 	}
 
-	public function updateModule(Request $request, $id) {
+	public function updateTopic(Request $request, $id) {
 		$request->validate([
-			'username' => ['required', 'max:255', Rule::unique('modules')->ignore($id)],
-			'email' => ['required', 'max:255', Rule::unique('modules')->ignore($id)],
+			'name' => ['required', Rule::unique('topics')->ignore($id)],
+			'image' => ['required', 'image', Rule::unique('topics')->ignore($id)],
 		]); // unique rule without itself 
 
-		Module::find($id)->update([
-			'username' => $request->username,
-			'email' => $request->email,
+		Topic::find($id)->update([
+			'name' => $request->name,
+			'image' => $request->image,
 		]);
-		$request->session()->flash('message', 'Module updated.');
+		$request->session()->flash('message', 'Topic updated.');
 		return $this->lectureContent();
 	}
 
-	public function destroyModule($id) {
-			Module::find($id)->delete();
+	public function destroyTopic($id) {
+		Topic::find($id)->delete();
 
-			// check deleted or not
-			if (!Module::find($id)) {
-				$request->session()->flash('message', 'Module deleted.');
-				return $this->lectureContent;
-			}
-			else
-				throw new RuntimeException(sprintf('Could not delete drink with id '.$id));
+		// check deleted or not
+		if (!Topic::find($id)) {
+			$request->session()->flash('message', 'Topic deleted.');
+			return $this->lectureContent;
 		}
+		else
+			throw new RuntimeException(sprintf('Could not delete drink with id '.$id));
 	}
 }

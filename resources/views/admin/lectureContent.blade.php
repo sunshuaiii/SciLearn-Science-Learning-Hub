@@ -29,7 +29,7 @@
 				@foreach($topic->getArticles as $article)
 				
 				<tr class="showEdit">
-					<td onclick="window.location.href='/showModule/{{$module->id}}';">{{$module->name}} </td>
+					<td>{{$module->name}} </td>
 					<td onclick="window.location.href='/showTopic/{{$topic->id}}';">{{$topic->name}} </td>
 					<td onclick="window.location.href='/showArticle/{{$article->id}}';">{{$article->title}} </td>
 					<td onclick="window.location.href='/showQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>

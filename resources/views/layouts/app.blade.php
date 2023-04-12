@@ -61,7 +61,6 @@
 
 								@if (Auth::guard(session('role'))->user()->can('isAdmin'))
 									<a class="dropdown-item" href="/lecture_content">Lecture Content</a>
-									<a class="dropdown-item" href="/createModule">Create Module</a>
 									<a class="dropdown-item" href="/createTopic">Create Topic</a>
 									<a class="dropdown-item" href="/createArticle">Create Article</a>
 									<a class="dropdown-item" href="/createQuiz">Create Quiz</a>
