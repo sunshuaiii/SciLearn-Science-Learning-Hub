@@ -19,14 +19,16 @@
 <hr>
 <div class="container">
   <div class="col">
-    <img src="{{'/images/'.$userAvatarImagePath}}" class="avatar-img" alt="avatar image">
+    <div style="text-align: center; line-height: 100px;">
+      <img src="{{'/images/'.$userAvatarImagePath}}" class="avatar-img" alt="avatar image" style="display: block; margin: auto;">
+    </div>
   </div>
 </div>
 <br>
 @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
+<div class="alert alert-success">
+  {{ session()->get('message') }}
+</div>
 @endif
 
 <br> <br> <br>
@@ -36,7 +38,7 @@
 <div class="container">
   <div class="row row-cols-3 row-cols-md-5 g-4">
     @foreach($avatars as $avatar)
-    <div class="col">
+    <div class="col mx-auto">
       <img src="{{'/images/'.$avatar['image']}}" class="avatar-img" alt="avatar image">
       <br>
       <form action="/students/profile/avatar/changeAvatar/{{$avatar['id']}}" method="post">
@@ -49,6 +51,6 @@
   </div>
 </div>
 
-<br><br><br>
+<br><br><br><br><br><br>
 
 @endsection

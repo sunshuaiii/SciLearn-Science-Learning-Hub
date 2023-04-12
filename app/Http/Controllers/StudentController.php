@@ -120,8 +120,8 @@ class StudentController extends Controller
 		$user = Auth::guard(session('role'))->user();
 		$user = User::findOrFail($user->id);
 
-		if ($user->avatar_id == 0) {
-			$userAvatarImagePath = "/images/AvatarIcon.png";
+		if ($user->avatar_id == "0") {
+			$userAvatarImagePath = "AvatarIcon.png";
 		} else {
 			$userAvatarImagePath = Avatar::findOrFail($user->avatar_id)->image;
 		}
