@@ -74,7 +74,7 @@
 							@endif
                         </div>
                         @if (session()->has('userAvatarImagePath'))
-                        <img class="header-avatar-img" src="{{'images/'.session('userAvatarImagePath')}}" alt="Avatar" id="avatar">
+                        <img class="header-avatar-img" src="{{'/images'.session('userAvatarImagePath')}}" alt="Avatar" id="avatar">
                         @else
                         <img class="header-avatar-img" src="/images/AvatarIcon.png" alt="Avatar" id="avatar">
                         @endif
