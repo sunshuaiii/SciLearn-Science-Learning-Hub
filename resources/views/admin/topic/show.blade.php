@@ -14,16 +14,13 @@
     </ol>
 </nav>
 
-<br> <br> <br>
-<h1 style="text-align: center;">Topic Details</h1>
-<hr>
-
 <div class="container justify-content-center" style="margin-bottom:5rem;">
 @if(session('message'))
 <div class="alert alert-success">
 	{{session('message')}}
 </div>
 @endif
+</div>
 
 <br> <br> <br>
 <h1 style="text-align: center;">Topic Details</h1>
@@ -63,8 +60,6 @@
 		<label for="name" class="control-label col-sm-2">Name</label>
 		<input id="name" name="name" type="text" class="form-control col-sm-10" value="{{$topic->name}}" readonly>
 	</div>
-	@endif
-
 	<div class="row">
 		<div class="col-md-6">
 			<form id="readonly_form_id" class="form-horizontal">
@@ -89,40 +84,42 @@
 					</div>
 				</div>
 
-	<div class="form-group">
-		<label for="image" class="control-label col-sm-2">Image:</label><br/>
-		<div class="col-sm-8">
-			<img src="{{ $topic['image'] }}" alt="Card image" class="img-thumbnail">
+				<div class="form-group">
+					<label for="image" class="control-label col-sm-2">Image:</label><br/>
+					<div class="col-sm-8">
+						<img src="{{ $topic['image'] }}" alt="Card image" class="img-thumbnail">
+					</div>
+				</div>
+				
+
+				<br/>
+
+			</form>
 		</div>
 	</div>
-	
-
-	<br/>
-
-</form>
 
 	<br>
 
 
 <div id="verticalScroll">
 <table>
-		<thead>
-			<tr>
-				<th>Article</th>
-				<th>Quiz</th>
+	<thead>
+		<tr>
+			<th>Article</th>
+			<th>Quiz</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach($topic->getArticles as $article)
+			<tr class="showEdit">
+				<td onclick="window.location.href='/showArticle/{{$article->id}}';">{{$article->title}} </td>
+				<td onclick="window.location.href='/showQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>
 			</tr>
-		</thead>
-		<tbody>
-			@foreach($topic->getArticles as $article)
-				<tr class="showEdit">
-					<td onclick="window.location.href='/showArticle/{{$article->id}}';">{{$article->title}} </td>
-					<td onclick="window.location.href='/showQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>
-				</tr>
-			@endforeach
-		</tbody>
-	</table>
+		@endforeach
+	</tbody>
+</table>
 
-	</div>
+</div>
 
 </div>
 
