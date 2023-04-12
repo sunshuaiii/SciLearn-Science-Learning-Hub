@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Challenges')
+@section('title', 'Start Challenges')
 
 @section('content')
 
@@ -18,12 +18,12 @@
 </nav>
 
 <br> <br> <br>
-  <h1 style="text-align: center;">Start Challenges</h1>
+<h1 style="text-align: center;">Start Challenges</h1>
 <hr>
 
 <!-- The section includes a button with an onclick function to start a stopwatch and show the questions. -->
 <div class="text-center">
-    <button type="button" class="btn btn-primary" id="start-stopwatch" onclick="startStopwatch(); showQuestions()">Start</button>
+    <button type="button" class="btn btn-primary" id="start-stopwatch" onclick="startStopwatch();">Start</button>
     <div id="stopwatch" class="text-center">Press Start To Start the Challenges</div>
 </div>
 
@@ -46,38 +46,46 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="1">
-                                    <label class="form-check-label" for="answer1{{ $loop->iteration }}">
-                                        1. {{ $question->option1 }}
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}_1" value="1">
+                                    <label class="form-check-label" for="answer{{ $loop->iteration }}_1">
+                                        <label class="form-check-label" for="answer{{ $loop->iteration }}_1">
+                                            1. {{ $question->option1 }}
+                                        </label>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="2">
-                                    <label class="form-check-label" for="answer2{{ $loop->iteration }}">
-                                        2. {{ $question->option2 }}
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}_2" value="2">
+                                    <label class="form-check-label" for="answer{{ $loop->iteration }}_2">
+                                        <label class="form-check-label" for="answer{{ $loop->iteration }}_2">
+                                            2. {{ $question->option2 }}
+                                        </label>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="3">
-                                    <label class="form-check-label" for="answer3{{ $loop->iteration }}">
-                                        3. {{ $question->option3 }}
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}_3" value="3">
+                                    <label class="form-check-label" for="answer{{ $loop->iteration }}_3">
+                                        <label class="form-check-label" for="answer{{ $loop->iteration }}_3">
+                                            3. {{ $question->option3 }}
+                                        </label>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="4">
-                                    <label class="form-check-label" for="answer4{{ $loop->iteration }}">
-                                        4. {{ $question->option4 }}
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}_4" value="4">
+                                    <label class="form-check-label" for="answer{{ $loop->iteration }}_4">
+                                        <label class="form-check-label" for="answer{{ $loop->iteration }}_4">
+                                            4. {{ $question->option4 }}
+                                        </label>
                                     </label>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div id="answer-feedback{{ $loop->iteration }}" class="mt-3 d-none"></div>
                         <br>
                     </div>
@@ -104,6 +112,7 @@
         intervalId = setInterval(updateStopwatch, 10);
         document.getElementById("start-stopwatch").disabled = true;
         document.getElementById("start-time").value = startTime;
+        document.getElementById("challenges-container").removeAttribute("hidden");
     }
 
     function updateStopwatch() {
@@ -115,10 +124,6 @@
 
     function stopStopwatch() {
         clearInterval(intervalId);
-    }
-
-    function showQuestions() {
-        document.getElementById("challenges-container").removeAttribute("hidden");
     }
 
     function validateSubmit() {

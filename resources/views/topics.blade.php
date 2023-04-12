@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
+@if($moduleName != 'challenges')
 @section('title', "Topics")
+@else
+@section('title', "Challenges")
+@endif
 
 @section('content')
 

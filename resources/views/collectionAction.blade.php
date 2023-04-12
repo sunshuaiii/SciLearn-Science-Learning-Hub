@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "Topics")
+@section('title', "Topics Collected")
 
 @section('content')
 
@@ -16,7 +16,7 @@
 </nav>
 
 <br> <br> <br>
-  <h1 style="text-align: center;">Topics Collected</h1>
+  <h1 style="text-align: center;">Topics Collected in {{ $collection['name'] }}</h1>
 <hr>
 
 <div class="container">

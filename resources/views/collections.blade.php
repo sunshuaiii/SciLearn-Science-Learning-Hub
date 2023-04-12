@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Collections')
+@section('title', 'My Collections')
 
 @section('content')
 <br>

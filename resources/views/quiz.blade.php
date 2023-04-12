@@ -38,33 +38,41 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="1">
-                                    <label class="form-check-label" for="answer1{{ $loop->iteration }}">
-                                        1. {{ $question->option1 }}
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}_1" value="1">
+                                    <label class="form-check-label" for="answer{{ $loop->iteration }}_1">
+                                        <label class="form-check-label" for="answer{{ $loop->iteration }}_1">
+                                            1. {{ $question->option1 }}
+                                        </label>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="2">
-                                    <label class="form-check-label" for="answer2{{ $loop->iteration }}">
-                                        2. {{ $question->option2 }}
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}_2" value="2">
+                                    <label class="form-check-label" for="answer{{ $loop->iteration }}_2">
+                                        <label class="form-check-label" for="answer{{ $loop->iteration }}_2">
+                                            2. {{ $question->option2 }}
+                                        </label>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="3">
-                                    <label class="form-check-label" for="answer3{{ $loop->iteration }}">
-                                        3. {{ $question->option3 }}
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}_3" value="3">
+                                    <label class="form-check-label" for="answer{{ $loop->iteration }}_3">
+                                        <label class="form-check-label" for="answer{{ $loop->iteration }}_3">
+                                            3. {{ $question->option3 }}
+                                        </label>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}" value="4">
-                                    <label class="form-check-label" for="answer4{{ $loop->iteration }}">
-                                        4. {{ $question->option4 }}
+                                    <input class="form-check-input" type="radio" name="answer{{ $loop->iteration }}" id="answer{{ $loop->iteration }}_4" value="4">
+                                    <label class="form-check-label" for="answer{{ $loop->iteration }}_4">
+                                        <label class="form-check-label" for="answer{{ $loop->iteration }}_4">
+                                            4. {{ $question->option4 }}
+                                        </label>
                                     </label>
                                 </div>
                             </div>

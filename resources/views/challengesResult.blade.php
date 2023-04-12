@@ -19,13 +19,13 @@
 </nav>
 
 <br> <br> <br>
-  <h1 style="text-align: center;">Your Results</h1>
+<h1 style="text-align: center;">Your Results</h1>
 <hr>
 
 @if($score == 10)
 <div style="text-align:center;">
-    <h2>You scored 10/10!</h2>
-    <h4>Your result is recorded on the Leaderboard.</h4>
+    <h3>Congratulations! You scored 10/10!</h2>
+        <h4>Your result is recorded on the Leaderboard.</h4>
 </div>
 @else
 <div style="text-align:center;">
@@ -33,12 +33,13 @@
 </div>
 @endif
 
+<br>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Quiz Result') }}</div>
-
+                <div class="card-header text-center" style="font-size: 24px;">{{ __('Quiz Result') }}</div>
                 <div class="card-body">
                     <p>Score: {{ $score }}/{{ $totalQuestions }}</p>
                     <p>Incorrect Answers: {{ $incorrectAnswers }}</p>

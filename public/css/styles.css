@@ -163,6 +163,11 @@ footer {
     box-shadow: 15px 5px 15px 5px rgba(0, 0, 0, 0.1);
 }
 
+.form-check-label:hover {
+    cursor: pointer;
+    color: #ff6600;
+}
+
 .cartoonish-card {
     background-color: #cce5ff;
     border-radius: 20px;
