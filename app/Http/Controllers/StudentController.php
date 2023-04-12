@@ -11,6 +11,7 @@ use App\Models\Leaderboard;
 use App\Models\Topic;
 use App\Models\Avatar;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
@@ -130,7 +131,7 @@ class StudentController extends Controller
 		return response(view('student.avatar', ['userAvatarImagePath' => $userAvatarImagePath, 'avatars' => $avatars]));
 	}
 
-	public function changeAvatar($id)
+	public function changeAvatar(Request $request, $id)
 	{
 		$user = Auth::guard(session('role'))->user();
 		$user = User::findOrFail($user->id);

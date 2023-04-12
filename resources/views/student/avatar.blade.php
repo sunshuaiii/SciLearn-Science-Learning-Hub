@@ -22,6 +22,12 @@
     <img src="{{'/images/'.$userAvatarImagePath}}" class="avatar-img" alt="avatar image">
   </div>
 </div>
+<br>
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 
 <br> <br> <br>
 <h1 style="text-align: center;">Avatar List</h1>
