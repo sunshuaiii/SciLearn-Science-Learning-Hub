@@ -18,6 +18,8 @@
 </nav>
 
 <br> <br> <br>
+  <h1 style="text-align: center;">Start Challenges</h1>
+<hr>
 
 <!-- The section includes a button with an onclick function to start a stopwatch and show the questions. -->
 <div class="text-center">
@@ -36,7 +38,7 @@
                 @foreach($questions as $question)
 
                 <!-- to show the correct answers for testing purpose -->
-                console.log({{$question->answer}});
+                The answer is {{$question->answer}}
                 <div class="challenges-card mx-auto">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-4">Question {{ $loop->iteration }} - {{ $question->question }}</h5>

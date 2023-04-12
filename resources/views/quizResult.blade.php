@@ -21,6 +21,8 @@
 </nav>
 
 <br> <br> <br>
+  <h1 style="text-align: center;">Quiz Results</h1>
+<hr>
 
 <div style="text-align:center;">
     <h3>You can check your progress in the user profile.</h3>

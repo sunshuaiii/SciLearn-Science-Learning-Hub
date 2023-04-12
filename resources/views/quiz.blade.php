@@ -21,6 +21,8 @@
 </nav>
 
 <br> <br> <br>
+  <h1 style="text-align: center;">Quiz</h1>
+<hr>
 
 <div class="container">
     <div class="row">

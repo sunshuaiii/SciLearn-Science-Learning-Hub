@@ -14,7 +14,9 @@
 	</ol>
 </nav>
 
-<h1 style="text-align: center;">Leaderboard</h1>
+<br> <br> <br>
+  <h1 style="text-align: center;">Leaderboard</h1>
+<hr>
 
 <table class="table table-hover" style="margin-bottom: 3rem">
 	<thead>
@@ -38,5 +40,7 @@
 <hr>
 
 @include('startChallenge')
+
+<br> <br> <br>
 
 @endsection

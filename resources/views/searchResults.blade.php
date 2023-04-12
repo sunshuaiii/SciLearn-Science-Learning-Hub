@@ -16,11 +16,11 @@
     </ol>
 </nav>
 
-<br>
-<h3 style="text-align: center;">Search Results</h3>
+<br> <br> <br>
+<h1 style="text-align: center;">Search Results</h1>
 <hr>
 
-<h5 style="text-align: left;">{{ count($results) }} topics found</h3>
+<h5 style="text-align: left;">{{ count($results) }} topics found</h5>
 
 @if (count($results) > 0)
 <div class="container">
@@ -48,7 +48,9 @@
 </div>
 @else
 <br> <br> <br>
-<h4  style="text-align: center;">Type something else to search for the topics.</h4>
+<h4 style="text-align: center;">Type something else to search for the topics.</h4>
 @endif
+
+<br> <br> <br>
 
 @endsection

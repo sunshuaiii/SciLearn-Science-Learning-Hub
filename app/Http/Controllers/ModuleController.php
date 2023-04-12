@@ -236,7 +236,6 @@ class ModuleController extends Controller
         $percentage = round(($score / $totalQuestions) * 100, 2);
         $elapsedTime = $request->input('elapsed_time');
         $timeTaken = $_POST['time_taken'];
-        echo $elapsedTime;
 
         if (Auth::guard(session('role'))->user()) {
             $userId = Auth::guard(session('role'))->user()->id;

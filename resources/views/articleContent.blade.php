@@ -19,11 +19,9 @@
     </ol>
 </nav>
 
-<br><br>
-
-<h1 style="text-align: center;">{{ $article['title']}}</h1>
-
-<br> <br>
+<br> <br> <br>
+  <h1 style="text-align: center;">{{ $article['title']}}</h1>
+<hr>
 
 <div class="container">
     <div class="row">
