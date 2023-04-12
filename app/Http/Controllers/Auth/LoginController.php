@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Avatar;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -94,7 +95,11 @@ class LoginController extends Controller
 			// An authenticated session will be started 
 			session(['role' => $request->role]); // to tell which guard is authenticated
 			
-			$request->session()->regenerate(); // regenerate the user's session to prevent session fixation
+			// $request->session()->regenerate(); // regenerate the user's session to prevent session fixation
+			$userAvatarId = Auth::guard(session('role'))->user()->avatar_id;
+			$userAvatarImagePath = Avatar::where('id', $userAvatarId)->get()->value('image');
+			$request->session()->put('userAvatarImagePath', $userAvatarImagePath);
+
 			return redirect()->intended('/');
 		}
 		

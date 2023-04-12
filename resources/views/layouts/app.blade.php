@@ -73,8 +73,8 @@
 								<a class="dropdown-item" href="/register/student">Sign Up</a>
 							@endif
                         </div>
-                        @if(session('userAvatarImagePath') != null)
-                        <img class="header-avatar-img" src="{{session('userAvatarImagePath')}}" alt="Avatar" id="avatar">
+                        @if (session()->has('userAvatarImagePath'))
+                        <img class="header-avatar-img" src="{{'images/'.session('userAvatarImagePath')}}" alt="Avatar" id="avatar">
                         @else
                         <img class="header-avatar-img" src="/images/AvatarIcon.png" alt="Avatar" id="avatar">
                         @endif
