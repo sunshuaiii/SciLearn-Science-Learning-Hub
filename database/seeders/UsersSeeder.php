@@ -17,15 +17,24 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $numberOfAvatars = DB::table('avatars')->count(); 
-        for ($i = 0; $i < 10; $i++) { 
-            DB::table('users')->insert([ 
-                'username' => $faker->name(), 
-                'email' => $faker->unique()->safeEmail(), 
-                'password' => bcrypt('password'), 
+        $numberOfAvatars = DB::table('avatars')->count();
+
+        DB::table('users')->insert([
+            'username' => "Lalisa",
+            'email' => "lisa@email.com",
+            'password' => bcrypt('12341234'),
+            // is_admin attribute will be set to false by default
+            'avatar_id' => $faker->numberBetween(1, $numberOfAvatars),
+        ]);
+
+        for ($i = 1; $i < 10; $i++) {
+            DB::table('users')->insert([
+                'username' => $faker->name(),
+                'email' => $faker->unique()->safeEmail(),
+                'password' => bcrypt('password'),
                 // is_admin attribute will be set to false by default
                 'avatar_id' => $faker->numberBetween(1, $numberOfAvatars),
-            ]); 
+            ]);
         }
     }
 }
