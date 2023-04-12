@@ -15,7 +15,7 @@
 </nav>
 
 <br> <br> <br>
-  <h1 style="text-align: center;">Leaderboard</h1>
+  <h1 style="text-align: center;">Top 10 Leaderboard</h1>
 <hr>
 
 <table>

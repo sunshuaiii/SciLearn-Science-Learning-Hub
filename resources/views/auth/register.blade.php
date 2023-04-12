@@ -36,13 +36,27 @@
 
 		<div class="mb-3">
 			<label for="password">Password</label>
-			<input id="password" name="password" type="password" placeholder="Enter password" class="form-control col-sm-10">
+			<div class="input-group">
+				<input type="password" class="form-control col-sm-10" id="password" placeholder="Enter password" name="password">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<input type="checkbox" onclick="showPassword()"> Show Password
+					</div>
+				</div>
+			</div>
 			@error('password') <div class="alert alert-danger">{{ $message }}</div> @enderror
 		</div>
 
 		<div class="mb-3">
-			<label for="password_confirmation">Confirm Password</label>
-			<input id="password_confirmation" name="password_confirmation" type="password" placeholder="Confirm password" class="form-control col-sm-10">
+			<label for="password_confirmation">Password</label>
+			<div class="input-group">
+				<input type="password" class="form-control col-sm-10" id="password_confirmation" placeholder="Confirm password" name="password_confirmation">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<input type="checkbox" onclick="showPasswordConfirmation()"> Show Password
+					</div>
+				</div>
+			</div>
 			@error('password_confirmation') <div class="alert alert-danger">{{ $message }}</div> @enderror
 		</div>
 
@@ -63,4 +77,25 @@
 		console.log(document.getElementById("role").value + " " + document.getElementById("email").value + " " + document.getElementById("password").value);
 	};
 </script>
+
+<script>
+    function showPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+	function showPasswordConfirmation() {
+		var y = document.getElementById("password_confirmation");
+        if (y.type === "password") {
+			y.type = "text";
+        } else {
+			y.type = "password";
+        }
+    }
+</script>
+
 @endsection
