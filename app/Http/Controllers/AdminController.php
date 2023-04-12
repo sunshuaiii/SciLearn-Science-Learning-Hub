@@ -14,16 +14,17 @@ class AdminController extends Controller
 {
 	public function __construct()
     {
+		// always authorize admin before using any method in this controller
 		$this->authorizeAdmin();
     }
 
 	private function authorizeAdmin() {
 		try {
 			// Auth is accessble after logined
-			if (! Auth::guard(session('role'))->user()->can('isAdmin')) {
+			if (! Auth::guard(session('role'))->user()->can('isAdmin')) { // if login user not admin
 				abort(404);
 			}
-		} catch (\Throwable $e) {
+		} catch (\Throwable $e) { // if user not logined
 			abort(404);
 		}
 	}
@@ -35,17 +36,14 @@ class AdminController extends Controller
      */
     public function lectureContent()
     {
-		$this->authorizeAdmin();
         return view('admin.lectureContent');
     }
 
 	public function showModule($id) {
-		$this->authorizeAdmin();
         return view('admin.module.show', ['module' => Module::find($id)]);
 	}
 
 	public function showTopic($id) {
-		$this->authorizeAdmin();
         return view('admin.topic.show', ['topic' => Topic::find($id)]);
 	}
 
@@ -56,12 +54,10 @@ class AdminController extends Controller
      */
     public function createTopic($module_id)
     {
-		$this->authorizeAdmin();
         return view('admin.topic.create', ['module_id' => $module_id]);
     }
 
 	public function editTopic($id) {
-		$this->authorizeAdmin();
         return view('admin.topic.edit', ['topic' => Topic::find($id)]);
 	}
 

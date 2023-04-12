@@ -46,9 +46,6 @@ Route::post('/modules/{moduleName}/{topicId}/{articleId}/quiz/submit', [ModuleCo
 // leaderboard
 Route::get('/leaderboard', [StudentController::class, 'leaderboard']);
 
-// testing
-// Route::get('/test', [TestController::class, 'test'])->name('test');
-
 // features for registered students
 Route::middleware(['auth'])->group(function () {
 	// using the same controller
@@ -70,39 +67,33 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('/collections', CollectionController::class);
 });
 
-// Route::middleware(['auth:admin'])->group(function () {
-	Route::controller(AdminController::class)->group(function () {
-		Route::get('/lecture_content', 'lectureContent');
+Route::controller(AdminController::class)->group(function () {
+	Route::get('/lecture_content', 'lectureContent');
 
-		Route::get('/showModule/{id}', 'showModule');
+	Route::get('/showModule/{id}', 'showModule');
 
-		Route::get('/createTopic/{module_id}', 'createTopic');
-		Route::post('/storeTopic', 'storeTopic');
-		Route::get('/showTopic/{id}', 'showTopic');
-		Route::get('/editTopic/{id}', 'editTopic');
-		Route::put('/updateTopic/{id}', 'updateTopic');
-		Route::delete('/destroyTopic/{id}', 'destroyTopic');
+	Route::get('/createTopic/{module_id}', 'createTopic');
+	Route::post('/storeTopic', 'storeTopic');
+	Route::get('/showTopic/{id}', 'showTopic');
+	Route::get('/editTopic/{id}', 'editTopic');
+	Route::put('/updateTopic/{id}', 'updateTopic');
+	Route::delete('/destroyTopic/{id}', 'destroyTopic');
 
-		Route::get('/createArticle/{topic_id}', 'createArticle');
-		Route::post('/storeArticle', 'storeArticle');
-		Route::get('/showArticle/{id}', 'showArticle');
-		Route::get('/editArticle/{id}', 'editArticle');
-		Route::put('/updateArticle/{id}', 'updateArticle');
-		Route::delete('/destroyArticle/{id}', 'destroyArticle');
+	Route::get('/createArticle/{topic_id}', 'createArticle');
+	Route::post('/storeArticle', 'storeArticle');
+	Route::get('/showArticle/{id}', 'showArticle');
+	Route::get('/editArticle/{id}', 'editArticle');
+	Route::put('/updateArticle/{id}', 'updateArticle');
+	Route::delete('/destroyArticle/{id}', 'destroyArticle');
 
-		Route::get('/createQuiz/{article_id}', 'createQuiz');
-		Route::post('/storeQuiz', 'storeQuiz');
-		Route::get('/showQuiz/{id}', 'showQuiz');
-		Route::get('/editQuiz/{id}', 'editQuiz');
-		Route::put('/updateQuiz/{id}', 'updateQuiz');
-		Route::delete('/destroyQuiz/{id}', 'destroyQuiz');		
-	});
-// });
+	Route::get('/createQuiz/{article_id}', 'createQuiz');
+	Route::post('/storeQuiz', 'storeQuiz');
+	Route::get('/showQuiz/{id}', 'showQuiz');
+	Route::get('/editQuiz/{id}', 'editQuiz');
+	Route::put('/updateQuiz/{id}', 'updateQuiz');
+	Route::delete('/destroyQuiz/{id}', 'destroyQuiz');		
+});
 
-
-// Route::resource('students.badges', BadgeController::class)->shallow();
-// Route::view('testing', 'welcome');
-// Route::view('topics', 'showTopics');
 
 /*
  * Actions Handled by Resource Controllers
