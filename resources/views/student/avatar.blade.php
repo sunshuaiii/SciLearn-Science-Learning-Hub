@@ -19,7 +19,7 @@
 <hr>
 <div class="container">
   <div class="col">
-    <img src="{{$userAvatarImagePath}}" class="avatar-img" alt="avatar image">
+    <img src="{{'/images/'.$userAvatarImagePath}}" class="avatar-img" alt="avatar image">
   </div>
 </div>
 
@@ -31,7 +31,7 @@
   <div class="row row-cols-3 row-cols-md-5 g-4">
     @foreach($avatars as $avatar)
     <div class="col">
-      <img src="{{$avatar['image']}}" class="avatar-img" alt="avatar image">
+      <img src="{{'/images/'.$avatar['image']}}" class="avatar-img" alt="avatar image">
       <br>
       <form action="/students/profile/avatar/changeAvatar/{{$avatar['id']}}" method="post">
         @method('put')
