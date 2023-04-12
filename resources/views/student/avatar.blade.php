@@ -14,28 +14,31 @@
   </ol>
 </nav>
 
-<br>
-
+<br> <br> <br>
+<h1 style="text-align: center;">Current Avatar</h1>
+<hr>
 <div class="container">
-  <h1>Current Avatar</h1>
-  <br>
-
   <div class="col">
     <img src="{{$userAvatarImagePath}}" class="avatar-img" alt="avatar image">
   </div>
+</div>
 
-  <h1>Avatar List</h1>
+<br> <br> <br>
+<h1 style="text-align: center;">Avatar List</h1>
+<hr>
+
+<div class="container">
   <div class="row row-cols-3 row-cols-md-5 g-4">
     @foreach($avatars as $avatar)
-      <div class="col">
-        <img src="{{$avatar['image']}}" class="avatar-img" alt="avatar image">
-        <br>
-        <form action="/students/profile/avatar/changeAvatar/{{$avatar['id']}}" method="post">
-          @method('put')
-          @csrf
-          <button type="submit" class="btn btn-primary">Select Avatar</button>
-        </form>
-      </div>
+    <div class="col">
+      <img src="{{$avatar['image']}}" class="avatar-img" alt="avatar image">
+      <br>
+      <form action="/students/profile/avatar/changeAvatar/{{$avatar['id']}}" method="post">
+        @method('put')
+        @csrf
+        <button type="submit" class="btn btn-primary">Select Avatar</button>
+      </form>
+    </div>
     @endforeach
   </div>
 </div>

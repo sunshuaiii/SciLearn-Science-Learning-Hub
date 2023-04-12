@@ -304,3 +304,7 @@ footer {
 .progress-bar {
     background-color: #6666ff;
 }
+
+.control-label {
+    text-align: right;
+}

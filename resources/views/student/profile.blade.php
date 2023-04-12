@@ -16,7 +16,7 @@
   <h1 style="text-align: center;">User Profile</h1>
 <hr>
 
-Hi, {{$user->username}} <br /> <br />
+<h3 style="text-align: center;">Hi, {{$user->username}} </h3> <br>
 
 @if(session('message'))
 <div class="alert alert-success">

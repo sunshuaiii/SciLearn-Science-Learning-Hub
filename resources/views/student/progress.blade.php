@@ -24,9 +24,11 @@
 	@endforeach
 </div>
 
+<br><br><br>
+
 <style>
 	#verticalScroll {
-		height: 600px;
+		height: 650px;
 		overflow: auto;
 	}
 
