@@ -18,7 +18,7 @@
   <h1 style="text-align: center;">Leaderboard</h1>
 <hr>
 
-<table class="table table-hover" style="margin-bottom: 3rem">
+<table>
 	<thead>
 		<tr>
 			<th>Rank</th>
@@ -38,6 +38,27 @@
 </table>
 
 <hr>
+
+<style>
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	th, td {
+		padding: 8px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	th {
+		background-color: #f2f2f2;
+	}
+
+	tr:hover {
+		background-color:#f5f5f5;
+	}
+</style>
 
 @include('startChallenge')
 

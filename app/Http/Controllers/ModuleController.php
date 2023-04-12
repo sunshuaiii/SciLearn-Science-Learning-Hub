@@ -133,6 +133,7 @@ class ModuleController extends Controller
     public function startQuiz($moduleName, $topicId, $articleId)
     {
         $quizId = Quiz::where('article_id', $articleId)->get()->value('id');
+        $quizName = Quiz::where('article_id', $articleId)->get()->value('name');
 
         $questions = Question::where('quiz_id', $quizId)->get();
 
@@ -147,7 +148,8 @@ class ModuleController extends Controller
             'topicName' => $topicName,
             'articleTitle' => $articleTitle,
             'topicId' => $topicId,
-            'articleId' => $articleId
+            'articleId' => $articleId,
+            'quizName' => $quizName
         ]);
     }
 

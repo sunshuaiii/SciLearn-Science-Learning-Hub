@@ -21,7 +21,7 @@
 </nav>
 
 <br> <br> <br>
-  <h1 style="text-align: center;">Quiz</h1>
+  <h1 style="text-align: center;">{{ $quizName }}</h1>
 <hr>
 
 <div class="container">
