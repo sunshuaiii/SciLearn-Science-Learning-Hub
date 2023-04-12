@@ -1,54 +1,100 @@
-<!-- Show the form for editing the specified resource. -->
+@extends('layouts.app')
 
-@extends('components.layout')
-@section('title', 'Edit/Delete Drink')
+@section('title', 'Eidt Topic')
+
 @section('content')
-	<form method="POST" action="{{route('drinks.update', $drink)}}" id="edit_form_id">
-		@csrf
-		@method('PUT') <!-- Form Method Spoofing -->
+<br>
 
-		<input id="id" name="id" type="hidden" value="{{$drink['id']}}">
+<nav class="head-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/lecture_content">Lecture Content</a></li>
+		<li class="breadcrumb-item"><a href="/showModule/{{$module_id}}">Module: {{App\Models\Module::find($module_id)->name}}</a></li>
+        <li class="breadcrumb-item"><a href="/showTopic/{{$topic->id}}">Topic: {{App\Models\Topic::find($topic_id)->name}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Topic</li>
+    </ol>
+</nav>
 
-		<label for="category">Category</label>
-		<input id="category" name="category" type="text" value="{{$drink['category']}}">
+<br> <br> <br>
+<h1 style="text-align: center;">Edit Topic</h1>
+<hr>
+
+<div class="container" style="margin-bottom:5rem;">
+
+<br/>
+
+<form method="POST" action="/updateTopic/{{$topic->id}}" id="edit_form_id">
+	@csrf
+	@method('PUT') <!-- Form Method Spoofing -->
+
+	<input id="id" name="id" type="hidden" value="{{$topic['id']}}">
+
+	<div class="form-group">
+		<label for="name" class="control-label col-sm-2">Name</label>
+		<input id="name" name="name" type="text" class="form-control col-sm-10" value="{{$topic->name}}">
+		@error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
+	</div>
+
+	<div class="form-group">
+		<label for="tag" class="control-label col-sm-2">Tag</label>
+		<select name="tag" class="form-select" id="tag">
+			@php
+				$tags = ['Physics', 'Chemistry', 'Biology', ''];
+			@endphp
+
+			@foreach($tags as $tag)
+				@if ($tag == $topic->tag)
+					<option value="{{$tag}}" selected>{{$tag}}</option>
+				@else
+					<option value="{{$tag}}">{{$tag}}</option>
+				@endif
+			@endforeach
+			<!-- <option selected disabled>Please select one</option> -->
+		</select>
+		@error('tag') <div class="alert alert-danger">{{ $message }}</div> @enderror
+	</div>
+
+	<div class="form-group">
+		<label for="order" class="control-label col-sm-2">Order</label>
+		<input id="order" name="order" type="text" class="form-control col-sm-10" value="{{$topic->order}}">
+		@error('order') <div class="alert alert-danger">{{ $message }}</div> @enderror
+	</div>
+
+	<div class="form-group">
+		<label for="module_id" class="control-label col-sm-2">Module</label>
+		<select name="module_id" class="form-select" id="module">
+			@foreach(App\Models\Module::all() as $module)
+				@if ($module->id == $topic->module_id)
+					<option value="{{$module->id}}" selected>{{$module->name}}</option>
+				@else
+					<option value="{{$module->id}}">{{$module->name}}</option>
+				@endif
+			@endforeach
+			<!-- <option selected disabled>Please select one</option> -->
+		</select>
+		@error('module') <div class="alert alert-danger">{{ $message }}</div> @enderror
+	</div>
+
+	<div class="form-group">
+		<label for="image" class="control-label col-sm-2">Image</label><br/>
+		<img src="{{ $topic['image'] }}" alt="Card image">
+		@error('image') <div class="alert alert-danger">{{ $message }}</div> @enderror
+	</div>
 	
-		<label for="name">Name</label>
-		<input id="name" name="name" type="text" value="{{$drink->name}}">
+	<br/>
 
-		<label for="expiry_date">Expiry Date</label>
-		<input id="expiry_date" name="expiry_date" type="date" value="{{$drink['expiry_date']}}">
-		
-		<input type="submit" value="Save">
-		<a href="/drinks">
-			<input type="button" value="Cancel">
-		</a>
-	</form>
-	
-	<!-- pass $drink to controller using DELETE request -->
-	<form method="POST" action="{{route('drinks.destroy', $drink)}}" id="delete_form_id">
-		@csrf
-		@method('DELETE') <!-- Form Method Spoofing -->
-		<input id="id" name="id" type="hidden" value="{{$drink['id']}}">
-		<input type="button" value="Delete" id="delete button">
-		<span id="delete confirmation" style="display:none">
-			Delete this item?
-			<input name="deleteType" type="submit" value="Permanant Delete">
-			<input name="deleteType" type="submit" value="Move to Recycle Bin">
-			<input type="button" value="Do No Delete" id="do no delete button">
-		</span>
-	</form>
+	<input type="submit" value="Save" class="btn btn-primary">
 
-	<script>
-		document.getElementById("delete button").onclick = function() {
-			const deleteConfirmation = document.getElementById("delete confirmation");
-			if (deleteConfirmation.style.display === "none")
-				deleteConfirmation.style.display = "block";
-			else
-				deleteConfirmation.style.display = "none";
-		};
-		document.getElementById("do not delete button").onclick = function() {
-			const deleteConfirmation = document.getElementById("delete confirmation");
-			deleteConfirmation.style.display = "none";
-		};
-	</script>
+	<input type="button" value="Cancel" class="btn btn-primary" onclick="history.back()">
+
+</form>
+
+<br/>
+</div>
+
+<style>
+.control-label {
+    text-align: left;
+	}
+</style>
 @endsection

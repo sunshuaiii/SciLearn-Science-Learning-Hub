@@ -12,15 +12,17 @@
 	</ol>
 </nav>
 
-<br> <br> <br>
-<h1 style="text-align: center;">Lecture Content</h1>
-<hr>
-
 @if(session('message'))
 <div class="alert alert-success">
 	{{session('message')}}
 </div>
 @endif
+
+<br> <br> <br>
+<h1 style="text-align: center;">Lecture Content</h1>
+<hr>
+
+
 
 <div id="verticalScroll">
 	<table>
@@ -34,25 +36,43 @@
 		</thead>
 		<tbody>
 			@foreach(App\Models\Module::all() as $module)
-			@foreach($module->getTopics as $topic)
-			@php
-			$prev_topic = null;
-			@endphp
-			@foreach($topic->getArticles as $article)
+				@if ($module->getTopics->count() == 0)
+				<tr>
+					<td onclick="window.location.href='/showModule/{{$module->id}}';">{{$module->name}} </td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				@else
+					@foreach($module->getTopics as $topic)
+						@php
+							$prev_topic = null;
+						@endphp
 
-			<tr class="showEdit">
-				<td>{{$module->name}} </td>
-				@if ($topic->name != $prev_topic)
-				<td onclick="window.location.href='/showTopic/{{$topic->id}}';" rowspan="{{count($topic->getArticles)}}">{{$topic->name}}</td>
+						@if ($topic->getArticles->count() == 0)
+							<tr>
+								<td onclick="window.location.href='/showModule/{{$module->id}}';">{{$module->name}} </td>
+								<td onclick="window.location.href='/showTopic/{{$topic->id}}';">{{$topic->name}}</td>
+								<td></td>
+								<td></td>
+							</tr>
+						@else
+							@foreach($topic->getArticles as $article)
+								<tr class="showEdit">
+									<td onclick="window.location.href='/showModule/{{$module->id}}';">{{$module->name}} </td>
+									@if ($topic->name != $prev_topic)
+										<td onclick="window.location.href='/showTopic/{{$topic->id}}';" rowspan="{{count($topic->getArticles)}}">{{$topic->name}}</td>
+									@endif
+									<td onclick="window.location.href='/showArticle/{{$article->id}}';">{{$article->title}} </td>
+									<td onclick="window.location.href='/showQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>
+								</tr>
+								@php
+									$prev_topic = $topic->name;
+								@endphp
+							@endforeach
+						@endif
+					@endforeach
 				@endif
-				<td onclick="window.location.href='/showArticle/{{$article->id}}';">{{$article->title}} </td>
-				<td onclick="window.location.href='/showQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>
-			</tr>
-			@php
-			$prev_topic = $topic->name;
-			@endphp
-			@endforeach
-			@endforeach
 			@endforeach
 		</tbody>
 	</table>

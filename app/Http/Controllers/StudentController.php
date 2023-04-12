@@ -36,15 +36,21 @@ class StudentController extends Controller
 		foreach (Module::take(3)->get() as $module) {
 			foreach ($module->getTopics as $topic) {
 				$numberOfQuiz = $topic->getArticles->count();
-				$quizzesTakenCount = 0;
-				foreach ($topic->getArticles as $article) {
-					// return Quiz::find(1);
-					// return Quiz::where('article_id', $article->id)->get();
 
-					if ($quizzesTaken->contains($article->getQuiz))
-						$quizzesTakenCount++;
+				if ($numberOfQuiz == 0) {
+					$progress[$i++] = 1;
 				}
-				$progress[$i++] = $quizzesTakenCount / $numberOfQuiz;
+				else {
+					$quizzesTakenCount = 0;
+					foreach ($topic->getArticles as $article) {
+						// return Quiz::find(1);
+						// return Quiz::where('article_id', $article->id)->get();
+
+						if ($quizzesTaken->contains($article->getQuiz))
+							$quizzesTakenCount++;
+					}
+					$progress[$i++] = $quizzesTakenCount / $numberOfQuiz;
+				}	
 			}
 		}
 

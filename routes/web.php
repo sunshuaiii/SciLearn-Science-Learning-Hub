@@ -74,14 +74,15 @@ Route::middleware(['auth:admin'])->group(function () {
 	Route::controller(AdminController::class)->group(function () {
 		Route::get('/lecture_content', 'lectureContent');
 
-		Route::get('/createTopic', 'createTopic');
-		Route::get('/createArticle', 'createArticle');
-		Route::get('/createQuiz', 'createQuiz');
+		Route::get('/createTopic/{module_id}', 'createTopic');
+		Route::get('/createArticle/{topic_id}', 'createArticle');
+		Route::get('/createQuiz/{article_id}', 'createQuiz');
 
 		Route::post('/storeTopic', 'storeTopic');
 		Route::post('/storeArticle', 'storeArticle');
 		Route::post('/storeQuiz', 'storeQuiz');
 
+		Route::get('/showModule/{id}', 'showModule');
 		Route::get('/showTopic/{id}', 'showTopic');
 		Route::get('/showArticle/{id}', 'showArticle');
 		Route::get('/showQuiz/{id}', 'showQuiz');

@@ -9,21 +9,53 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
         <li class="breadcrumb-item"><a href="/lecture_content">Lecture Content</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Topic Details</li>
+		<li class="breadcrumb-item"><a href="/showModule/{{$topic->module_id}}">Module: {{App\Models\Module::find($topic->module_id)->name}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Topic: {{$topic->name}}</a></li>
     </ol>
 </nav>
 
 <br>
 
-<div class="container" style="margin-bottom:5rem;">
-
 @if(session('message'))
 <div class="alert alert-success">
-    {{session('message')}}
+	{{session('message')}}
 </div>
 @endif
 
+<br> <br> <br>
+<h1 style="text-align: center;">Topic Details</h1>
+<hr>
+
+<div class="container" style="margin-bottom:5rem;">
+
+<input type="button" id="edit" value="Edit" class="btn btn-primary"
+	onclick="window.location.href='/editTopic/{{$topic->id}}';">
+<input type="button" id="delete button" value="Delete" class="btn btn-primary">
+<input type="button" id="addArticle" value="Add Article" class="btn btn-primary"
+	onclick="window.location.href='/createArticle/{{$topic->id}}';">
+
+
+	<br/>
+
+	<!-- pass to controller using DELETE request -->
+	<form method="POST" action="/destroyTopic/{{$topic->id}}" id="delete_form_id" style="margin-bottom:2rem;">
+		@csrf
+		@method('DELETE') <!-- Form Method Spoofing -->
+		<input id="id" name="id" type="hidden" value="{{$topic['id']}}">
+
+		<span id="delete confirmation" style="display:none;">
+			<br/>
+			Delete this item?
+			<div class="col-sm-offset-2 col-sm-10">
+				<input type="submit" value="Delete" class="btn btn-primary">
+				<input type="button" value="Do No Delete" id="cancel" class="btn btn-primary">
+			</div>
+		</span>
+	</form>
+
 <form id="readonly_form_id" class="form-horizontal">
+	<input id="id" name="id" type="hidden" value="{{$topic['id']}}">
+
 	<div class="form-group">
 		<label for="name" class="control-label col-sm-2">Name</label>
 		<input id="name" name="name" type="text" class="form-control col-sm-10" value="{{$topic->name}}" readonly>
@@ -45,41 +77,78 @@
 	</div>
 
 	<div class="form-group">
-		<label for="image" class="control-label col-sm-2">Image</label>
+		<label for="image" class="control-label col-sm-2">Image</label><br/>
 		<img src="{{ $topic['image'] }}" alt="Card image">
 	</div>
 	
 
 	<br/>
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<input type="button" id="edit" value="Edit" class="btn btn-primary"
-				onclick="window.location.href='/editTopic/{{$topic->id}}';">
-		</div>
-	</div>
+
 </form>
 
 <br/>
 
-	<!-- pass to controller using DELETE request -->
-	<form method="POST" action="/destroyTopic/{{$topic->id}}" id="delete_form_id">
-		@csrf
-		@method('DELETE') <!-- Form Method Spoofing -->
-		<input id="id" name="id" type="hidden" value="{{$topic['id']}}">
-		<div class="col-sm-offset-2 col-sm-10">
-			<input type="button" id="delete button" value="Delete" class="btn btn-primary">
-		</div>
 
-		<span id="delete confirmation" style="display:none;">
-			<br/>
-			Delete this item?
-			<div class="col-sm-offset-2 col-sm-10">
-				<input type="submit" value="Delete" class="btn btn-primary">
-				<input type="button" value="Do No Delete" id="cancel" class="btn btn-primary">
-			</div>
-		</span>
-	</form>
+<div id="verticalScroll">
+<table>
+		<thead>
+			<tr>
+				<th>Article</th>
+				<th>Quiz</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach($topic->getArticles as $article)
+				<tr class="showEdit">
+					<td onclick="window.location.href='/showArticle/{{$article->id}}';">{{$article->title}} </td>
+					<td onclick="window.location.href='/showQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>
+				</tr>
+			@endforeach
+		</tbody>
+	</table>
+
+	</div>
+
 </div>
+
+	<style>
+	#verticalScroll {
+		height: 600px;
+		overflow: auto;
+	}
+
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	th,
+	td {
+		padding: 8px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	th {
+		background-color: #f2f2f2;
+	}
+
+	tr:hover {
+		background-color: #f5f5f5;
+	}
+
+	.showEdit {
+		cursor: pointer;
+	}
+
+	td:hover {
+		color: #ff6600;
+	}
+
+	.control-label {
+    text-align: left;
+	}
+</style>
 
 <script>
 		document.getElementById("delete button").onclick = function() {
