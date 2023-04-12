@@ -23,9 +23,13 @@ class AdminController extends Controller
     public function lectureContent()
     {
 		$this->authorizeAdmin();
-
         return view('admin.lectureContent');
     }
+
+	public function showModule($id) {
+		$this->authorizeAdmin();
+        return view('admin.module.show', ['module' => Module::find($id)]);
+	}
 
     /**
      * Show the form for creating a new resource.
@@ -38,81 +42,49 @@ class AdminController extends Controller
         return view('admin.module.create');
     }
 
-	public function storeModule() {
+	public function editModule($id) {
+		$this->authorizeAdmin();
+        return view('admin.module.edit', ['module' => Module::find($id)]);
+	}
+
+	public function storeModule(Request $request) {
 		$request->validate([
-			'username' => 'required|unique:users|max:255',
-			'email' => 'required|unique:users|email|max:255',
-			'password' => 'required|min:8|confirmed',
-		]); // if invalid, return back to the original page and show error message
-		User::create([
+			'username' => ['required', 'max:255', Rule::unique('modules')->ignore($id)],
+			'email' => ['required', 'max:255', Rule::unique('modules')->ignore($id)],
+		]); // unique rule without itself 
+
+		Module::create([
 			'username' => $request->username,
 			'email' => $request->email,
-			'password' => Hash::make($request->password),
-			'avatar_id' => 0,
 		]);
-
 		$request->session()->flash('message', 'Module created.');
 		return $this->lectureContent();
 	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-		$this->authorizeAdmin();
-        //
-    }
+	public function updateModule(Request $request, $id) {
+		$request->validate([
+			'username' => ['required', 'max:255', Rule::unique('modules')->ignore($id)],
+			'email' => ['required', 'max:255', Rule::unique('modules')->ignore($id)],
+		]); // unique rule without itself 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-		$this->authorizeAdmin();
-        //
-    }
+		Module::find($id)->update([
+			'username' => $request->username,
+			'email' => $request->email,
+		]);
+		$request->session()->flash('message', 'Module updated.');
+		return $this->lectureContent();
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-		$this->authorizeAdmin();
-        //
-    }
+	public function destroyModule($id) {
+			Module::find($id)->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-		$this->authorizeAdmin();
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-		$this->authorizeAdmin();
-        //
-    }
+			// check deleted or not
+			if (!Module::find($id)) {
+				$request->session()->flash('message', 'Module deleted.');
+				return $this->lectureContent;
+			}
+			else
+				throw new RuntimeException(sprintf('Could not delete drink with id '.$id));
+		}
+	}
 }
