@@ -5,13 +5,16 @@
 @section('content')
 <br>
 
-<h1>{{$role == 'admin' ? 'Admin Login' : 'Login'}}</h1>
-
 <nav class="head-nav" aria-label="breadcrumb">
 	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Home</a></li>
 		<li class="breadcrumb-item active" aria-current="page">Login</li>
 	</ol>
 </nav>
+
+<br> <br> <br>
+<h1 style="text-align: center;">{{$role == 'admin' ? 'Admin Login' : 'Login'}}</h1>
+<hr>
 
 <br>
 <div class="container mt-3">
@@ -37,6 +40,7 @@
 
 		@error('login failed') <div class="alert alert-danger">{{ $message }}</div> @enderror
 		<button type="submit" class="btn btn-primary">Login</button>
+		
 		<br> <br>
 		<a href="{{'/register/'.$role}}">No account yet? Sign up now!</a>
 		<br> <br>
