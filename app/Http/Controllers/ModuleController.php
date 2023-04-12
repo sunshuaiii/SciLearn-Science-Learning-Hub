@@ -56,6 +56,15 @@ class ModuleController extends Controller
                     $progress[$i++] = $quizzesTakenCount / $numberOfQuiz;
                 }
             }
+            return view('topics', [
+                'moduleName' => $moduleName,
+                'moduleNameToShow' => $moduleNameToShow,
+                'topicsWithTag1' => $topicsWithTag1,
+                'topicsWithTag2' => $topicsWithTag2,
+                'topicsWithTag3' => $topicsWithTag3,
+                'topicsWithTag4' => $topicsWithTag4,
+                'progress' => $progress,
+            ]);
         }
 
         return view('topics', [
@@ -65,7 +74,6 @@ class ModuleController extends Controller
             'topicsWithTag2' => $topicsWithTag2,
             'topicsWithTag3' => $topicsWithTag3,
             'topicsWithTag4' => $topicsWithTag4,
-            'progress' => $progress,
         ]);
     }
 
@@ -98,11 +106,11 @@ class ModuleController extends Controller
                 // check if the user has completed the quiz
                 $completed[$i++] = DB::table('user_quizzes')->where('user_id', $userId)->where('quiz_id', $quizId)->exists();
             }
-        }
 
-        // Add the completed to the articles array as a new key
-        foreach ($articles as $key => $result) {
-            $articles[$key]->completed = $completed[$key];
+            // Add the completed to the articles array as a new key
+            foreach ($articles as $key => $result) {
+                $articles[$key]->completed = $completed[$key];
+            }
         }
 
         return view('articles', [

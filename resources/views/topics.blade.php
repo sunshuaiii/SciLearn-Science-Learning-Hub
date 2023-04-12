@@ -18,7 +18,7 @@
 </nav>
 
 <br> <br> <br>
-  <h1 style="text-align: center;">{{$moduleNameToShow}}</h1>
+<h1 style="text-align: center;">{{$moduleNameToShow}}</h1>
 <hr>
 
 @if($moduleName != 'challenges')
@@ -43,6 +43,7 @@
                         <div class="card-btn">
                             <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
                         </div>
+                        @if (Auth::guard(session('role'))->user())
                         <div style="margin-bottom: 0.5rem;">
                             <div class="progress" style="height: 1.5rem;">
                                 <div class="progress-bar bg-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
@@ -50,6 +51,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
                 @endforeach
@@ -68,6 +70,7 @@
                         <div class="card-btn">
                             <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
                         </div>
+                        @if (Auth::guard(session('role'))->user())
                         <div style="margin-bottom: 0.5rem;">
                             <div class="progress" style="height: 1.5rem;">
                                 <div class="progress-bar bg-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
@@ -75,6 +78,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
                 @endforeach
@@ -93,6 +97,7 @@
                         <div class="card-btn">
                             <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
                         </div>
+                        @if (Auth::guard(session('role'))->user())
                         <div style="margin-bottom: 0.5rem;">
                             <div class="progress" style="height: 1.5rem;">
                                 <div class="progress-bar bg-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
@@ -100,6 +105,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
                 @endforeach
@@ -118,6 +124,7 @@
                         <div class="card-btn">
                             <a href={{$moduleName."/".$topic['id']}} class="btn cartoonish-btn">Start Learning</a>
                         </div>
+                        @if (Auth::guard(session('role'))->user())
                         <div style="margin-bottom: 0.5rem;">
                             <div class="progress" style="height: 1rem;">
                                 <div class="progress-bar bg-success progress-bar-striped active rounded-pill" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
@@ -125,6 +132,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
                 @endforeach
