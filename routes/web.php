@@ -70,36 +70,34 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('/collections', CollectionController::class);
 });
 
-Route::middleware(['auth:admin'])->group(function () {
+// Route::middleware(['auth:admin'])->group(function () {
 	Route::controller(AdminController::class)->group(function () {
 		Route::get('/lecture_content', 'lectureContent');
 
-		Route::get('/createTopic/{module_id}', 'createTopic');
-		Route::get('/createArticle/{topic_id}', 'createArticle');
-		Route::get('/createQuiz/{article_id}', 'createQuiz');
-
-		Route::post('/storeTopic', 'storeTopic');
-		Route::post('/storeArticle', 'storeArticle');
-		Route::post('/storeQuiz', 'storeQuiz');
-
 		Route::get('/showModule/{id}', 'showModule');
+
+		Route::get('/createTopic/{module_id}', 'createTopic');
+		Route::post('/storeTopic', 'storeTopic');
 		Route::get('/showTopic/{id}', 'showTopic');
-		Route::get('/showArticle/{id}', 'showArticle');
-		Route::get('/showQuiz/{id}', 'showQuiz');
-
 		Route::get('/editTopic/{id}', 'editTopic');
-		Route::get('/editArticle/{id}', 'editArticle');
-		Route::get('/editQuiz/{id}', 'editQuiz');
-
 		Route::put('/updateTopic/{id}', 'updateTopic');
-		Route::put('/updateArticle/{id}', 'updateArticle');
-		Route::put('/updateQuiz/{id}', 'updateQuiz');
-
 		Route::delete('/destroyTopic/{id}', 'destroyTopic');
+
+		Route::get('/createArticle/{topic_id}', 'createArticle');
+		Route::post('/storeArticle', 'storeArticle');
+		Route::get('/showArticle/{id}', 'showArticle');
+		Route::get('/editArticle/{id}', 'editArticle');
+		Route::put('/updateArticle/{id}', 'updateArticle');
 		Route::delete('/destroyArticle/{id}', 'destroyArticle');
+
+		Route::get('/createQuiz/{article_id}', 'createQuiz');
+		Route::post('/storeQuiz', 'storeQuiz');
+		Route::get('/showQuiz/{id}', 'showQuiz');
+		Route::get('/editQuiz/{id}', 'editQuiz');
+		Route::put('/updateQuiz/{id}', 'updateQuiz');
 		Route::delete('/destroyQuiz/{id}', 'destroyQuiz');		
 	});
-});
+// });
 
 
 // Route::resource('students.badges', BadgeController::class)->shallow();

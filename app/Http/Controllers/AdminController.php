@@ -12,10 +12,20 @@ use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
+	public function __construct()
+    {
+		$this->authorizeAdmin();
+    }
+
 	private function authorizeAdmin() {
-		if (! Auth::guard(session('role'))->user()->can('isAdmin')) {
-            abort(404);
-        }
+		try {
+			// Auth is accessble after logined
+			if (! Auth::guard(session('role'))->user()->can('isAdmin')) {
+				abort(404);
+			}
+		} catch (\Throwable $e) {
+			abort(404);
+		}
 	}
 
     /**
