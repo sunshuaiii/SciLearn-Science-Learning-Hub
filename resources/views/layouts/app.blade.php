@@ -5,7 +5,7 @@
     <meta property="og:title" content="SciLearn - Science Learning Hub" />
     <meta name="author" content="Ling Sun Shuai, Lim Choon Kiat, Olivia Ong Yee Ming, Tan Jia Qi, Yang Chu Yan">
     <!-- <link rel="icon" href="~/images/logo" type="image/x-icon" /> -->
-    <meta property="og:description" content="This website allows kids aged between 7 to 12 to learn Science." />
+    <meta property="og:description" content="This website allows kids age between 6 to 8 to learn Science." />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SciLearn - @yield('title')</title>
