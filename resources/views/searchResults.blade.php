@@ -22,34 +22,38 @@
 
 <h5 style="text-align: left;">{{ count($results) }} topics found</h5>
 
-@if (count($results) > 0)
 <div class="container">
     <div class="row">
-        <br> <br>
-        <div class="container">
-            <div class="row">
-                @foreach ($results as $result)
-                <div class="col-md-3">
-                    <div class="card cartoonish-card">
-                        <img class="card-img" src="{{ $result->image }}" alt="Card image">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $result->name }}</h5>
-                        </div>
-                        <div class="card-btn">
-                            <a href={{"/modules/".$result->moduleName."/".$result->id}} class="btn cartoonish-btn">Start
-                                Learning</a>
+        @if(count($results) > 0)
+        <div style="display:none">{{ $i=0 }}</div>
+        @foreach($results as $result)
+        <div class="col-md-3">
+            <div class="card cartoonish-card">
+                <img class="card-img" src="{{ $result->image }}" alt="Card image" width="640" height="180">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $result->name }}</h5>
+                </div>
+                <div class="card-btn">
+                    <a href={{"/modules/".$result->moduleName."/".$result->id}} class="btn cartoonish-btn">Start Learning</a>
+                </div>
+                @if (Auth::guard(session('role'))->user())
+                <div style="margin-bottom: 0.5rem;">
+                    <div class="progress" style="height: 1.5rem;">
+                        <div class="progress-bar bg-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ $progress[$i] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress[$i++] * 100 }}%;">
+                            {{ number_format($progress[$i - 1]*100, 2, '.', ',') }}%
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @endif
             </div>
         </div>
+        @endforeach
+        @else
+        <br> <br> <br>
+        <h4 style="text-align: center;">Type something else to search for the topics.</h4>
+        @endif
     </div>
 </div>
-@else
-<br> <br> <br>
-<h4 style="text-align: center;">Type something else to search for the topics.</h4>
-@endif
 
 <br> <br> <br>
 

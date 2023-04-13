@@ -30,7 +30,7 @@
 		<input id="id" name="id" type="hidden" value="{{$topic['id']}}">
 
 		<div class="form-group">
-			<label for="name" class="control-label col-sm-2">Name</label>
+			<label for="name" class="control-label col-sm-2">Topic Name</label>
 			<input id="name" name="name" type="text" class="form-control col-sm-10" value="{{$topic->name}}">
 			@error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
 		</div>

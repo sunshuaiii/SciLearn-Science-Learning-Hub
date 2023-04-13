@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Topic;
-use App\Models\Article;
+use App\Models\Module;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
@@ -29,6 +30,28 @@ class SearchController extends Controller
         // Add the module names to the search results array as a new key
         foreach ($results as $key => $result) {
             $results[$key]->moduleName = $moduleNames[$key];
+        }
+
+        if (Auth::guard(session('role'))->user()) {
+            $user = Auth::guard(session('role'))->user();
+            $quizzesTaken = $user->getQuizzes;
+            $progress = [];
+            $i = 0;
+
+            foreach ($results as $topic) {
+                $numberOfQuiz = $topic->getArticles->count();
+                $quizzesTakenCount = 0;
+                foreach ($topic->getArticles as $article) {
+                    if ($quizzesTaken->contains($article->getQuiz))
+                        $quizzesTakenCount++;
+                }
+                if ($quizzesTakenCount == 0) {
+                    $progress[$i++] = 0;
+                } else {
+                    $progress[$i++] = $quizzesTakenCount / $numberOfQuiz;
+                }
+            }
+            return view('searchResults', ['results' => $results, 'progress' => $progress,]);
         }
 
         // Pass the search results to the view

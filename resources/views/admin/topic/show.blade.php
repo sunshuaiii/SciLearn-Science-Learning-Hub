@@ -57,7 +57,7 @@
 			<div class="col-md-6">
 				<form id="readonly_form_id" class="form-horizontal">
 					<div class="form-group">
-						<label for="name" class="control-label col-sm-4">Name:</label>
+						<label for="name" class="control-label col-sm-4">Topic Name:</label>
 						<div class="col-sm-8">
 							<input id="name" name="name" type="text" class="form-control" value="{{$topic->name}}" readonly>
 						</div>

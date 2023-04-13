@@ -31,22 +31,6 @@
 
 	<br /><br />
 
-
-	<form id="readonly_form_id" class="form-horizontal">
-		<input id="id" name="id" type="hidden" value="{{$module['id']}}">
-
-		<div class="form-group">
-			<label for="name" class="control-label col-sm-2">Name</label>
-			<input id="name" name="name" type="text" class="form-control col-sm-10" value="{{$module->name}}" readonly>
-		</div>
-
-		<br />
-
-	</form>
-
-	<br />
-
-
 	<div id="verticalScroll">
 		<table>
 			<thead>
