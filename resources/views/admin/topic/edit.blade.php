@@ -92,7 +92,7 @@
 
 		<div class="form-group">
 			<label for="image" class="control-label col-sm-2">New Image Path</label><br />
-			<input id="image" name="image" type="text" class="form-control col-sm-10">
+			<input id="image" name="image" type="text" class="form-control col-sm-10" value="{{$topic->image}}">
 			@error('image') <div class="alert alert-danger">{{ $message }}</div> @enderror
 		</div>
 

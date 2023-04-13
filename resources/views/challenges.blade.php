@@ -38,7 +38,7 @@
                 @foreach($questions as $question)
 
                 <!-- to show the correct answers for testing purpose -->
-                The answer is {{$question->answer}}
+                <!-- The answer is {{$question->answer}} -->
                 <div class="challenges-card mx-auto">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-4">Question {{ $loop->iteration }} - {{ $question->question }}</h5>

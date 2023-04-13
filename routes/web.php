@@ -101,25 +101,3 @@ Route::controller(AdminController::class)->group(function () {
 	Route::put('/updateQuestion/{id}', 'updateQuestion');
 	Route::delete('/destroyQuestion/{id}', 'destroyQuestion');
 });
-
-
-/*
- * Actions Handled by Resource Controllers
- * HTTP Request		URL		 						Action		Route Name
- * get				/users							index		users.index
- * get				/users/create					create		users.create
- * post				/users							store		users.store
- * get				/users/{user}					show		users.show
- * get				/users/{user}/edit				edit		users.edit
- * put/patch		/users/{user}					update		users.update
- * delete			/users/{user}					destroy		users.destroy
- * 
- * using shallow nesting 
- * get				/users/{user}/drinks			index		users.drinks.index
- * get				/users/{user}/drinks/create		create		users.drinks.create
- * post				/users/{user}/drinks			store		users.drinks.store
- * get				/drinks/{drink}					show		drinks.show
- * get				/drinks/{drink}/edit			edit		drinks.edit
- * put/patch		/drinks/{drink}					update		drinks.update
- * delete			/drinks/{drink}					destroy		drinks.destroy
- */
