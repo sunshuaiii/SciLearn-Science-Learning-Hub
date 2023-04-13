@@ -20,7 +20,7 @@
 <h1 style="text-align: center;">Search Results</h1>
 <hr>
 
-<h5 style="text-align: left;">{{ count($results) }} topics found</h5>
+<h4 style="text-align: left;">{{ count($results) }} related topics found</h5>
 
 <div class="container">
     <div class="row">
@@ -29,7 +29,7 @@
         @foreach($results as $result)
         <div class="col-md-3">
             <div class="card cartoonish-card">
-                <img class="card-img" src="{{ $result->image }}" alt="Card image" width="640" height="180">
+                <img class="card-img" src="{{ $result->image }}" alt="Card image" style="object-fit:cover;" width="640" height="180">
                 <div class="card-body">
                     <h5 class="card-title">{{ $result->name }}</h5>
                 </div>

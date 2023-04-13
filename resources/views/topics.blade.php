@@ -40,7 +40,7 @@
                 @foreach($topicsWithTag1 as $topic)
                 <div class="col-md-3">
                     <div class="card cartoonish-card">
-                        <img class="card-img" src="{{ $topic['image'] }}" alt="Card image" width="640" height="180">
+                        <img class="card-img" src="{{ $topic['image'] }}" alt="Card image" style="object-fit:cover;" width="640" height="180">
                         <div class="card-body">
                             <h5 class="card-title">{{ $topic['name'] }}</h5>
                         </div>
@@ -67,7 +67,7 @@
                 @foreach($topicsWithTag2 as $topic)
                 <div class="col-md-3">
                     <div class="card cartoonish-card">
-                        <img class="card-img" src="{{ $topic['image'] }}" alt="Card image" width="640" height="180">
+                        <img class="card-img" src="{{ $topic['image'] }}" alt="Card image" style="object-fit:cover;" width="640" height="180">
                         <div class="card-body">
                             <h5 class="card-title">{{ $topic['name'] }}</h5>
                         </div>
@@ -94,7 +94,7 @@
                 @foreach($topicsWithTag3 as $topic)
                 <div class="col-md-3">
                     <div class="card cartoonish-card">
-                        <img class="card-img" src="{{ $topic['image'] }}" alt="Card image" width="640" height="180">
+                        <img class="card-img" src="{{ $topic['image'] }}" alt="Card image" style="object-fit:cover;" width="640" height="180">
                         <div class="card-body">
                             <h5 class="card-title">{{ $topic['name'] }}</h5>
                         </div>
@@ -121,7 +121,7 @@
                 @foreach($topicsWithTag4 as $topic)
                 <div class="col-md-3">
                     <div class="card cartoonish-card">
-                        <img class="card-img" src="{{ $topic['image'] }}" alt="Card image" width="640" height="180">
+                        <img class="card-img" src="{{ $topic['image'] }}" alt="Card image" style="object-fit:cover;" width="640" height="180">
                         <div class="card-body">
                             <h5 class="card-title">{{ $topic['name'] }}</h5>
                         </div>

@@ -38,7 +38,7 @@
                     </span>
                 </div>
                 @endif
-                <img class="card-img" src="{{ $article['image'] }}" alt="Card image">
+                <img class="card-img" src="{{ $article['image'] }}" alt="Card image" style="object-fit:cover;" width="640" height="180">
                 <div class="card-body">
                     <h5 class="card-title">{{ $article['title'] }}</h5>
                 </div>
