@@ -43,7 +43,7 @@
 
 		<span id="delete confirmation" style="display:none;">
 			<br />
-			Delete this item?
+			Delete this topic? This will also delete the associated articles, quizzes, and questions.
 			<div class="col-sm-offset-2 col-sm-10">
 				<input type="submit" value="Delete" class="btn btn-primary">
 				<input type="button" value="Do No Delete" id="cancel" class="btn btn-primary">
@@ -71,13 +71,6 @@
 					</div>
 
 					<div class="form-group">
-						<label for="order" class="control-label col-sm-4">Order:</label>
-						<div class="col-sm-8">
-							<input id="order" name="order" type="text" class="form-control" value="{{$topic->order}}" readonly>
-						</div>
-					</div>
-
-					<div class="form-group">
 						<label for="image" class="control-label col-sm-2">Image:</label><br />
 						<div class="col-sm-8">
 							<img src="{{ $topic['image'] }}" alt="Card image" class="img-thumbnail">
@@ -92,6 +85,9 @@
 		</div>
 	</form>
 
+	<br> <br> <br>
+	<h1 style="text-align: center;">Topic: {{$topic->name}}</h1>
+	<hr>
 
 	<div id="verticalScroll">
 		<table>

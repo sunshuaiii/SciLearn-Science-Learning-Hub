@@ -12,17 +12,15 @@
 	</ol>
 </nav>
 
+<br> <br> <br>
+<h1 style="text-align: center;">Lecture Content</h1>
+<hr>
+
 @if(session('message'))
 <div class="alert alert-success">
 	{{session('message')}}
 </div>
 @endif
-
-<br> <br> <br>
-<h1 style="text-align: center;">Lecture Content</h1>
-<hr>
-
-
 
 <div id="verticalScroll">
 	<table>
