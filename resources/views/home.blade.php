@@ -16,27 +16,27 @@
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://picsum.photos/1000/400?random=1" class="d-block w-100" alt="...">
+      <img src="{{ asset('images/home/isaac.jpg') }}" class="d-block w-100">
       <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <a href="#" class="btn btn-primary btn-cartoonish">Read More</a>
+        <h5>If I have seen further it is by standing on the shoulders of Giants.</h5>
+        <p>- Isaac Newton</p>
+        <a href="modules" class="btn btn-primary btn-cartoonish">Read More</a>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://picsum.photos/1000/400?random=2" class="d-block w-100" alt="...">
+      <img src="{{ asset('images/home/marie.jpg') }}" class="d-block w-100">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <a href="#" class="btn btn-primary btn-cartoonish">Read More</a>
+        <h5>Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.</h5>
+        <p>- Marie Curie</p>
+        <a href="modules" class="btn btn-primary btn-cartoonish">Read More</a>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://picsum.photos/1000/400?random=3" class="d-block w-100" alt="...">
+      <img src="{{ asset('images/home/galileo.png') }}" class="d-block w-100">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <a href="#" class="btn btn-primary btn-cartoonish">Read More</a>
+        <h5>You cannot teach a man anything; you can only help him discover it in himself.</h5>
+        <p>- Galileo Galilei</p>
+        <a href="modules" class="btn btn-primary btn-cartoonish">Read More</a>
       </div>
     </div>
   </div>

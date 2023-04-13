@@ -33,7 +33,7 @@ class ArticlesSeeder extends Seeder
             DB::table('articles')->insert([
                 'title' => ucfirst($faker->words(5, true)),
                 'content' => $content,
-                'image' => $faker->imageUrl($width = 640, $height = 480, 'science'),
+                'image' => 'https://picsum.photos/1000/400?random=' . rand(1, 1000),
                 'topic_id' => $faker->numberBetween(1, $numberOfTopics),
             ]);
         }
