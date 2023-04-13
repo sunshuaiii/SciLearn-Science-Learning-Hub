@@ -312,13 +312,22 @@ class AdminController extends Controller
 	public function showQuestion($id)
 	{
 		$this->authorizeAdmin();
-		return view('admin.question.show', ['question' => Question::find($id)]);
+		$quiz_id = Question::where('id', $id)->get()->value('quiz_id');// return the quiz id for the navigation
+		$article_id = Quiz::where('id', $quiz_id)->get()->value('article_id');// return the article id for the navigation
+		$topic_id = Article::where('id', $article_id)->get()->value('topic_id');  // return the topic id for the navigation
+		$module_id = Topic::where('id', $topic_id)->get()->value('module_id');	// return the module id for the navigation
+		$questions = Question::where('quiz_id', $quiz_id)->get();
+		return view('admin.question.show', ['question_id' => $id, 'questions' => $questions, 'question' => Question::find($id), 'module_id' => $module_id, 'topic_id' => $topic_id, 'article_id' => $article_id, 'quiz_id' => $quiz_id]);
 	}
 
 	public function createQuestion($quiz_id)
 	{
 		$this->authorizeAdmin();
-		return view('admin.question.create', ['quiz_id' => $quiz_id]);
+		$questions = Question::where('quiz_id', $quiz_id)->get();
+		$article_id = Quiz::where('id', $quiz_id)->get()->value('article_id');  // return the article id for the navigation
+		$topic_id = Article::where('id', $article_id)->get()->value('topic_id');  // return the topic id for the navigation
+		$module_id = Topic::where('id', $topic_id)->get()->value('module_id');	// return the module id for the navigation
+		return view('admin.question.create', ['questions' => $questions, 'quiz_id' => $quiz_id, 'topic_id' => $topic_id, 'module_id' => $module_id, 'article_id' => $article_id]);
 	}
 
 	public function editQuestion($id)
@@ -328,7 +337,7 @@ class AdminController extends Controller
 		$article_id = Quiz::where('id', $quiz_id)->get()->value('article_id');  // return the article id for the navigation
 		$topic_id = Article::where('id', $article_id)->get()->value('topic_id');  // return the topic id for the navigation
 		$module_id = Topic::where('id', $topic_id)->get()->value('module_id');	// return the module id for the navigation
-		return view('admin.question.edit', ['quiz' => Quiz::find($id), 'module_id' => $module_id, 'topic_id' => $topic_id, 'article_id' => $article_id, 'quiz_id' => $quiz_id]);
+		return view('admin.question.edit', ['question' => Question::find($id), 'question_id' => $id, 'quiz' => Quiz::find($id), 'module_id' => $module_id, 'topic_id' => $topic_id, 'article_id' => $article_id, 'quiz_id' => $quiz_id]);
 	}
 
 	public function storeQuestion(Request $request)

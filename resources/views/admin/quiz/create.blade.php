@@ -11,7 +11,7 @@
 		<li class="breadcrumb-item"><a href="/lecture_content">Lecture Content</a></li>
 		<li class="breadcrumb-item"><a href="/showModule/{{$module_id}}">Module: {{App\Models\Module::find($module_id)->name}}</a></li>
 		<li class="breadcrumb-item"><a href="/showTopic/{{$topic_id}}">Topic: {{App\Models\Topic::find($topic_id)->name}}</a></li>
-		<li class="breadcrumb-item"><a href="/showArticle/{{$article_id}}">Topic: {{App\Models\Article::find($article_id)->title}}</a></li>
+		<li class="breadcrumb-item"><a href="/showArticle/{{$article_id}}">Article: {{App\Models\Article::find($article_id)->title}}</a></li>
 		<li class="breadcrumb-item active" aria-current="page">Create Quiz</a></li>
 	</ol>
 </nav>

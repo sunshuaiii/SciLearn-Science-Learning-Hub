@@ -94,12 +94,12 @@ Route::controller(AdminController::class)->group(function () {
 	Route::put('/updateQuiz/{id}', 'updateQuiz');
 	Route::delete('/destroyQuiz/{id}', 'destroyQuiz');
 
-	Route::get('/createQuestions/{quiz_id}', 'createQuestions');
-	Route::post('/storeQuestions', 'storeQuestions');
-	Route::get('/showQuestions/{id}', 'showQuestions');
-	Route::get('/editQuestions/{id}', 'editQuestions');
-	Route::put('/updateQuestions/{id}', 'updateQuestions');
-	Route::delete('/destroyQuestions/{id}', 'destroyQuestions');
+	Route::get('/createQuestion/{quiz_id}', 'createQuestion');
+	Route::post('/storeQuestion', 'storeQuestion');
+	Route::get('/showQuestion/{id}', 'showQuestion');
+	Route::get('/editQuestion/{id}', 'editQuestion');
+	Route::put('/updateQuestion/{id}', 'updateQuestion');
+	Route::delete('/destroyQuestion/{id}', 'destroyQuestion');
 });
 
 
