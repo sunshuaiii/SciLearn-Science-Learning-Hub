@@ -67,9 +67,10 @@ class LoginController extends Controller
 			$request->get('remember')
 			)) { // true if authentication was successful
 			// An authenticated session will be started 
+			$request->session()->regenerate(); // regenerate the user's session to prevent session fixation
+
 			session(['role' => $request->role]); // to tell which guard is authenticated
 			
-			$request->session()->regenerate(); // regenerate the user's session to prevent session fixation
 			return redirect()->intended('/');
 		}
 		

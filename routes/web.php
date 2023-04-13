@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('/collections', CollectionController::class);
 });
 
+
 Route::controller(AdminController::class)->group(function () {
 	Route::get('/lecture_content', 'lectureContent');
 

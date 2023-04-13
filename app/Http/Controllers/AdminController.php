@@ -9,19 +9,21 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Topic;
 use App\Models\Module;
 use Illuminate\Validation\Rule;
+use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
-	public function __construct()
-    {
-		// always authorize admin before using any method in this controller
-		$this->authorizeAdmin();
-    }
+	// public function __construct()
+    // {
+	// 	// always authorize admin before using any method in this controller
+	// 	$this->authorizeAdmin();
+    // }
 
 	private function authorizeAdmin() {
 		try {
 			// Auth is accessble after logined
-			if (! Auth::guard(session('role'))->user()->can('isAdmin')) { // if login user not admin
+			if (! Auth::guard('admin')->user()->can('isAdmin')) { // if login user not admin
 				abort(404);
 			}
 		} catch (\Throwable $e) { // if user not logined
@@ -36,14 +38,17 @@ class AdminController extends Controller
      */
     public function lectureContent()
     {
+		$this->authorizeAdmin();
         return view('admin.lectureContent');
     }
 
 	public function showModule($id) {
+		$this->authorizeAdmin();
         return view('admin.module.show', ['module' => Module::find($id)]);
 	}
 
 	public function showTopic($id) {
+		$this->authorizeAdmin();
         return view('admin.topic.show', ['topic' => Topic::find($id)]);
 	}
 
@@ -54,14 +59,17 @@ class AdminController extends Controller
      */
     public function createTopic($module_id)
     {
+		$this->authorizeAdmin();
         return view('admin.topic.create', ['module_id' => $module_id]);
     }
 
 	public function editTopic($id) {
+		$this->authorizeAdmin();
         return view('admin.topic.edit', ['topic' => Topic::find($id)]);
 	}
 
 	public function storeTopic(Request $request) {
+		$this->authorizeAdmin();
 		$request->validate([
 			'name' => ['required', Rule::unique('topics')],
 			'order' => 'integer|unique:topics,order',
@@ -83,6 +91,7 @@ class AdminController extends Controller
 	}
 
 	public function updateTopic(Request $request, $id) {
+		$this->authorizeAdmin();
 		$request->validate([
 			'name' => ['required', Rule::unique('topics')->ignore($id)],
 			'order' => 'integer|unique:topics,order',
@@ -104,6 +113,7 @@ class AdminController extends Controller
 	}
 
 	public function destroyTopic(Request $request, $id) {
+		$this->authorizeAdmin();
 		Topic::find($id)->delete();
 
 		// check deleted or not
