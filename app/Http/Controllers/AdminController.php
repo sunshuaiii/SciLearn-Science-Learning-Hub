@@ -65,7 +65,8 @@ class AdminController extends Controller
 
 	public function editTopic($id) {
 		$this->authorizeAdmin();
-        return view('admin.topic.edit', ['topic' => Topic::find($id)]);
+		$module_id = Topic::where('id', $id)->get()->value('module_id');
+        return view('admin.topic.edit', ['topic' => Topic::find($id), 'module_id' => $module_id]);
 	}
 
 	public function storeTopic(Request $request) {
@@ -81,7 +82,7 @@ class AdminController extends Controller
 		$topic->name = $request->name;
 		$topic->tag = $request->tag ? $request->tag : "";
 		$topic->module_id = $request->module_id;
-		$topic->image = "unknown";
+		$topic->image = $request->image;
 		$topic->save();
 		
 		$request->session()->flash('message', 'Topic created.');
