@@ -142,13 +142,16 @@ class AdminController extends Controller
 	public function showArticle($id)
 	{
 		$this->authorizeAdmin();
-		return view('admin.article.show', ['article' => Article::find($id)]);
+		$topic_id = Article::where('id', $id)->get()->value('topic_id');  // return the topic id for the navigation
+		$module_id = Topic::where('id', $topic_id)->get()->value('module_id');	// return the module id for the navigation
+		return view('admin.article.show', ['article' => Article::find($id), 'module_id' => $module_id, 'topic_id' => $topic_id]);
 	}
 
 	public function createArticle($topic_id)
 	{
 		$this->authorizeAdmin();
-		return view('admin.article.create', ['topic_id' => $topic_id]);
+		$module_id = Topic::where('id', $topic_id)->get()->value('module_id');	// return the module id for the navigation
+		return view('admin.article.create', ['topic_id' => $topic_id, 'module_id' => $module_id]);
 	}
 
 	public function editArticle($id)
@@ -187,9 +190,7 @@ class AdminController extends Controller
 		$this->authorizeAdmin();
 
 		$request->validate([
-			'title' => ['required', Rule::unique('topics')],
-			'content' => 'required',
-			'image' => 'required',
+			'title' => ['required', Rule::unique('articles')],
 			'topic_id' => 'required|exists:App\Models\Topic,id',
 		]); // unique rule without itself 
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Topic Details')
+@section('title', 'Article Details')
 
 @section('content')
 <br>
@@ -9,13 +9,14 @@
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="/">Home</a></li>
 		<li class="breadcrumb-item"><a href="/lecture_content">Lecture Content</a></li>
-		<li class="breadcrumb-item"><a href="/showModule/{{$topic->module_id}}">Module: {{App\Models\Module::find($topic->module_id)->name}}</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Topic: {{$topic->name}}</a></li>
+		<li class="breadcrumb-item"><a href="/showModule/{{$module_id}}">Module: {{App\Models\Module::find($module_id)->name}}</a></li>
+		<li class="breadcrumb-item"><a href="/showTopic/{{$topic_id}}">Topic: {{App\Models\Topic::find($topic_id)->name}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Article: {{$article->title}}</a></li>
 	</ol>
 </nav>
 
 <br> <br> <br>
-<h1 style="text-align: center;">Topic Details</h1>
+<h1 style="text-align: center;">Article Details</h1>
 <hr>
 
 <div class="container justify-content-center" style="margin-bottom:5rem;">
@@ -28,22 +29,22 @@
 
 <div class="container" style="margin-bottom:5rem;">
 
-	<input type="button" id="edit" value="Edit" class="btn btn-primary" onclick="window.location.href='/editTopic/{{$topic->id}}';">
+	<input type="button" id="edit" value="Edit" class="btn btn-primary" onclick="window.location.href='/editArticle/{{$article->id}}';">
 	<input type="button" id="delete button" value="Delete" class="btn btn-primary">
-	<input type="button" id="addArticle" value="Add Article" class="btn btn-primary" onclick="window.location.href='/createArticle/{{$topic->id}}';">
+	<input type="button" id="addQuiz" value="Add Quiz" class="btn btn-primary" onclick="window.location.href='/createQuiz/{{$article->id}}';">
 
 
 	<br />
 
 	<!-- pass to controller using DELETE request -->
-	<form method="POST" action="/destroyTopic/{{$topic->id}}" id="delete_form_id" style="margin-bottom:2rem;">
+	<form method="POST" action="/destroyArticle/{{$article->id}}" id="delete_form_id" style="margin-bottom:2rem;">
 		@csrf
 		@method('DELETE') <!-- Form Method Spoofing -->
-		<input id="id" name="id" type="hidden" value="{{$topic['id']}}">
+		<input id="id" name="id" type="hidden" value="{{$article['id']}}">
 
 		<span id="delete confirmation" style="display:none;">
 			<br />
-			Delete this topic? This will also delete the associated articles, quizzes, and questions.
+			Delete this article? This will also delete the associated quizzes, and questions.
 			<div class="col-sm-offset-2 col-sm-10">
 				<input type="submit" value="Delete" class="btn btn-primary">
 				<input type="button" value="Do No Delete" id="cancel" class="btn btn-primary">
@@ -52,28 +53,28 @@
 	</form>
 
 	<form id="readonly_form_id" class="form-horizontal">
-		<input id="id" name="id" type="hidden" value="{{$topic['id']}}">
+		<input id="id" name="id" type="hidden" value="{{$article['id']}}">
 		<div class="row">
 			<div class="col-md-6">
 				<form id="readonly_form_id" class="form-horizontal">
 					<div class="form-group">
-						<label for="name" class="control-label col-sm-4">Topic Name:</label>
+						<label for="title" class="control-label col-sm-4">Article Title:</label>
 						<div class="col-sm-8">
-							<input id="name" name="name" type="text" class="form-control" value="{{$topic->name}}" readonly>
+							<input id="title" name="title" type="text" class="form-control" value="{{$article->title}}" readonly>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="tag" class="control-label col-sm-4">Tag:</label>
+						<label for="content" class="control-label col-sm-4">Content:</label>
 						<div class="col-sm-8">
-							<input id="tag" name="tag" type="text" class="form-control" value="{{$topic->tag}}" readonly>
+							<input id="content" name="content" type="text" class="form-control" value="{{$article->content}}" readonly>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="image" class="control-label col-sm-2">Image:</label><br />
 						<div class="col-sm-8">
-							<img src="{{ $topic['image'] }}" alt="Card image" class="img-thumbnail">
+							<img src="{{ $article['image'] }}" alt="Card image" class="img-thumbnail">
 						</div>
 					</div>
 
@@ -86,31 +87,37 @@
 	</form>
 
 	<br> <br> <br>
-	<h1 style="text-align: center;">Topic: {{$topic->name}}</h1>
+	<h1 style="text-align: center;">Article: {{$article->title}}</h1>
 	<hr>
 
 	<div id="verticalScroll">
 		<table>
 			<thead>
 				<tr>
-					<th>Article</th>
 					<th>Quiz</th>
+					<th>Question</th>
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($topic->getArticles as $article)
+				@if($article->getQuiz)
+				@php
+				$prev_article = null;
+				$quiz = $article->getQuiz;
+				@endphp
+				@foreach($quiz->getQuestions as $question)
 				<tr class="showEdit">
-					@if($topic->getArticles)
-					<td onclick="window.location.href='/showArticle/{{$article->id}}';">{{$article->title}} </td>
+					@if ($article->title != $prev_article)
+					<td onclick="window.location.href='/showQuiz/{{$quiz->id}}';" rowspan="{{count($quiz->getQuestions)}}">{{$article->title}}</td>
 					@endif
-					@if($article->getQuiz)
-					<td onclick="window.location.href='/showQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>
-					@endif
+					<td onclick="window.location.href='/showQuestion/{{$question->id}}';">{{$question->question}} </td>
 				</tr>
+				@php
+				$prev_article = $article->title;
+				@endphp
 				@endforeach
+				@endif
 			</tbody>
 		</table>
-
 	</div>
 
 </div>

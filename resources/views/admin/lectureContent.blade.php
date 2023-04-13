@@ -62,8 +62,10 @@
 										<td onclick="window.location.href='/showTopic/{{$topic->id}}';" rowspan="{{count($topic->getArticles)}}">{{$topic->name}}</td>
 									@endif
 									<td onclick="window.location.href='/showArticle/{{$article->id}}';">{{$article->title}} </td>
-									<td onclick="window.location.href='/showQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>
-								</tr>
+									@if ($article->getQuiz)
+										<td onclick="window.location.href='/showQuiz/{{$article->getQuiz->id}}';">{{$article->getQuiz->name}}</td>
+									@endif
+									</tr>
 								@php
 									$prev_topic = $topic->name;
 								@endphp
