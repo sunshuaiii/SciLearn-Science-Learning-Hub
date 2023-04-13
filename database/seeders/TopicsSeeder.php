@@ -30,7 +30,6 @@ class TopicsSeeder extends Seeder
                 'name' => $faker->sentence(),
                 'tag' => $tag,
                 'image' => 'https://picsum.photos/1000/400?random=' . rand(1, 1000),
-                'order' => $i + 1,
                 'module_id' => $moduleId,
             ]);
         }

@@ -37,7 +37,7 @@
 		<label for="tag" class="control-label col-sm-2">Tag</label>
 		<select name="tag" class="form-select" id="tag">
 			@php
-				$tags = ['Physics', 'Chemistry', 'Biology', ''];
+				$tags = ['', 'Physics', 'Chemistry', 'Biology'];
 			@endphp
 
 			@foreach($tags as $tag)
@@ -46,12 +46,6 @@
 			<!-- <option selected disabled>Please select one</option> -->
 		</select>
 		@error('tag') <div class="alert alert-danger">{{ $message }}</div> @enderror
-	</div>
-
-	<div class="form-group">
-		<label for="order" class="control-label col-sm-2">Order</label>
-		<input id="order" name="order" type="text" class="form-control col-sm-10" value="{{Illuminate\Support\Facades\DB::getPdo()->lastInsertId()}}">
-		@error('order') <div class="alert alert-danger">{{ $message }}</div> @enderror
 	</div>
 
 	<div class="form-group">

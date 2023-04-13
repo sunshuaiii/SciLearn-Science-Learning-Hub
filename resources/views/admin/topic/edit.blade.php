@@ -55,12 +55,6 @@
 	</div>
 
 	<div class="form-group">
-		<label for="order" class="control-label col-sm-2">Order</label>
-		<input id="order" name="order" type="text" class="form-control col-sm-10" value="{{$topic->order}}">
-		@error('order') <div class="alert alert-danger">{{ $message }}</div> @enderror
-	</div>
-
-	<div class="form-group">
 		<label for="module_id" class="control-label col-sm-2">Module</label>
 		<select name="module_id" class="form-select" id="module">
 			@foreach(App\Models\Module::all() as $module)

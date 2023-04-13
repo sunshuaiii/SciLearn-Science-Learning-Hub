@@ -72,7 +72,6 @@ class AdminController extends Controller
 		$this->authorizeAdmin();
 		$request->validate([
 			'name' => ['required', Rule::unique('topics')],
-			'order' => 'integer|unique:topics,order',
 			'module_id' => 'required|exists:App\Models\Module,id',
 			// 'image' => ['required', 'image', Rule::unique('topics')->ignore($id)],
 		]); // unique rule without itself 
@@ -81,7 +80,6 @@ class AdminController extends Controller
 		
 		$topic->name = $request->name;
 		$topic->tag = $request->tag ? $request->tag : "";
-		$topic->order = $request->order;
 		$topic->module_id = $request->module_id;
 		$topic->image = "unknown";
 		$topic->save();
@@ -94,7 +92,6 @@ class AdminController extends Controller
 		$this->authorizeAdmin();
 		$request->validate([
 			'name' => ['required', Rule::unique('topics')->ignore($id)],
-			'order' => 'integer|unique:topics,order',
 			'module_id' => 'required|exists:App\Models\Module,id',
 			// 'image' => ['required', 'image', Rule::unique('topics')->ignore($id)],
 		]); // unique rule without itself 
@@ -103,7 +100,6 @@ class AdminController extends Controller
 		
 		$topic->name = $request->name;
 		$topic->tag = $request->tag ? $request->tag : "";
-		$topic->order = $request->order;
 		$topic->module_id = $request->module;
 		// $topic->image = $request->image;
 		$topic->save();

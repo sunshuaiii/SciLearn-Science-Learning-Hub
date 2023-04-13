@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('tag')->enum('Physics', 'Chemistry', 'Biology', '');
             $table->string('image');
-            $table->integer('order');
             $table->foreignId('module_id')->constrained('modules', 'id');
             $table->timestamps();
         });
