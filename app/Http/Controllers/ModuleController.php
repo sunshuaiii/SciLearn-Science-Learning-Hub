@@ -86,10 +86,13 @@ class ModuleController extends Controller
         // check if the topicId is selected
         // no topicId will be selected if is a challenge
         if (!$topic) {
-            // start challenge
-            // select 10 random records from the 'questions' table. 
-            $questions = DB::table('questions')->inRandomOrder()->take(10)->get();
-            return view('challenges', ['questions' => $questions]);
+            if (Auth::guard(session('role'))->user()) {
+                // start challenge
+                // select 10 random records from the 'questions' table. 
+                $questions = DB::table('questions')->inRandomOrder()->take(10)->get();
+                return view('challenges', ['questions' => $questions]);
+            }
+            return redirect('/login/student');
         }
 
         $topicName = $topic->name;

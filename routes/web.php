@@ -39,9 +39,6 @@ Route::post('/modules/challenges/submit', [ModuleController::class, 'submitChall
 Route::get('/modules/{moduleName}/{topicId}', [ModuleController::class, 'showArticles']);
 // Route to show the content of an article
 Route::get('/modules/{moduleName}/{topicId}/{articleId}', [ModuleController::class, 'showArticleContent']);
-// Route to start a quiz for an article
-Route::get('/modules/{moduleName}/{topicId}/{articleId}/quiz', [ModuleController::class, 'startQuiz']);
-Route::post('/modules/{moduleName}/{topicId}/{articleId}/quiz/submit', [ModuleController::class, 'submitQuiz'])->name('quiz.submit');
 
 // leaderboard
 Route::get('/leaderboard', [StudentController::class, 'leaderboard']);
@@ -59,6 +56,10 @@ Route::middleware(['auth'])->group(function () {
 		Route::put('/students', 'update');
 		Route::put('/students/password', 'updatePassword');
 	});
+
+	// Route to start a quiz for an article
+	Route::get('/modules/{moduleName}/{topicId}/{articleId}/quiz', [ModuleController::class, 'startQuiz']);
+	Route::post('/modules/{moduleName}/{topicId}/{articleId}/quiz/submit', [ModuleController::class, 'submitQuiz'])->name('quiz.submit');
 
 	// collection
 	Route::get('/collections/{collectionId}/showTopics', [CollectionController::class, 'showTopics']);
@@ -92,7 +93,7 @@ Route::controller(AdminController::class)->group(function () {
 	Route::get('/showQuiz/{id}', 'showQuiz');
 	Route::get('/editQuiz/{id}', 'editQuiz');
 	Route::put('/updateQuiz/{id}', 'updateQuiz');
-	Route::delete('/destroyQuiz/{id}', 'destroyQuiz');		
+	Route::delete('/destroyQuiz/{id}', 'destroyQuiz');
 });
 
 
