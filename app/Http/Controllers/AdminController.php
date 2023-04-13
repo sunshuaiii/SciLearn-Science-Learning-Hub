@@ -232,13 +232,18 @@ class AdminController extends Controller
 	public function showQuiz($id)
 	{
 		$this->authorizeAdmin();
-		return view('admin.quiz.show', ['quiz' => Quiz::find($id)]);
+		$article_id = Quiz::where('id', $id)->get()->value('article_id');
+		$topic_id = Article::where('id', $article_id)->get()->value('topic_id');  // return the topic id for the navigation
+		$module_id = Topic::where('id', $topic_id)->get()->value('module_id');	// return the module id for the navigation
+		return view('admin.quiz.show', ['quiz' => Quiz::find($id), 'module_id' => $module_id, 'topic_id' => $topic_id, 'article_id' => $article_id]);
 	}
 
 	public function createQuiz($article_id)
 	{
 		$this->authorizeAdmin();
-		return view('admin.quiz.create', ['article_id' => $article_id]);
+		$topic_id = Article::where('id', $article_id)->get()->value('topic_id');  // return the topic id for the navigation
+		$module_id = Topic::where('id', $topic_id)->get()->value('module_id');	// return the module id for the navigation
+		return view('admin.quiz.create', ['article_id' => $article_id, 'topic_id' => $topic_id, 'module_id' => $module_id]);
 	}
 
 	public function editQuiz($id)
@@ -256,7 +261,7 @@ class AdminController extends Controller
 
 		$request->validate([
 			'name' => ['required', Rule::unique('quizzes')],
-			'article_id' => 'required|exists:App\Models\Article,id',
+			'article_id' => ['required', Rule::unique('quizzes')],
 		]); // unique rule without itself 
 
 		$quiz = new Quiz;

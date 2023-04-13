@@ -33,7 +33,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach(App\Models\Module::all() as $module)
+			@foreach(App\Models\Module::take(3)->get() as $module)
 				@if ($module->getTopics->count() == 0)
 				<tr>
 					<td onclick="window.location.href='/showModule/{{$module->id}}';">{{$module->name}} </td>
