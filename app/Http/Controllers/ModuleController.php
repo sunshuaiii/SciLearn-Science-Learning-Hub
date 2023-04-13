@@ -53,7 +53,11 @@ class ModuleController extends Controller
                         if ($quizzesTaken->contains($article->getQuiz))
                             $quizzesTakenCount++;
                     }
-                    $progress[$i++] = $quizzesTakenCount / $numberOfQuiz;
+                    if ($quizzesTakenCount == 0) {
+                        $progress[$i++] = 0;
+                    } else {
+                        $progress[$i++] = $quizzesTakenCount / $numberOfQuiz;
+                    }
                 }
             }
             return view('topics', [
