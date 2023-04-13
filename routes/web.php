@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\CollectionController;
@@ -94,6 +93,13 @@ Route::controller(AdminController::class)->group(function () {
 	Route::get('/editQuiz/{id}', 'editQuiz');
 	Route::put('/updateQuiz/{id}', 'updateQuiz');
 	Route::delete('/destroyQuiz/{id}', 'destroyQuiz');
+
+	Route::get('/createQuestions/{quiz_id}', 'createQuestions');
+	Route::post('/storeQuestions', 'storeQuestions');
+	Route::get('/showQuestions/{id}', 'showQuestions');
+	Route::get('/editQuestions/{id}', 'editQuestions');
+	Route::put('/updateQuestions/{id}', 'updateQuestions');
+	Route::delete('/destroyQuestions/{id}', 'destroyQuestions');
 });
 
 
