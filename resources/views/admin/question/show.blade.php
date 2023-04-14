@@ -49,7 +49,7 @@
 			Delete this question?
 			<div class="col-sm-offset-2 col-sm-10">
 				<input type="submit" value="Delete" class="btn btn-primary">
-				<input type="button" value="Do No Delete" id="cancel" class="btn btn-primary">
+				<input type="button" value="Do Not Delete" id="cancel" class="btn btn-primary">
 			</div>
 		</span>
 	</form>
