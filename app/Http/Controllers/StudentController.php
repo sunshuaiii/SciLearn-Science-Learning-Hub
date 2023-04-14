@@ -22,14 +22,6 @@ class StudentController extends Controller
 	{
 		$user = Auth::guard(session('role'))->user();
 		$quizzesTaken = $user->getQuizzes;
-		// $quizzes = Quiz::getUsers->where('user_id')
-		// $users = DB::table('users')
-		//     ->join('userquizzes', 'users.id', '=', 'userquizzes.user_id')
-		//     ->join('quizzes', 'quizzes.id', '=', 'userquizzes.quiz_id')
-		//     ->join('topics', 'topics.id', '=', 'quizzes.topic_id')
-		//     ->join('modules', 'modules.id', '=', 'topics.module_id')
-		//     ->select('modules.name as module_name', 'topics.name as topic_name', 'quizzes.name as quiz_name')
-		//     ->get();
 		$progress = [];
 		$i = 0;
 
