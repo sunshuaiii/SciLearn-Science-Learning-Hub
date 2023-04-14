@@ -93,6 +93,7 @@ class AdminController extends Controller
 		$this->authorizeAdmin();
 		$request->validate([
 			'name' => ['required', Rule::unique('topics')->ignore($id)],
+			'tag' => 'required',
 			'image' => 'required',
 			'module_id' => 'required|exists:App\Models\Module,id',
 		]); // unique rule without itself 

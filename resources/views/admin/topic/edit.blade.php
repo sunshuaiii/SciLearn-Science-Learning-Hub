@@ -57,7 +57,7 @@
 		<div class="form-group">
 			<label for="module_id" class="control-label col-sm-2">Module</label>
 			<select name="module_id" class="form-select" id="module" onchange="toggleTagSelection()">
-				@foreach(App\Models\Module::all() as $module)
+				@foreach(App\Models\Module::take(3)->get() as $module)
 				@if ($module->id == $topic->module_id)
 				<option value="{{$module->id}}" selected>{{$module->name}}</option>
 				@else
