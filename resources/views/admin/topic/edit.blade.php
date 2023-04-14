@@ -35,10 +35,9 @@
 			@error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
 		</div>
 
-		@if($module_id == 3)
 		<div class="form-group">
 			<label for="tag" class="control-label col-sm-2">Tag</label>
-			<select name="tag" class="form-select" id="tag">
+			<select name="tag" class="form-select" id="tag" @if($module_id !=3) disabled @endif>
 				@php
 				$tags = ['', 'Physics', 'Chemistry', 'Biology'];
 				@endphp
@@ -54,30 +53,10 @@
 			</select>
 			@error('tag') <div class="alert alert-danger">{{ $message }}</div> @enderror
 		</div>
-		@else
-		<div class="form-group">
-			<label for="tag" class="control-label col-sm-2">Tag</label>
-			<select name="tag" class="form-select" id="tag" disabled>
-				@php
-				$tags = ['', 'Physics', 'Chemistry', 'Biology'];
-				@endphp
-
-				@foreach($tags as $tag)
-				@if ($tag == $topic->tag)
-				<option value="{{$tag}}" selected>{{$tag}}</option>
-				@else
-				<option value="{{$tag}}">{{$tag}}</option>
-				@endif
-				@endforeach
-				<!-- <option selected disabled>Please select one</option> -->
-			</select>
-			@error('tag') <div class="alert alert-danger">{{ $message }}</div> @enderror
-		</div>
-		@endif
 
 		<div class="form-group">
 			<label for="module_id" class="control-label col-sm-2">Module</label>
-			<select name="module_id" class="form-select" id="module">
+			<select name="module_id" class="form-select" id="module" onchange="toggleTagSelection()">
 				@foreach(App\Models\Module::all() as $module)
 				@if ($module->id == $topic->module_id)
 				<option value="{{$module->id}}" selected>{{$module->name}}</option>
@@ -89,6 +68,7 @@
 			</select>
 			@error('module') <div class="alert alert-danger">{{ $message }}</div> @enderror
 		</div>
+
 
 		<div class="form-group">
 			<label for="image" class="control-label col-sm-2">New Image Path</label><br />
@@ -106,6 +86,17 @@
 
 	<br />
 </div>
+
+<script>
+	function toggleTagSelection() {
+		var module_id = document.getElementById("module").value;
+		if (module_id == 3) {
+			document.getElementById("tag").disabled = false;
+		} else {
+			document.getElementById("tag").disabled = true;
+		}
+	}
+</script>
 
 <style>
 	.control-label {

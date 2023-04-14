@@ -101,7 +101,7 @@ class AdminController extends Controller
 
 		$topic->name = $request->name;
 		$topic->tag = $request->tag ? $request->tag : "";
-		$topic->module_id = $request->module;
+		$topic->module_id = $request->module_id;
 		$topic->image = $request->image;
 		$topic->save();
 
