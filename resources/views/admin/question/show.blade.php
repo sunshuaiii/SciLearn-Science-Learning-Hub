@@ -33,8 +33,11 @@
 
 	<input type="button" id="edit" value="Edit" class="btn btn-primary" onclick="window.location.href='/editQuestion/{{$question->id}}';">
 	<input type="button" id="delete button" value="Delete" class="btn btn-primary">
-	<input type="button" id="addQuestion" value="Add Question" class="btn btn-primary" onclick="window.location.href='/createQuestion/{{$question->id}}';">
-
+	@if($quiz_id)
+	<input type="button" id="addQuestion" value="Add Question in This Quiz" class="btn btn-primary" onclick="window.location.href='/createQuestion/{{$question->quiz_id}}';">
+	@else
+	<input type="button" id="addQuestion" value="Add Question" class="btn btn-primary" onclick="window.location.href='/createQuestion/{{$question->quiz_id}}';">
+	@endif
 
 	<br />
 
@@ -158,6 +161,28 @@
 	</form>
 
 	<br> <br> <br>
+	<h1 style="text-align: center;">Other Questions in the {{App\Models\Quiz::find($quiz_id)->name}}</h1>
+	<hr>
+
+	<div id="verticalScroll">
+		<table>
+			<thead>
+				<tr>
+					<th>Question</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if(count($questions) > 0)
+				@foreach($questions as $question)
+				<tr class="showEdit">
+					<td onclick="window.location.href='/showQuestion/{{$question->id}}';">{{$question->question}} </td>
+				</tr>
+				@endforeach
+				@endif
+			</tbody>
+		</table>
+	</div>
+
 
 </div>
 
